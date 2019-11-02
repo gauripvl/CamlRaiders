@@ -1,0 +1,4 @@
+# dune exec ./movement.exe
+# OCAMLPARAM: unset
+$ /usr/bin/getconf _NPROCESSORS_ONLN > /var/folders/p_/2g4ptk894czgpqdt70d13cpc0000gn/T/duned273a8.output 2> /dev/null
+$ /Users/jessicalu/.opam/4.08.1/bin/ocamlc.opt -config > /var/folders/p_/2g4ptk894czgpqdt70d13cpc0000gn/T/dunee4a485.output
