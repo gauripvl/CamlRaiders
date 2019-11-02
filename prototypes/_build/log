@@ -1,4 +1,8 @@
 # dune exec ./movement.exe
 # OCAMLPARAM: unset
-$ /usr/bin/getconf _NPROCESSORS_ONLN > /var/folders/p_/2g4ptk894czgpqdt70d13cpc0000gn/T/duned273a8.output 2> /dev/null
-$ /Users/jessicalu/.opam/4.08.1/bin/ocamlc.opt -config > /var/folders/p_/2g4ptk894czgpqdt70d13cpc0000gn/T/dunee4a485.output
+$ /usr/bin/getconf _NPROCESSORS_ONLN > /var/folders/p_/2g4ptk894czgpqdt70d13cpc0000gn/T/dune9b15f4.output 2> /dev/null
+$ /Users/jessicalu/.opam/4.08.1/bin/ocamlc.opt -config > /var/folders/p_/2g4ptk894czgpqdt70d13cpc0000gn/T/dune7f4090.output
+$ (cd _build/default && /Users/jessicalu/.opam/4.08.1/bin/ocamldep.opt -modules -impl movement.ml) > _build/default/.movement.eobjs/movement.ml.d
+$ (cd _build/default && /Users/jessicalu/.opam/4.08.1/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I .movement.eobjs/byte -no-alias-deps -opaque -o .movement.eobjs/byte/movement.cmo -c -impl movement.ml)
+$ (cd _build/default && /Users/jessicalu/.opam/4.08.1/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I .movement.eobjs/byte -I .movement.eobjs/native -intf-suffix .ml -no-alias-deps -opaque -o .movement.eobjs/native/movement.cmx -c -impl movement.ml)
+$ (cd _build/default && /Users/jessicalu/.opam/4.08.1/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -o movement.exe /Users/jessicalu/.opam/4.08.1/lib/ocaml/unix.cmxa /Users/jessicalu/.opam/4.08.1/lib/ocaml/graphics.cmxa .movement.eobjs/native/movement.cmx)
