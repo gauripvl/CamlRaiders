@@ -1,0 +1,3 @@
+open Amodule
+
+let () = hello ()
