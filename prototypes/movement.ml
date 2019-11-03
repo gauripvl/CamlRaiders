@@ -1,4 +1,5 @@
 open Graphics
+open Png 
 open Unix
 
 type sprite = {
@@ -41,7 +42,9 @@ let rec game_loop s e = (* later make e a list of enemies rather than a single e
 
 let main () = 
   open_graph " 640x480";
-  let player = { speed = 8; img = create_image 50 50; x = 320; y = 240; } in 
+  let img_camel = load_as_rgb24 "assets/images/camel.png" [] in 
+  let camel = Graphic_image.of_image img_camel in 
+  let player = { speed = 8; img = camel; x = 320; y = 240; } in 
   let enemy = { speed = 1; img = create_image 50 50; x = 100; y = 400; } in
   draw player;
   draw enemy;
