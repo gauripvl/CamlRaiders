@@ -1,0 +1,4 @@
+# dune build movement.exe
+# OCAMLPARAM: unset
+$ /usr/bin/nproc > /tmp/dune1e4744.output 2> /dev/null
+$ /home/pihu/.opam/4.08.1/bin/ocamlc.opt -config > /tmp/dune1159a1.output
