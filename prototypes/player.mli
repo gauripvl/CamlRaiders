@@ -1,8 +1,5 @@
-module type Player = sig
-
+module type SpriteSig = sig
   type t
-
-  (* ================= COMMON SPRITE FIELDS ================= *)
 
   (** [get_speed t] is the speed of [t] *)
   val get_speed : t -> int
@@ -20,7 +17,11 @@ module type Player = sig
   (** [draw t] draws the image of [s] onto the GUI. *)
   val draw : t -> unit
 
-  (* ================= COMMON SPRITE FIELDS (END) ================= *)
+end
+
+module type Player = sig
+  module Sprite : SpriteSig
+  type t
 
   (** [update_pos t] updates the position of the ship based on key presses. 
       Pressing 'w'moves the ship up, 'a' moves the ship left, 
@@ -29,3 +30,9 @@ module type Player = sig
   val update_pos : t -> unit
 
 end
+
+module type PlayerMaker =
+  functor (S : SpriteSig)
+    -> Player with module Sprite = S
+
+module Make : PlayerMaker

@@ -1,0 +1,8 @@
+B _build
+PKG oUnit
+PKG str
+PKG unix
+PKG ocamlbuild
+PKG bisect_ppx-ocamlbuild
+PKG graphics
+PKG camlimages

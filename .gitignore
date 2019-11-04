@@ -1,3 +1,9 @@
+# assignment
+doc.public
+doc.private
+camelraiders.zip
+report
+
 # ocaml
 *.cmo
 *.cma
@@ -7,3 +13,10 @@
 *.native
 *.byte
 _build
+
+# temporary files
+*.swp
+*~
+\#*\#
+.DS_Store
+

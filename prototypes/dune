@@ -1,5 +1,9 @@
+(library
+  (name player)
+  (libraries graphics)
+)
+
 (executable
   (name game)
-   (libraries unix graphics camlimages.core camlimages.gif camlimages.png camlimages.graphics)
-   (modules player game)
+  (libraries unix graphics camlimages.core camlimages.gif camlimages.png camlimages.graphics player)
 )

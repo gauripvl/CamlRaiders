@@ -1,4 +1,5 @@
 (** [game_loop s e] updates the screen continuously to animate the game. *)
+
 let rec game_loop ()= 
   Unix.sleepf 3.0;
   game_loop ()

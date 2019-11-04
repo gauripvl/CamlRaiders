@@ -1,0 +1,6 @@
+#directory "_build";;
+#require "str";;
+#require "graphics";;
+#require "camlimages.core";;
+#load_rec "sprite.cmo";;
+#load_rec "player.cmo";;
