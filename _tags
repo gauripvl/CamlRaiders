@@ -1,3 +1,1 @@
-<{player,sprite}.ml>: coverage
-<test.{byte,native}>: coverage
 true: package(unix), package(oUnit), package(graphics), package(camlimages)

@@ -3,8 +3,8 @@ OBJECTS=$(MODULES:=.cmo)
 MLS=$(MODULES:=.ml)
 MLIS=$(MODULES:=.mli)
 TEST=test.byte
-OCAMLBUILD=ocamlbuild -use-ocamlfind -plugin-tag 'package(bisect_ppx-ocamlbuild)'
-PKGS=unix,oUnit,str,graphis,camlimages
+OCAMLBUILD=ocamlbuild -use-ocamlfind
+PKGS=unix,oUnit,str,graphics,camlimages
 
 default: build
 	utop
@@ -13,7 +13,7 @@ build:
 	$(OCAMLBUILD) $(OBJECTS)
 
 test:
-	BISECT_COVERAGE=YES $(OCAMLBUILD) -tag 'debug' $(TEST) && ./$(TEST) -runner sequential
+	$(OCAMLBUILD) -tag 'debug' $(TEST) && ./$(TEST)
 
 check:
 	bash checkenv.sh
@@ -40,4 +40,4 @@ docs-private: build
 
 clean:
 	ocamlbuild -clean
-	rm -rf doc.public doc.private report search_src.zip bisect*.out
+	rm -rf doc.public doc.private camelraiders.zip
