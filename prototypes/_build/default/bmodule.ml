@@ -1,3 +1,0 @@
-open Amodule
-
-let () = hello ()

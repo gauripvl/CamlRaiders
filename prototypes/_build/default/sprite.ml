@@ -1,4 +1,4 @@
-open Unix
+(* open Unix *)
 open Graphics
 
 module type Sprite = sig
@@ -8,13 +8,6 @@ module type Sprite = sig
     mutable x: int;
     mutable y: int;
   }
-
-  (* type img = image
-     type speed = int
-     type x = int
-     (* mutable *)
-     type y = int
-     mutable *)
   val get_speed : s -> int
   val get_x : s -> int
   val get_y : s -> int
@@ -31,10 +24,6 @@ module Sprite = struct
     mutable x: int;
     mutable y: int;
   }
-  (* type img = image
-     type speed = int
-     type x = int
-     type y = int *)
 
   let get_speed s =
     s.speed

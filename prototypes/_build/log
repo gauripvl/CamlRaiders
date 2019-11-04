@@ -1,9 +1,24 @@
-# dune exec ./movement.exe
+# dune build movement.exe
 # OCAMLPARAM: unset
-$ /usr/bin/nproc > /tmp/dune5a209a.output 2> /dev/null
-$ /home/pihu/.opam/4.08.1/bin/ocamlc.opt -config > /tmp/dune1307d8.output
-$ (cd _build/default && /home/pihu/.opam/4.08.1/bin/ocamldep.opt -modules -impl image.ml) > _build/default/.movement.eobjs/image.ml.d
-$ (cd _build/default && /home/pihu/.opam/4.08.1/bin/ocamldep.opt -modules -impl movement.ml) > _build/default/.movement.eobjs/movement.ml.d
-$ (cd _build/default && /home/pihu/.opam/4.08.1/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I .movement.eobjs/byte -I /home/pihu/.opam/4.08.1/lib/camlimages/core -I /home/pihu/.opam/4.08.1/lib/camlimages/gif -I /home/pihu/.opam/4.08.1/lib/camlimages/graphics -I /home/pihu/.opam/4.08.1/lib/camlimages/png -no-alias-deps -opaque -o .movement.eobjs/byte/movement.cmo -c -impl movement.ml)
-$ (cd _build/default && /home/pihu/.opam/4.08.1/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I .movement.eobjs/byte -I .movement.eobjs/native -I /home/pihu/.opam/4.08.1/lib/camlimages/core -I /home/pihu/.opam/4.08.1/lib/camlimages/gif -I /home/pihu/.opam/4.08.1/lib/camlimages/graphics -I /home/pihu/.opam/4.08.1/lib/camlimages/png -intf-suffix .ml -no-alias-deps -opaque -o .movement.eobjs/native/movement.cmx -c -impl movement.ml)
-$ (cd _build/default && /home/pihu/.opam/4.08.1/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -o movement.exe -I /home/pihu/.opam/4.08.1/lib/camlimages/core -I /home/pihu/.opam/4.08.1/lib/camlimages/gif -I /home/pihu/.opam/4.08.1/lib/camlimages/graphics -I /home/pihu/.opam/4.08.1/lib/camlimages/png /home/pihu/.opam/4.08.1/lib/ocaml/unix.cmxa /home/pihu/.opam/4.08.1/lib/ocaml/graphics.cmxa /home/pihu/.opam/4.08.1/lib/camlimages/core/camlimages.cmxa /home/pihu/.opam/4.08.1/lib/camlimages/gif/camlimages_gif.cmxa /home/pihu/.opam/4.08.1/lib/camlimages/png/camlimages_png.cmxa /home/pihu/.opam/4.08.1/lib/camlimages/graphics/camlimages_graphics.cmxa .movement.eobjs/native/movement.cmx)
+$ /usr/bin/nproc > /tmp/dunec66dcf.output 2> /dev/null
+$ /home/pihu/.opam/4.08.1/bin/ocamlc.opt -config > /tmp/dune27d486.output
+$ (cd _build/default && /home/pihu/.opam/4.08.1/bin/ocamldep.opt -modules -intf sprite.mli) > _build/default/.sprite.objs/sprite.mli.d
+$ (cd _build/default && /home/pihu/.opam/4.08.1/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I .sprite.objs/byte -no-alias-deps -opaque -o .sprite.objs/byte/sprite.cmi -c -intf sprite.mli)
+$ (cd _build/default && /home/pihu/.opam/4.08.1/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I .sprite.objs/byte -I .sprite.objs/native -intf-suffix .ml -no-alias-deps -opaque -o .sprite.objs/native/sprite.cmx -c -impl sprite.ml)
+> File "sprite.ml", line 28, characters 6-15:
+> 28 |   let get_speed s =
+>            ^^^^^^^^^
+> Error (warning 32): unused value get_speed.
+> File "sprite.ml", line 31, characters 6-11:
+> 31 |   let get_x s =
+>            ^^^^^
+> Error (warning 32): unused value get_x.
+> File "sprite.ml", line 34, characters 6-11:
+> 34 |   let get_y s =
+>            ^^^^^
+> Error (warning 32): unused value get_y.
+> File "sprite.ml", line 57, characters 6-19:
+> 57 |   let img_to_transp img = 
+>            ^^^^^^^^^^^^^
+> Error (warning 32): unused value img_to_transp.
+[2]

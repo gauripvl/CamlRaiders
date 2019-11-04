@@ -1,3 +1,10 @@
+(library 
+  (name sprite)
+  (modules sprite)
+)
+
 (executable
- (name movement)
- (libraries unix graphics camlimages.core camlimages.gif camlimages.png camlimages.graphics))
+  (name movement)
+   (libraries unix graphics camlimages.core camlimages.gif camlimages.png camlimages.graphics sprite)
+   (modules movement)
+)
