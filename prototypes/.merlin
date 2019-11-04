@@ -4,7 +4,7 @@ B /home/pihu/.opam/4.08.1/lib/camlimages/gif
 B /home/pihu/.opam/4.08.1/lib/camlimages/graphics
 B /home/pihu/.opam/4.08.1/lib/camlimages/png
 B /home/pihu/.opam/4.08.1/lib/ocaml
-B _build/default/.play.eobjs/byte
+B _build/default/.game.eobjs/byte
 S /home/pihu/.opam/4.08.1/lib/camlimages/core
 S /home/pihu/.opam/4.08.1/lib/camlimages/gif
 S /home/pihu/.opam/4.08.1/lib/camlimages/graphics

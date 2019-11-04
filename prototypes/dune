@@ -1,7 +1,5 @@
-
-
 (executable
-  (name play)
+  (name game)
    (libraries unix graphics camlimages.core camlimages.gif camlimages.png camlimages.graphics)
-   (modules sprite play)
+   (modules player game)
 )
