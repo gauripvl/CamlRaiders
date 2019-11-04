@@ -1,18 +1,18 @@
-open Graphics
-
 module type Sprite = sig
-  type s = {
-    img: image;
-    speed: int;
-    mutable x: int;
-    mutable y: int;
-  }
 
-  val get_speed : s -> int
-  val get_x : s -> int
-  val get_y : s -> int
-  val color_to_rgb : color -> color * color * color
-  val make_transp : color * color * color -> color
-  val map_color : color -> color
-  val img_to_transp : image -> image
+  type t
+
+  (** [get_speed t] is the speed of [t] *)
+  val get_speed : t -> int
+
+  (** [get_x t] is the x-coordinate of [t] *)
+  val get_x : t -> int
+
+  (** [get_y t] is the y-coordinate of [t] *)
+  val get_y : t -> int
+
+  (** [img_to_transp i] is [i] with black color 
+      changed to [transp] *)
+  val img_to_transp : Graphics.image -> Graphics.image
+
 end

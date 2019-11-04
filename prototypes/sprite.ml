@@ -1,42 +1,37 @@
-(* open Unix *)
-open Graphics
-
 module type Sprite = sig
-  type s = {
-    img: image;
-    speed: int;
-    mutable x: int;
-    mutable y: int;
-  }
-  val get_speed : s -> int
-  val get_x : s -> int
-  val get_y : s -> int
-  val color_to_rgb : color -> color * color * color
-  val make_transp : color * color * color -> color
-  val map_color : color -> color
-  val img_to_transp : image -> image
+  type t 
+  val get_speed : t -> int
+  val get_x : t -> int
+  val get_y : t -> int
+  val color_to_rgb : 
+    Graphics.color -> Graphics.color * Graphics.color * Graphics.color
+  val make_transp : 
+    Graphics.color * Graphics.color * Graphics.color -> Graphics.color
+  val map_color : Graphics.color -> Graphics.color
+  val img_to_transp : Graphics.image -> Graphics.image
 end
 
 module Sprite = struct
-  type s = {
-    img: image;
+
+  type t = {
+    img: Graphics.image;
     speed: int;
     mutable x: int;
     mutable y: int;
   }
 
-  let get_speed s =
-    s.speed
+  let get_speed t =
+    t.speed
 
-  let get_x s =
-    s.x
+  let get_x t =
+    t.x
 
-  let get_y s =
-    s.y
+  let get_y t =
+    t.y
 
   (* https://discuss.ocaml.org/t/what-ive-found-playing-with-graphics/739 *)
   (* no function for converting color back to rgb in Graphics *)
-  (** [color_to_rgb c] returns the (r,g,b) components of [c] *)
+  (** [color_to_rgb c] returns the (r,g,b) component of [c] *)
   let color_to_rgb color =
     let r = (color land 0xFF0000) asr 0x10
     and g = (color land 0x00FF00) asr 0x8
@@ -46,16 +41,15 @@ module Sprite = struct
   (** [make_transp rgb] is [rbg] converted to the type [color] 
       if [rgb] is not black. Otherwise return [transp] *)
   let make_transp = function 
-    | (0, 0, 0) -> transp
-    | (r', g', b') -> rgb r' g' b'
+    | (0, 0, 0) -> Graphics.transp
+    | (r', g', b') -> Graphics.rgb r' g' b'
 
   (** [map_color c] is [c] if [c] is not black. 
       Otherwise return [transp] *)
   let map_color color = color |> color_to_rgb |> make_transp
 
-  (** [img_to_transp i] is [i] with black color changed to [transp] *)
   let img_to_transp img = 
-    dump_image img 
+    Graphics.dump_image img 
     |> Array.map (fun x -> Array.map (fun c -> map_color c) x)
-    |> make_image
+    |> Graphics.make_image
 end
