@@ -4,12 +4,11 @@ B /home/pihu/.opam/4.08.1/lib/camlimages/gif
 B /home/pihu/.opam/4.08.1/lib/camlimages/graphics
 B /home/pihu/.opam/4.08.1/lib/camlimages/png
 B /home/pihu/.opam/4.08.1/lib/ocaml
-B _build/default/.movement.eobjs/byte
-B _build/default/.sprite.objs/byte
+B _build/default/.play.eobjs/byte
 S /home/pihu/.opam/4.08.1/lib/camlimages/core
 S /home/pihu/.opam/4.08.1/lib/camlimages/gif
 S /home/pihu/.opam/4.08.1/lib/camlimages/graphics
 S /home/pihu/.opam/4.08.1/lib/camlimages/png
 S /home/pihu/.opam/4.08.1/lib/ocaml
 S .
-FLG -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs
+FLG -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs
