@@ -1,10 +1,11 @@
-MODULES=sprite player authors
+MODULES=sprite gui player objects authors
 OBJECTS=$(MODULES:=.cmo)
 MLS=$(MODULES:=.ml)
 MLIS=$(MODULES:=.mli)
 TEST=test.byte
+MAIN=game.byte
 OCAMLBUILD=ocamlbuild -use-ocamlfind
-PKGS=unix,oUnit,str,graphics,camlimages
+PKGS=unix,oUnit,str,graphics,camlimages.core,camlimages.png,camlimages.graphics,camlimages.gif
 
 default: build
 	utop
@@ -15,6 +16,9 @@ build:
 test:
 	$(OCAMLBUILD) -tag 'debug' $(TEST) && ./$(TEST)
 
+play:
+	$(OCAMLBUILD) $(MAIN) && ./$(MAIN)
+
 check:
 	bash checkenv.sh
 	
@@ -23,7 +27,7 @@ check:
 # 	bash finalcheck.sh
 
 zip: 
-	zip camelraiders.zip *.ml* _tags Makefile report/*
+	zip camelraiders.zip *.ml* _tags Makefile
 	
 docs: docs-public docs-private
 	

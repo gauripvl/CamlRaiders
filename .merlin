@@ -4,4 +4,7 @@ PKG str
 PKG unix
 PKG ocamlbuild
 PKG graphics
-PKG camlimages
+PKG camlimages.core
+PKG camlimages.png
+PKG camlimages.graphics
+PKG camlimages.gif
