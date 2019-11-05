@@ -1,4 +1,4 @@
-MODULES=sprite gui player objects authors
+MODULES=sprite gui objects authors
 OBJECTS=$(MODULES:=.cmo)
 MLS=$(MODULES:=.ml)
 MLIS=$(MODULES:=.mli)
