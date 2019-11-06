@@ -1,6 +1,6 @@
 
 type sprite = {
-  img: Graphics.image;
+  img: string;
   speed: int;
   mutable x: int;
   mutable y: int;

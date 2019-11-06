@@ -1,6 +1,11 @@
 open Sprite
+open Objects
 
 type t = sprite
+
+(** [open_game_window w] opens a graphics window with 
+    properties of [w] *) 
+val open_game_window : type_gui -> unit 
 
 (** [get_speed t] is the speed of [t] *)
 val get_speed : t -> int

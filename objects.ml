@@ -1,5 +1,10 @@
-open Gui
 open Sprite
+
+type type_gui = {
+  width : int;
+  height : int;
+  title : string;
+}
 
 type type_player = {
   image: sprite;
@@ -12,9 +17,15 @@ type type_enemy = {
   mutable health: int;
 }
 
-let init_player = { 
+let gui_window = {
+  width = 640;
+  height = 480;
+  title = "CamlRaiders";
+}
+
+let player = { 
   image = {
-    img = create_image "camel";
+    img = "camel";
     speed = 8; 
     x = 320; 
     y = 240; 
@@ -23,12 +34,19 @@ let init_player = {
   level = 1;
 }
 
-let init_enemy = { 
+let enemy = { 
   image = {
-    img = create_image "camel";
+    img = "camel";
     speed = 8; 
     x = 320; 
     y = 240; 
   };
   health = 1;
+}
+
+let bullet = {
+  img = "";
+  speed = 20;
+  x = player.image.x;
+  y = player.image.y;
 }

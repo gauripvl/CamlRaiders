@@ -1,4 +1,4 @@
-MODULES=sprite gui objects authors
+MODULES=sprite objects gui projectile authors
 OBJECTS=$(MODULES:=.cmo)
 MLS=$(MODULES:=.ml)
 MLIS=$(MODULES:=.mli)
