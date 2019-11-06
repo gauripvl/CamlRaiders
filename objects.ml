@@ -20,12 +20,12 @@ type type_enemy = {
 let gui_window = {
   width = 640;
   height = 480;
-  title = "CamlRaiders";
+  title = "CamlRaiders Demo";
 }
 
 let player = { 
   image = {
-    img = "camel";
+    img = "chibi_camel";
     speed = 8; 
     x = 320; 
     y = 240; 
@@ -38,14 +38,14 @@ let enemy = {
   image = {
     img = "camel";
     speed = 8; 
-    x = 320; 
-    y = 240; 
+    x = 200; 
+    y = 300; 
   };
   health = 1;
 }
 
 let bullet = {
-  img = "";
+  img = "beam";
   speed = 20;
   x = player.image.x;
   y = player.image.y;
