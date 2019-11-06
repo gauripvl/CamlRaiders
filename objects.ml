@@ -36,7 +36,7 @@ let player = {
 
 let enemy = { 
   image = {
-    img = "camel";
+    img = "scorpion_mini";
     speed = 8; 
     x = 200; 
     y = 300; 

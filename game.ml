@@ -45,7 +45,7 @@ let collision (e: sprite) =
   else set_bg 0x4797ff
 (* if player.lives > 0 then player.lives <- player.lives - 1 else exit 0 *)
 
-let rec game_loop camel = 
+let rec game_loop camel p e = 
   Unix.sleepf 0.05;
   (* cleanup (); *)
   update_pos camel;
@@ -54,16 +54,20 @@ let rec game_loop camel =
   Graphics.clear_graph ();
   (* set_bg 0x4797ff; *)
   collision enemy.image;
-  draw enemy.image;
-  draw camel;
+  Graphics.draw_image p camel.x camel.y;
+  Graphics.draw_image e enemy.image.x enemy.image.y;
+  (* draw enemy.image;
+     draw camel; *)
   (* draw_proj !objects_list; *)
-  game_loop camel
+  game_loop camel p e
 
 let main () = 
   open_game_window gui_window;
   set_bg 0x4797ff;
   draw player.image;
   draw enemy.image;
-  game_loop player.image
+  let img_player = create_image player.image.img in 
+  let img_enemy = create_image enemy.image.img in 
+  game_loop player.image img_player img_enemy
 
 let () = main ()
