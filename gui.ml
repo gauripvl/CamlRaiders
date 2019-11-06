@@ -52,10 +52,10 @@ let draw t = Graphics.draw_image (create_image t.img) t.x t.y
 let update_pos t = 
   if Graphics.key_pressed () then 
     match Graphics.read_key () with 
-    | 'w' -> t.y <- t.y + t.speed
-    | 'a' -> t.x <- t.x - t.speed
-    | 's' -> t.y <- t.y - t.speed
-    | 'd' -> t.x <- t.x + t.speed
+    | 'w' -> t.y <- if t.y + t.speed >= (gui_window.height - 50) then (gui_window.height - 50) else t.y + t.speed
+    | 'a' -> t.x <- if t.x - t.speed <= 0 then 0 else t.x - t.speed
+    | 's' -> t.y <- if t.y - t.speed <= 0 then 0 else t.y - t.speed
+    | 'd' -> t.x <- if t.x + t.speed >= (gui_window.width - 50) then (gui_window.width - 50) else t.x + t.speed
     | 'q' -> exit 0
     | _ -> ()
 
