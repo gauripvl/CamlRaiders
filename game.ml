@@ -7,6 +7,7 @@ open Projectile
    as a variable *)
 
 (* ============= lasers ============= *)
+(* unused *)
 let objects_list = ref []
 
 let do_launch_proj t = 
@@ -45,10 +46,31 @@ let collision (e: sprite) =
   else set_bg 0x4797ff
 (* if player.lives > 0 then player.lives <- player.lives - 1 else exit 0 *)
 
+
+(* ============== move list of enemies (end) ============= *)
+(* unused *)
+let enemies_list = ref []
+
+let rec draw_enemies = function
+  | [] -> () 
+  | h::t -> draw h; draw_enemies t
+
+let rec move_enemies = function
+  | [] -> () 
+  | h::t -> h.y <- h.y - h.speed; move_enemies t
+
+let cleanup_enemies () = 
+  enemies_list := List.filter (fun x -> x.y > gui_window.height) !enemies_list
+(* ============== move list of enemies (end) ============= *)
+
+let move_enemy e = 
+  e.image.y <- e.image.y - e.image.speed
+
 let rec game_loop camel p e = 
   Unix.sleepf 0.05;
   (* cleanup (); *)
   update_pos camel;
+  move_enemy enemy;
   (* do_launch_proj camel; *)
   (* move_projectiles !objects_list; *)
   Graphics.clear_graph ();

@@ -50,12 +50,12 @@ let create_image str =
 let draw t = Graphics.draw_image (create_image t.img) t.x t.y
 
 let update_pos t = 
-  (* if Graphics.key_pressed () then  *)
-  match Graphics.read_key () with 
-  | 'w' -> t.y <- t.y + t.speed
-  | 'a' -> t.x <- t.x - t.speed
-  | 's' -> t.y <- t.y - t.speed
-  | 'd' -> t.x <- t.x + t.speed
-  | 'q' -> exit 0
-  | _ -> ()
+  if Graphics.key_pressed () then 
+    match Graphics.read_key () with 
+    | 'w' -> t.y <- t.y + t.speed
+    | 'a' -> t.x <- t.x - t.speed
+    | 's' -> t.y <- t.y - t.speed
+    | 'd' -> t.x <- t.x + t.speed
+    | 'q' -> exit 0
+    | _ -> ()
 
