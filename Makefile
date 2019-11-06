@@ -27,7 +27,7 @@ check:
 # 	bash finalcheck.sh
 
 zip: 
-	zip camelraiders.zip *.ml* _tags Makefile
+	zip camlraiders.zip *.ml* _tags Makefile ./assets/*
 	
 docs: docs-public docs-private
 	
