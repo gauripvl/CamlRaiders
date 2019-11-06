@@ -1,10 +1,11 @@
-MODULES=sprite player authors
+MODULES=sprite objects gui projectile authors
 OBJECTS=$(MODULES:=.cmo)
 MLS=$(MODULES:=.ml)
 MLIS=$(MODULES:=.mli)
 TEST=test.byte
-OCAMLBUILD=ocamlbuild -use-ocamlfind -plugin-tag 'package(bisect_ppx-ocamlbuild)'
-PKGS=unix,oUnit,str,graphis,camlimages
+MAIN=game.byte
+OCAMLBUILD=ocamlbuild -use-ocamlfind
+PKGS=unix,oUnit,str,graphics,camlimages.core,camlimages.png,camlimages.graphics,camlimages.gif
 
 default: build
 	utop
@@ -13,7 +14,10 @@ build:
 	$(OCAMLBUILD) $(OBJECTS)
 
 test:
-	BISECT_COVERAGE=YES $(OCAMLBUILD) -tag 'debug' $(TEST) && ./$(TEST) -runner sequential
+	$(OCAMLBUILD) -tag 'debug' $(TEST) && ./$(TEST)
+
+play:
+	$(OCAMLBUILD) $(MAIN) && ./$(MAIN)
 
 check:
 	bash checkenv.sh
@@ -23,7 +27,7 @@ check:
 # 	bash finalcheck.sh
 
 zip: 
-	zip camelraiders.zip *.ml* _tags Makefile report/*
+	zip camlraiders.zip *.ml* _tags Makefile ./assets/*
 	
 docs: docs-public docs-private
 	
@@ -40,4 +44,4 @@ docs-private: build
 
 clean:
 	ocamlbuild -clean
-	rm -rf doc.public doc.private report search_src.zip bisect*.out
+	rm -rf doc.public doc.private camelraiders.zip

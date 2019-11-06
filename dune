@@ -1,0 +1,5 @@
+(executable
+  (name game)
+  (libraries unix graphics camlimages.core camlimages.gif camlimages.png camlimages.graphics)
+  (modules game sprite objects projectile gui)
+)
