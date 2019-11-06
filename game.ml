@@ -42,7 +42,7 @@ let set_bg col =
 
 let collision (e: sprite) = 
   if (collision_test player.image e) 
-  then set_bg Graphics.white 
+  then set_bg 0xff792b 
   else set_bg 0x4797ff
 (* if player.lives > 0 then player.lives <- player.lives - 1 else exit 0 *)
 
@@ -70,7 +70,7 @@ let rec game_loop camel p e =
   Unix.sleepf 0.05;
   (* cleanup (); *)
   update_pos camel;
-  move_enemy enemy;
+  (* move_enemy enemy; *)
   (* do_launch_proj camel; *)
   (* move_projectiles !objects_list; *)
   Graphics.clear_graph ();
