@@ -1,4 +1,3 @@
-open Unix
 (* open Sprite *)
 open Gui
 open Objects
@@ -23,19 +22,25 @@ let rec draw_proj = function
 (* let cleanup () = 
    objects_list := List.filter (fun x -> x.y < gui_window.height) !objects_list *)
 
+let set_bg col = 
+  Graphics.set_color col; 
+  Graphics.fill_rect 0 0 640 480
+
 let rec game_loop camel = 
-  sleepf 0.05;
+  Unix.sleepf 0.05;
   (* cleanup (); *)
   update_pos camel;
   (* do_launch_proj camel; *)
   (* move_projectiles !objects_list; *)
   Graphics.clear_graph ();
+  set_bg 0x4797ff;
   draw camel;
   (* draw_proj !objects_list; *)
   game_loop camel
 
 let main () = 
   open_game_window gui_window;
+  set_bg 0x4797ff;
   draw player.image;
   game_loop player.image
 
