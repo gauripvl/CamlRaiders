@@ -1,6 +1,8 @@
 (**
    Metadata about this submission.
-   @author Full Name (netID)
+   @author Gauri Pidatala (vp223)
+   @author Jessica Lu (jal482)
+   @author Pinxuan Huang (ph437)
 *)
 
 (** [hours_worked] is a list of the number of hours each team member
