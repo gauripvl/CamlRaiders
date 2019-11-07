@@ -27,7 +27,7 @@ check:
 # 	bash finalcheck.sh
 
 zip: 
-	zip camlraiders.zip *.ml* _tags Makefile ./assets/*
+	zip camlraiders.zip *.ml* _tags Makefile ./assets/images/* INSTALL.txt
 	
 docs: docs-public docs-private
 	
