@@ -1,17 +1,19 @@
-OCaml 4.08 and opam must be installed.
+OCaml 4.08.1 and OPAM must be installed.
 
 Our game uses external libraries which must be installed to run the game. 
 1) opam install graphics
 2) opam install camlimages 
 
 To run the game: 
-1) make play 
+1) make build
+2) make play 
 
 Here are the features we implemented so far: 
-1) Player movement: Use WASD keys to move. 
+1) Player movement: Use WASD keys to move up, left, down, or right.
 2) Bounded GUI: The player stays inside the GUI window. In other words, 
 it is not possible to move the player's image outside the GUI. 
-3) Collision detection: The GUI background color changes from blue 
+3) Rectangular collision detection: The GUI background color changes from blue 
 to orange when the player's image collides with the scorpion's and the 
 background changes back to blue when the player's image does not overlap 
 the scorpion's.
+4) Quit game: Press 'q' to close the GUI window.
