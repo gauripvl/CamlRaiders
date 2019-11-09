@@ -33,10 +33,8 @@ let get_width s =
   Array.get temp 1 |> Array.length 
 
 let collision_test (s: sprite) (e: sprite) = 
-  (s.x + 50 > e.x && s.x < e.x + 72) &&
-  (s.y + 50 > e.y && s.y < e.y + 84)
-(* (s.x < e.x + (get_height e)/2 && s.x > e.x - (get_height e)/2) 
-   && (s.y < e.y + (get_width e)/ 2 && s.y > e.y - (get_width e)/2) *)
+  (s.x + get_width s > e.x && s.x < e.x + get_width e) &&
+  (s.y + get_height s > e.y && s.y < e.y + get_height e)
 
 let set_bg col = 
   Graphics.set_color col; 
