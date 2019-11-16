@@ -7,5 +7,5 @@
 #require "camlimages.gif";;
 #load_rec "sprite.cmo";;
 #load_rec "objects.cmo";;
-#load_rec "gui.cmo";;
 #load_rec "projectile.cmo";;
+#load_rec "gui.cmo";;
