@@ -1,5 +1,6 @@
 open Sprite
 open Objects
+open Projectile
 
 type t = sprite
 
@@ -49,6 +50,8 @@ let create_image str =
 (* let draw t = Graphics.draw_image (Option.get t.img) t.x t.y *)
 let draw t = Graphics.draw_image (create_image t.name) t.x t.y
 
+let lasers_list = ref []
+
 let update_pos t = 
   if Graphics.key_pressed () then 
     match Graphics.read_key () with 
@@ -56,6 +59,20 @@ let update_pos t =
     | 'a' -> t.x <- if t.x - t.speed <= 0 then 0 else t.x - t.speed
     | 's' -> t.y <- if t.y - t.speed <= 0 then 0 else t.y - t.speed
     | 'd' -> t.x <- if t.x + t.speed >= (gui_window.width - 50) then (gui_window.width - 50) else t.x + t.speed
+    | ' ' -> lasers_list := (create_projectile t) :: !lasers_list
     | 'q' -> exit 0
     | _ -> ()
 
+(* let do_launch_proj t = 
+   if Graphics.key_pressed () then 
+    match Graphics.read_key () with 
+    | ' ' -> lasers_list := (create_projectile t) :: !lasers_list
+    | 'q' -> exit 0
+    | _ -> ()  *)
+
+let rec draw_proj = function
+  | [] -> () 
+  | h::t -> draw h; draw_proj t
+
+let cleanup () = 
+  lasers_list := List.filter (fun x -> x.y < gui_window.height) !lasers_list

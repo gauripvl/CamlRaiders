@@ -1,12 +1,14 @@
-(* open Sprite *)
-open Gui
 open Objects
+open Projectile
+open Gui
 
 let rec game_loop () = 
   Unix.sleepf 0.05;
   update_pos player.image;
+  move_projectiles !lasers_list;
   Graphics.clear_graph ();
   draw player.image;
+  draw_proj !lasers_list;
   game_loop ()
 
 let main () = 
