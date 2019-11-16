@@ -20,4 +20,4 @@ type type_enemy = {
 val gui_window : type_gui
 val player : type_player 
 val enemy : type_enemy
-val bullet : sprite
+(* val bullet : sprite *)

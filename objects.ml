@@ -25,7 +25,10 @@ let gui_window = {
 
 let player = { 
   image = {
-    img = "chibi_camel";
+    img = None;
+    name = "chibi_camel";
+    height = -1;
+    width = -1;
     speed = 8; 
     x = 320; 
     y = 240; 
@@ -36,7 +39,10 @@ let player = {
 
 let enemy = { 
   image = {
-    img = "scorpion_mini";
+    img = None;
+    name = "scorpion_mini";
+    height = -1;
+    width = -1;
     speed = 8; 
     x = 200; 
     y = 300; 
@@ -44,9 +50,11 @@ let enemy = {
   health = 1;
 }
 
-let bullet = {
-  img = "beam";
-  speed = 20;
-  x = player.image.x;
-  y = player.image.y;
-}
+(* let bullet = {
+   img = "beam";
+   height = -1;
+   width = -1;
+   speed = 20;
+   x = player.image.x;
+   y = player.image.y;
+   } *)

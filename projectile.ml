@@ -5,6 +5,8 @@ type t = sprite
 (* TODO dynamically center projectile *)
 let create_projectile s = {
   img = "beam";
+  height = -1;
+  width = -1;
   speed = 24;
   x = s.x + 16;
   y = s.y + 24;

@@ -46,8 +46,8 @@ let create_image str =
   |> Graphic_image.of_image 
   |> img_to_transp
 
-(* let draw t = Graphics.draw_image t.img t.x t.y *)
-let draw t = Graphics.draw_image (create_image t.img) t.x t.y
+(* let draw t = Graphics.draw_image (Option.get t.img) t.x t.y *)
+let draw t = Graphics.draw_image (create_image t.name) t.x t.y
 
 let update_pos t = 
   if Graphics.key_pressed () then 
