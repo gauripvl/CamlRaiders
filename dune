@@ -1,5 +1,5 @@
 (executable
-  (name game)
+  (name spriteproto)
   (libraries unix graphics camlimages.core camlimages.gif camlimages.png camlimages.graphics)
-  (modules game sprite objects projectile gui)
+  (modules spriteproto sprite objects projectile gui)
 )
