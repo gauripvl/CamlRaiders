@@ -28,18 +28,11 @@ val create_image : string -> Graphics.image
 (** [draw t] draws the image of [s] onto the GUI. *)
 val draw : t -> unit
 
-(** [lasers_list] is a reference to a list of sprites *)
-val lasers_list : t list ref
+(** [draw_list lst] draws each element of [lst] onto the gui *)
+val draw_list : t list -> unit
 
 (** [update_pos t] updates the position of the ship based on key presses. 
     Pressing 'w'moves the ship up, 'a' moves the ship left, 
     'd' moves the ship right, and 's' moves the ship down. 
     Pressing 'q' quits the game and any other key does nothing. *)
 val update_pos : t -> unit
-
-(** [draw_proj lst] draws each element of [lst] onto the gui *)
-val draw_proj : t list -> unit
-
-(** [cleanup ()] removes laser sprites which are outside the 
-    gui window boundaries from [lasers_list] *)
-val cleanup : unit -> unit

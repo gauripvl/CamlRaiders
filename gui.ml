@@ -50,7 +50,9 @@ let create_image str =
 (* let draw t = Graphics.draw_image (Option.get t.img) t.x t.y *)
 let draw t = Graphics.draw_image (create_image t.name) t.x t.y
 
-let lasers_list = ref []
+let rec draw_list = function
+  | [] -> () 
+  | h::t -> draw h; draw_list t
 
 let update_pos t = 
   if Graphics.key_pressed () then 
@@ -62,17 +64,3 @@ let update_pos t =
     | ' ' -> lasers_list := (create_projectile t) :: !lasers_list
     | 'q' -> exit 0
     | _ -> ()
-
-(* let do_launch_proj t = 
-   if Graphics.key_pressed () then 
-    match Graphics.read_key () with 
-    | ' ' -> lasers_list := (create_projectile t) :: !lasers_list
-    | 'q' -> exit 0
-    | _ -> ()  *)
-
-let rec draw_proj = function
-  | [] -> () 
-  | h::t -> draw h; draw_proj t
-
-let cleanup () = 
-  lasers_list := List.filter (fun x -> x.y < gui_window.height) !lasers_list

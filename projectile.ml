@@ -1,6 +1,9 @@
 open Sprite 
+open Objects
 
 type t = sprite
+
+let lasers_list = ref []
 
 let create_projectile s = {
   img = None;
@@ -12,8 +15,11 @@ let create_projectile s = {
   y = s.y + 24; (* TODO change 24 to player.image.height/2 etc... *)
 }
 
-let move_projectile p = p.y <- p.y - p.speed
+(* let move_projectile p = p.y <- p.y - p.speed *)
 
 let rec move_projectiles = function 
   | [] -> () 
   | h::t -> h.y <- h.y + h.speed; move_projectiles t
+
+let cleanup_lasers lst = 
+  lst := List.filter (fun x -> x.y < gui_window.height) !lst
