@@ -64,3 +64,7 @@ let update_pos t =
     | ' ' -> lasers_list := (create_projectile t) :: !lasers_list
     | 'q' -> exit 0
     | _ -> ()
+
+let print_st str = 
+  Graphics.moveto ((gui_window.height)/2) ((gui_window.width)/2);
+  Graphics.draw_string str

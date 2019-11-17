@@ -36,3 +36,5 @@ val draw_list : t list -> unit
     'd' moves the ship right, and 's' moves the ship down. 
     Pressing 'q' quits the game and any other key does nothing. *)
 val update_pos : t -> unit
+
+val print_st : string -> unit
