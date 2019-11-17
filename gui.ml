@@ -10,12 +10,6 @@ let open_game_window w =
 
 let get_speed t = t.speed
 
-let get_pos t = (t.x, t.y)
-
-let get_x t = t.x
-
-let get_y t = t.y
-
 (* https://discuss.ocaml.org/t/what-ive-found-playing-with-graphics/739 *)
 (* no function for converting color back to rgb in Graphics *)
 (** [color_to_rgb c] returns the (r,g,b) component of [c] *)

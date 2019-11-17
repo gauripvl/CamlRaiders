@@ -13,6 +13,7 @@ let rec game_loop () =
   draw player.image;
   draw_list !lasers_list;
   if (!timer > 0.0) then print_st "you lost"; timer := !timer -. 0.1;
+  print_st (string_of_int player.image.height);
   game_loop ()
 
 
@@ -20,6 +21,7 @@ let main () =
   open_game_window gui_window;
   draw player.image;
   player.image.img <- Some (create_image player.image.name);
+  set_image_dimensions player.image;
   game_loop ()
 
 let test () = 

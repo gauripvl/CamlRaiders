@@ -11,16 +11,6 @@ val open_game_window : type_gui -> unit
 (** [get_speed t] is the speed of [t] *)
 val get_speed : t -> int
 
-(** [get_pos t] is [(x,y)] where x is the x-coordinate of [t] 
-    and y is the y-coordinate of [t] *)
-val get_pos : t -> int * int
-
-(** [get_x t] is the x-coordinate of [t] *)
-val get_x : t -> int
-
-(** [get_y t] is the y-coordinate of [t] *)
-val get_y : t -> int
-
 (** [create_image str] returns a transparent Graphics.image of 
     the png file named [str] in the assets/images directory *)
 val create_image : string -> Graphics.image
