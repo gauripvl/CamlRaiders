@@ -3,10 +3,7 @@ open Projectile
 open Gui
 open Sprite
 
-
-let print_st str = 
-  Graphics.moveto ((gui_window.height)/2) ((gui_window.width)/2);
-  Graphics.draw_string str
+let timer = ref 5.0
 
 let rec game_loop () = 
   Unix.sleepf 0.05;
@@ -15,7 +12,7 @@ let rec game_loop () =
   Graphics.clear_graph ();
   draw player.image;
   draw_list !lasers_list;
-  print_st "you lost";
+  if (!timer > 0.0) then print_st "you lost"; timer := !timer -. 0.1;
   game_loop ()
 
 
