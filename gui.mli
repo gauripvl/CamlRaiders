@@ -40,6 +40,9 @@ val update_pos : t -> unit
 (** [draw_proj lst] draws each element of [lst] onto the gui *)
 val draw_proj : t list -> unit
 
+val print_st : string -> unit
+
 (** [cleanup ()] removes laser sprites which are outside the 
     gui window boundaries from [lasers_list] *)
 val cleanup : unit -> unit
+

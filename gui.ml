@@ -74,5 +74,9 @@ let rec draw_proj = function
   | [] -> () 
   | h::t -> draw h; draw_proj t
 
+let print_st str = 
+  Graphics.moveto ((gui_window.height)/2) ((gui_window.width)/2);
+  Graphics.draw_string str
+
 let cleanup () = 
   lasers_list := List.filter (fun x -> x.y < gui_window.height) !lasers_list
