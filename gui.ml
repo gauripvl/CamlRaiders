@@ -1,7 +1,7 @@
 open Sprite
 open Objects
 open Projectile
-(* open Utils *)
+open Utils
 
 type t = sprite
 
@@ -36,21 +36,14 @@ let update_pos t =
     | 'q' -> exit 0
     | _ -> ()
 
-let laser_duration = 0.5
+let laser_duration = ref 0.5
 
-let laser_timer = ref laser_duration
-
-let shoot_laser_helper t = 
-  (* if Graphics.button_down () then  *)
+let add_laser_to_list t = 
   lasers_list := (create_projectile t) :: !lasers_list
 
 let shoot_laser t = 
   if Graphics.button_down () then 
-    if (!laser_timer <= 0.0) then (
-      shoot_laser_helper t; 
-      laser_timer := laser_duration
-    )
-    else laser_timer := !laser_timer -. 0.1
+    timer add_laser_to_list t laser_duration 0.5
 
 let print_st str = 
   Graphics.moveto ((gui_window.height)/2) ((gui_window.width)/2);

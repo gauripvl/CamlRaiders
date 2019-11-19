@@ -1,5 +1,5 @@
 (executable
-  (name spriteproto)
-  (libraries unix graphics camlimages.core camlimages.gif camlimages.png camlimages.graphics)
-  (modules spriteproto sprite objects projectile gui)
+  (name spawnproto)
+  (libraries unix threads graphics camlimages.core camlimages.gif camlimages.png camlimages.graphics)
+  (modules spawnproto sprite objects projectile gui stage utils)
 )

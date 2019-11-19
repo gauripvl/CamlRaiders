@@ -7,7 +7,7 @@ open Stage
 let rec game_loop () = 
   Unix.sleepf 0.05;
 
-  (* spawn_enemy (); *)
+  spawn_enemy ();
 
   update_pos player.image;
   shoot_laser player.image;

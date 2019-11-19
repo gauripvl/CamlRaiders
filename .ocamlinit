@@ -1,6 +1,7 @@
 #directory "_build";;
 #require "str";;
 #require "graphics";;
+#require "threads";;
 #require "camlimages.core";;
 #require "camlimages.png";;
 #require "camlimages.graphics";;
@@ -10,3 +11,4 @@
 #load_rec "projectile.cmo";;
 #load_rec "gui.cmo";;
 #load_rec "stage.cmo";;
+#load_rec "utils.cmo";;
