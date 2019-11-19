@@ -6,18 +6,27 @@ open Stage
 
 let rec game_loop () = 
   Unix.sleepf 0.05;
-  spawn_enemy ();
+
+  (* spawn_enemy (); *)
+
   update_pos player.image;
+  shoot_laser player.image;
+
   move_enemies !enemy_list;
   move_projectiles !lasers_list;
+
   Graphics.clear_graph ();
+
   draw player.image;
   draw_enemies !enemy_list;
   draw_list !lasers_list;
+
   cleanup_enemies (); 
   cleanup_lasers ();
+
   print_st (string_of_float !spawn_timer);
   print_st ("number of enemies: " ^ string_of_int (List.length !enemy_list));
+
   game_loop ()
 
 let main () = 

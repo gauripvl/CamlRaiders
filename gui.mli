@@ -30,4 +30,6 @@ val draw_enemies : type_enemy list -> unit
     Pressing 'q' quits the game and any other key does nothing. *)
 val update_pos : t -> unit
 
+val shoot_laser : t -> unit
+
 val print_st : string -> unit
