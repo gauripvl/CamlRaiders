@@ -11,15 +11,18 @@ val open_game_window : type_gui -> unit
 (** [get_speed t] is the speed of [t] *)
 val get_speed : t -> int
 
-(** [create_image str] returns a transparent Graphics.image of 
-    the png file named [str] in the assets/images directory *)
-val create_image : string -> Graphics.image
-
 (** [draw t] draws the image of [s] onto the GUI. *)
 val draw : t -> unit
 
-(** [draw_list lst] draws each element of [lst] onto the gui *)
+(** [draw_list lst] draws each sprite element of [lst] onto the gui *)
 val draw_list : t list -> unit
+
+(** [draw_create_list lst] creates an image and 
+    draws each sprite element of [lst] onto the gui *)
+(* val draw_create_list : t list -> unit *)
+
+(** [draw_enemies lst] draws each enemy element of [lst] onto the gui *)
+val draw_enemies : type_enemy list -> unit
 
 (** [update_pos t] updates the position of the ship based on key presses. 
     Pressing 'w'moves the ship up, 'a' moves the ship left, 
