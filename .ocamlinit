@@ -9,3 +9,4 @@
 #load_rec "objects.cmo";;
 #load_rec "projectile.cmo";;
 #load_rec "gui.cmo";;
+#load_rec "stage.cmo";;
