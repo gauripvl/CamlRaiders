@@ -37,18 +37,33 @@ let player = {
   level = 1;
 }
 
+let get_rand_x () = 
+  Random.self_init ();
+  Random.int gui_window.width
+
 let enemy = { 
   image = {
     img = None;
+    (* img = Some (create_image "scorpion_mini"); *)
     name = "scorpion_mini";
     height = -1;
     width = -1;
     speed = 8; 
-    x = 200; 
-    y = 300; 
+    x = get_rand_x (); 
+    y = gui_window.height - 250;
   };
   health = 1;
 }
+
+(* let laser s = {
+   img = None;
+   name = "beam";
+   height = -1;
+   width = -1;
+   speed = 24;
+   x = s.x + 16; (* TODO change 16 to player.image.width/2 etc... *)
+   y = s.y + 24; (* TODO change 24 to player.image.height/2 etc... *)
+   } *)
 
 (* let bullet = {
    img = "beam";
