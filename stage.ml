@@ -2,10 +2,6 @@ open Objects
 open Sprite
 open Utils
 
-let get_rand_x () = 
-  Random.self_init ();
-  Random.int gui_window.width
-
 let create_enemy () = {
   image = {
     img = None;
@@ -13,7 +9,7 @@ let create_enemy () = {
     height = -1;
     width = -1;
     speed = 8; 
-    x = get_rand_x (); 
+    x = get_rand_x gui_window.width; 
     y = gui_window.height + 100; 
   };
   health = 1;

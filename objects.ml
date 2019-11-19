@@ -12,9 +12,12 @@ type type_player = {
   mutable level: int;
 }
 
+type attack_variant = None | Missile 
+
 type type_enemy = {
   image: sprite;
   mutable health: int;
+  mutable aggro: attack_variant;
 }
 
 let gui_window = {
@@ -37,23 +40,19 @@ let player = {
   level = 1;
 }
 
-let get_rand_x () = 
-  Random.self_init ();
-  Random.int gui_window.width
-
-let enemy = { 
-  image = {
+(* let enemy = { 
+   image = {
     img = None;
     (* img = Some (create_image "scorpion_mini"); *)
     name = "scorpion_mini";
     height = -1;
     width = -1;
     speed = 8; 
-    x = get_rand_x (); 
+    x = get_rand_x gui_window.width; 
     y = gui_window.height - 250;
-  };
-  health = 1;
-}
+   };
+   health = 1;
+   } *)
 
 (* let laser s = {
    img = None;
