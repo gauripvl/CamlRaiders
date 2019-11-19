@@ -21,5 +21,5 @@ let rec move_projectiles = function
   | [] -> () 
   | h::t -> h.y <- h.y + h.speed; move_projectiles t
 
-let cleanup_lasers lst = 
-  lst := List.filter (fun x -> x.y < gui_window.height) !lst
+let cleanup_lasers () = 
+  lasers_list := List.filter (fun x -> x.y < gui_window.height) !lasers_list
