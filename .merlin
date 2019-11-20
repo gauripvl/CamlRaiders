@@ -1,4 +1,5 @@
 EXCLUDE_QUERY_DIR
+<<<<<<< HEAD
 B /home/pihu/.opam/4.08.1/lib/camlimages/core
 B /home/pihu/.opam/4.08.1/lib/camlimages/gif
 B /home/pihu/.opam/4.08.1/lib/camlimages/graphics
@@ -12,5 +13,18 @@ S /home/pihu/.opam/4.08.1/lib/camlimages/graphics
 S /home/pihu/.opam/4.08.1/lib/camlimages/png
 S /home/pihu/.opam/4.08.1/lib/ocaml
 S /home/pihu/.opam/4.08.1/lib/ocaml/threads
+=======
+B /Users/gauri/.opam/4.08.1/lib/camlimages/core
+B /Users/gauri/.opam/4.08.1/lib/camlimages/gif
+B /Users/gauri/.opam/4.08.1/lib/camlimages/graphics
+B /Users/gauri/.opam/4.08.1/lib/camlimages/png
+B /Users/gauri/.opam/4.08.1/lib/ocaml
+B _build/default/.spriteproto.eobjs/byte
+S /Users/gauri/.opam/4.08.1/lib/camlimages/core
+S /Users/gauri/.opam/4.08.1/lib/camlimages/gif
+S /Users/gauri/.opam/4.08.1/lib/camlimages/graphics
+S /Users/gauri/.opam/4.08.1/lib/camlimages/png
+S /Users/gauri/.opam/4.08.1/lib/ocaml
+>>>>>>> parent of 4dcc69d... Collision Betweens Player Lasers and Enemy
 S .
 FLG -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs
