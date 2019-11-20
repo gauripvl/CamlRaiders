@@ -1,5 +1,5 @@
 (executable
-  (name spawnproto)
+  (name atkproto)
   (libraries unix threads graphics camlimages.core camlimages.gif camlimages.png camlimages.graphics)
-  (modules spawnproto sprite objects projectile gui stage utils collisions)
+  (modules atkproto utils sprite objects projectile gui stage collisions)
 )

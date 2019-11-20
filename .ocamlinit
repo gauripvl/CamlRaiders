@@ -12,3 +12,4 @@
 #load_rec "gui.cmo";;
 #load_rec "stage.cmo";;
 #load_rec "utils.cmo";;
+#load_rec "collisions.cmo";;

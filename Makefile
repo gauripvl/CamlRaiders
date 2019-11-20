@@ -1,9 +1,9 @@
-MODULES=sprite objects projectile gui stage utils authors
+MODULES=sprite objects projectile gui stage utils collisions authors
 OBJECTS=$(MODULES:=.cmo)
 MLS=$(MODULES:=.ml)
 MLIS=$(MODULES:=.mli)
 TEST=test.byte
-MAIN=spawnproto.byte
+MAIN=demo.byte
 OCAMLBUILD=ocamlbuild -use-ocamlfind
 PKGS=unix,oUnit,str,graphics,threads,camlimages.core,camlimages.png,camlimages.graphics,camlimages.gif
 
