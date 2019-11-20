@@ -1,5 +1,6 @@
 open Sprite
 open Projectile 
+open Objects
 
 let collision_test (s: sprite) (e: sprite) = 
   (s.x + get_width s > e.x && s.x < e.x + get_width e) &&
@@ -15,26 +16,27 @@ let collision (e: sprite) =
   else set_bg 0x4797ff
 (* if player.lives > 0 then player.lives <- player.lives - 1 else exit 0 *)
 
-let rec enemy_list_collision (e_laser: laser) (e_enemy_list: enemy_list) (p: player) =
+let rec enemy_list_collision enemy_laser enemies =
+  match enemies with 
   | [] -> ()
-  | h::t -> if collision_test e_laser h
-    then a.health <- a.health - player.health
-    else enemy_list_collision e_laser t player
+  | h::t -> if collision_test enemy_laser h
+    then h.health <- h.health - player.power
+    else enemy_list_collision enemy_laser t
 
-let rec player_laser_collision (l: lasers_list) (e: enemy_list) (p: player) =
-  match l with
+let rec player_laser_collision enemy_lasers enemies =
+  match enemy_lasers with
   | [] -> ()
-  | h::t -> enemy_list_collision h e p;
-    player_laser_collision t e p
+  | h::t -> enemy_list_collision h enemies;
+    player_laser_collision t enemies
 
-let rec remove_enemy (e: enemy_list) (acc: enemy_list)  =
-  match e with
-  | [] -> []
-  | h::t -> if h.health <= 0
-    then remove_enemy t acc
-    else
-      acc :: h;
-    remove_enemy t acc
+let remove_enemy lst  = 
+  List.filter (fun e -> e.health > 0) lst
+(* match lst with
+   | [] -> []
+   | h::t -> if h.health <= 0
+   then remove_enemy t acc
+   else
+   acc :: h; remove_enemy t acc *)
 
 
 (* try doing accumulator w/ all enemies that have not collided, or try
