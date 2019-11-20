@@ -32,14 +32,15 @@ let update_pos t =
     | 'a' -> t.x <- if t.x - t.speed <= 0 then 0 else t.x - t.speed
     | 's' -> t.y <- if t.y - t.speed <= 0 then 0 else t.y - t.speed
     | 'd' -> t.x <- if t.x + t.speed >= (gui_window.width - 50) then (gui_window.width - 50) else t.x + t.speed
-    | ' ' -> lasers_list := (create_projectile t) :: !lasers_list
+    (* | ' ' -> lasers_list := (create_projectile "beam" 24 t) :: !lasers_list *)
+    | 'p' -> enemy_atks := (create_projectile "orb" 12 t) :: !enemy_atks
     | 'q' -> exit 0
     | _ -> ()
 
 let laser_duration = ref 0.5
 
 let add_laser_to_list t = 
-  lasers_list := (create_projectile t) :: !lasers_list
+  lasers_list := (create_projectile "beam" 24 t) :: !lasers_list
 
 let shoot_laser t = 
   if Graphics.button_down () then 
