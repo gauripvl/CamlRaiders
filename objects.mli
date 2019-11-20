@@ -12,12 +12,15 @@ type type_player = {
   mutable level: int;
 }
 
+type type_attack = None | Missile 
+
 type type_enemy = {
   image: sprite;
   mutable health: int;
+  mutable aggro: type_attack;
 }
 
 val gui_window : type_gui
 val player : type_player 
-val enemy : type_enemy
+(* val enemy : type_enemy *)
 (* val bullet : sprite *)

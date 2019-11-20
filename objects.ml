@@ -12,12 +12,12 @@ type type_player = {
   mutable level: int;
 }
 
-type attack_variant = None | Missile 
+type type_attack = None | Missile 
 
 type type_enemy = {
   image: sprite;
   mutable health: int;
-  mutable aggro: attack_variant;
+  mutable aggro: type_attack;
 }
 
 let gui_window = {
