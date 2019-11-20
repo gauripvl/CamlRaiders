@@ -10,6 +10,7 @@ type type_player = {
   image: sprite;
   mutable lives: int;
   mutable level: int;
+  mutable power: int;
 }
 
 type type_attack = None | Missile 
@@ -32,43 +33,11 @@ let player = {
     name = "chibi_camel";
     height = -1;
     width = -1;
-    speed = 8; 
+    speed = 12; 
     x = 320; 
     y = 240; 
   };
   lives = 3;
   level = 1;
+  power = 10;
 }
-
-(* let enemy = { 
-   image = {
-    img = None;
-    (* img = Some (create_image "scorpion_mini"); *)
-    name = "scorpion_mini";
-    height = -1;
-    width = -1;
-    speed = 8; 
-    x = get_rand_x gui_window.width; 
-    y = gui_window.height - 250;
-   };
-   health = 1;
-   } *)
-
-(* let laser s = {
-   img = None;
-   name = "beam";
-   height = -1;
-   width = -1;
-   speed = 24;
-   x = s.x + 16; (* TODO change 16 to player.image.width/2 etc... *)
-   y = s.y + 24; (* TODO change 24 to player.image.height/2 etc... *)
-   } *)
-
-(* let bullet = {
-   img = "beam";
-   height = -1;
-   width = -1;
-   speed = 20;
-   x = player.image.x;
-   y = player.image.y;
-   } *)

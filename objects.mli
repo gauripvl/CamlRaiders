@@ -10,6 +10,7 @@ type type_player = {
   image: sprite;
   mutable lives: int;
   mutable level: int;
+  mutable power: int;
 }
 
 type type_attack = None | Missile 
