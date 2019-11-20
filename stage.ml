@@ -33,4 +33,4 @@ let rec move_enemies = function
   | h::t -> h.image.y <- h.image.y - h.image.speed; move_enemies t
 
 let cleanup_enemies () = 
-  enemy_list := List.filter (fun x -> is_onscreen x.image) !enemy_list
+  enemy_list := List.filter (fun e -> e.image.y > 0) !enemy_list
