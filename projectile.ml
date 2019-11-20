@@ -7,7 +7,7 @@ let lasers_list = ref []
 let enemy_atks = ref []
 
 let create_projectile name spd origin = {
-  img = None;
+  img = Some (create_image name);
   name = name;
   height = -1;
   width = -1;
