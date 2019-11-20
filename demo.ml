@@ -5,6 +5,21 @@ open Sprite
 open Stage
 open Collisions
 
+let make_score_board (player: type_player) =
+  Graphics.draw_rect (((gui_window.height)/10)-10) (((gui_window.width)/10)-60) 150 90;
+  Graphics.moveto ((gui_window.height)/10) ((gui_window.width)/10);
+  Graphics.draw_string "SCORE BOARD";
+  Graphics.lineto ((gui_window.height)/10) ((gui_window.width)/10);
+  Graphics.moveto ((gui_window.height)/10) (((gui_window.width)/10) -13);
+  Graphics.draw_string ("Lives Available:");
+  if player.lives = 3 then
+    Graphics.draw_image (create_image "one_heart") (((gui_window.height)/10) + 100) (((gui_window.width)/10) -13)
+  else
+  if player.lives = 2 then
+    Graphics.draw_image (create_image "two_hearts") (((gui_window.height)/10) + 100) (((gui_window.width)/10) -13)
+  else
+    Graphics.draw_image(create_image "thee_hearts") (((gui_window.height)/10) + 100) (((gui_window.width)/10) -13)
+
 let rec game_loop () = 
   Unix.sleepf 0.05;
 
@@ -27,9 +42,10 @@ let rec game_loop () =
   draw player.image;
   draw_enemies !enemy_list;
   draw_list !lasers_list;
+  make_score_board player;
 
   (* print_st (string_of_float !spawn_timer); *)
-  print_st ("number of enemies: " ^ string_of_int (List.length !enemy_list));
+  (* print_st ("number of enemies: " ^ string_of_int (List.length !enemy_list)); *)
 
   game_loop ()
 
