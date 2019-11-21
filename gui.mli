@@ -33,3 +33,5 @@ val update_pos : t -> unit
 val shoot_laser : t -> unit
 
 val print_st : string -> unit
+
+val draw_scoreboard : unit -> unit 

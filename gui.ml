@@ -50,3 +50,23 @@ let shoot_laser t =
 let print_st str = 
   Graphics.moveto ((gui_window.height)/2) ((gui_window.width)/2);
   Graphics.draw_string str
+
+let get_hearts () = 
+  match player.lives with 
+  | 1 -> "one_heart"
+  | 2 -> "two_hearts"
+  | 3 -> "three_hearts"
+  | _ -> failwith "Not implemented: Zero hearts, game over."
+
+let draw_scoreboard () =
+  Graphics.draw_rect 
+    (((gui_window.height)/10)-10) 
+    (((gui_window.width)/10)-60) 
+    150 90;
+  Graphics.moveto ((gui_window.height)/10) ((gui_window.width)/10);
+  Graphics.draw_string "SCORE BOARD";
+  Graphics.lineto ((gui_window.height)/10) ((gui_window.width)/10);
+  Graphics.moveto ((gui_window.height)/10) (((gui_window.width)/10) -13);
+  Graphics.draw_string ("Lives Available:");
+  Graphics.draw_image (create_image (get_hearts ())) 
+    (((gui_window.height)/10) + 100) (((gui_window.width)/10) -13)
