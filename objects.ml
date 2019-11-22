@@ -11,6 +11,7 @@ type type_player = {
   mutable lives: int;
   mutable level: int;
   mutable power: int;
+  mutable invincible: bool;
 }
 
 type type_attack = None | Missile 
@@ -19,6 +20,10 @@ type type_enemy = {
   image: sprite;
   mutable health: int;
   mutable aggro: type_attack;
+}
+
+type type_scoreboard = {
+  mutable score: int;
 }
 
 let gui_window = {
@@ -37,7 +42,12 @@ let player = {
     x = 320; 
     y = 240; 
   };
-  lives = 3;
+  lives = 1;
   level = 1;
   power = 10;
+  invincible = false;
+}
+
+let scoreboard = {
+  score = 0;
 }

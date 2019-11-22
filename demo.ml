@@ -5,7 +5,7 @@ open Sprite
 open Stage
 open Collisions
 
-let rec game_loop () = 
+let game_loop () = 
   Unix.sleepf 0.05;
 
   spawn_enemy ();
@@ -15,6 +15,8 @@ let rec game_loop () =
 
   player_laser_collision !lasers_list !enemy_list;
   cleanup_enemies (); 
+  collision_with !enemy_list;
+  update_player_status ();
 
   move_enemies !enemy_list;
   move_projectiles !lasers_list;
@@ -28,17 +30,22 @@ let rec game_loop () =
   draw_enemies !enemy_list;
   draw_list !lasers_list;
 
-  (* print_st (string_of_float !spawn_timer); *)
+  (* print_st (string_of_float !invincibility_timer); *)
   (* print_st ("number of enemies: " ^ string_of_int (List.length !enemy_list)); *)
-  draw_scoreboard ();
+  draw_scoreboard ()
 
-  game_loop ()
+(* game_loop () *)
+
+let rec play () = 
+  if (player.lives > 0) then (game_loop (); play ())
 
 let main () = 
   open_game_window gui_window;
   draw player.image;
   player.image.img <- Some (create_image player.image.name);
   set_image_dimensions player.image;
-  game_loop ()
+  play ();
+  Graphics.clear_graph (); 
+  draw_game_over_screen ()
 
 let () = main ()

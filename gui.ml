@@ -36,7 +36,7 @@ let update_pos t =
     | 'q' -> exit 0
     | _ -> ()
 
-let laser_duration = ref 0.5
+let laser_duration = ref 0.1
 
 let add_laser_to_list t = 
   let new_laser = create_projectile "beam" 24 t in 
@@ -51,22 +51,47 @@ let print_st str =
   Graphics.moveto ((gui_window.height)/2) ((gui_window.width)/2);
   Graphics.draw_string str
 
+(* let game_over () = 
+   print_endline "Game over!"; 
+   print_endline ("Your score: " ^ (string_of_int scoreboard.score)); 
+   exit 0 *)
+
+let quit_game () = 
+  if Graphics.key_pressed () then 
+    match Graphics.read_key () with 
+    | 'q' -> exit 0
+    | _ -> ()
+
+let rec draw_game_over_screen () = 
+  print_st ("Game over! Your score: " ^ (string_of_int scoreboard.score));
+  quit_game ();
+  draw_game_over_screen ()
+
 let get_hearts () = 
   match player.lives with 
   | 1 -> "one_heart"
   | 2 -> "two_hearts"
   | 3 -> "three_hearts"
-  | _ -> failwith "Not implemented: Zero hearts, game over."
+  | _ -> "one_heart"
 
 let draw_scoreboard () =
   Graphics.draw_rect 
     (((gui_window.height)/10)-10) 
     (((gui_window.width)/10)-60) 
     150 90;
+
   Graphics.moveto ((gui_window.height)/10) ((gui_window.width)/10);
   Graphics.draw_string "SCORE BOARD";
   Graphics.lineto ((gui_window.height)/10) ((gui_window.width)/10);
-  Graphics.moveto ((gui_window.height)/10) (((gui_window.width)/10) -13);
+
+  Graphics.moveto ((gui_window.height)/10) (((gui_window.width)/10) - 16);
   Graphics.draw_string ("Lives Available:");
   Graphics.draw_image (create_image (get_hearts ())) 
-    (((gui_window.height)/10) + 100) (((gui_window.width)/10) -13)
+    (((gui_window.height)/10) + 100) (((gui_window.width)/10) - 16);
+
+  Graphics.moveto ((gui_window.height)/10) (((gui_window.width)/10) - 32);
+  (* Graphics.draw_string ("Invincibility: " ^ (string_of_bool player.invincible)); *)
+
+  (* Graphics.moveto ((gui_window.height)/10) (((gui_window.width)/10) - 48); *)
+  Graphics.draw_string ("Score: " ^ (string_of_int scoreboard.score));
+

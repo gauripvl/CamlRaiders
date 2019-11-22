@@ -23,10 +23,10 @@ let spawn_timer = ref 5.0
 let add_enemy_to_list () = 
   let new_enemy = create_enemy "scorpion_mini" in 
   set_image_dimensions new_enemy.image;
-  enemy_list := new_enemy :: !enemy_list; 
-  print_endline "created enemy at x = ";
-  let created_enemy = List.hd (List.rev !enemy_list) in 
-  print_endline (string_of_int created_enemy.image.x)
+  enemy_list := new_enemy :: !enemy_list
+(* print_endline "created enemy at x = ";
+   let created_enemy = List.hd (List.rev !enemy_list) in 
+   print_endline (string_of_int created_enemy.image.x) *)
 
 let spawn_enemy () = timer add_enemy_to_list () spawn_timer 5.0
 

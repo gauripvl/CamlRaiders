@@ -35,3 +35,5 @@ val shoot_laser : t -> unit
 val print_st : string -> unit
 
 val draw_scoreboard : unit -> unit 
+
+val draw_game_over_screen : unit -> unit

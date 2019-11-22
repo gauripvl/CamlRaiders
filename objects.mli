@@ -11,6 +11,7 @@ type type_player = {
   mutable lives: int;
   mutable level: int;
   mutable power: int;
+  mutable invincible: bool;
 }
 
 type type_attack = None | Missile 
@@ -21,7 +22,10 @@ type type_enemy = {
   mutable aggro: type_attack;
 }
 
+type type_scoreboard = {
+  mutable score: int;
+}
+
 val gui_window : type_gui
 val player : type_player 
-(* val enemy : type_enemy *)
-(* val bullet : sprite *)
+val scoreboard : type_scoreboard
