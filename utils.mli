@@ -1,7 +1,10 @@
 open Sprite
 
-(** [timer f a duration t] calls [f] every [t] milliseconds *)
+(** [timer f a r t] calls [f a] every [t] milliseconds *)
 val timer : ('a -> unit) -> 'a -> float ref -> float -> unit
+
+(** [switch_duration s r t] *)
+val switch_duration : bool ref -> float ref-> float ->unit
 
 val get_rand_x : int -> int
 

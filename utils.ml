@@ -1,9 +1,16 @@
 open Sprite
 open Objects
 
-let timer f a duration t = 
-  if (!duration <= 0.0) then (f a; duration := t)
-  else duration := !duration -. 0.1
+let timer f a t_ref t = 
+  if (!t_ref <= 0.0) then (f a; t_ref := t)
+  else t_ref := !t_ref -. 0.1
+
+let switch_duration switch t_ref t = 
+  (* if !switch then ( *)
+  if (!t_ref > 0.0) then (switch := true; t_ref := !t_ref -. 0.1) 
+  else (switch := false; t_ref := t)
+(* )  *)
+(* else switch := false *)
 
 let get_rand_x bound = 
   Random.self_init ();
