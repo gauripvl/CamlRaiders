@@ -12,6 +12,7 @@ type type_player = {
   mutable level: int;
   mutable power: int;
   mutable invincible: bool;
+  mutable invincibility_duration: float;
 }
 
 type type_attack = None | Missile 

@@ -28,11 +28,6 @@ let print_st str =
   Graphics.moveto ((gui_window.height)/2) ((gui_window.width)/2);
   Graphics.draw_string str
 
-(* let game_over () = 
-   print_endline "Game over!"; 
-   print_endline ("Your score: " ^ (string_of_int scoreboard.score)); 
-   exit 0 *)
-
 let rec draw_game_over_screen () = 
   print_st ("Game over! Your score: " ^ (string_of_int scoreboard.score));
   quit_game ();
@@ -49,7 +44,7 @@ let draw_scoreboard () =
   Graphics.draw_rect 
     (((gui_window.height)/10)-10) 
     (((gui_window.width)/10)-60) 
-    150 90;
+    200 90;
 
   Graphics.moveto ((gui_window.height)/10) ((gui_window.width)/10);
   Graphics.draw_string "SCORE BOARD";
@@ -61,8 +56,8 @@ let draw_scoreboard () =
     (((gui_window.height)/10) + 100) (((gui_window.width)/10) - 16);
 
   Graphics.moveto ((gui_window.height)/10) (((gui_window.width)/10) - 32);
-  (* Graphics.draw_string ("Invincibility: " ^ (string_of_bool player.invincible)); *)
+  Graphics.draw_string ("Invincibility: " ^ (string_of_bool player.invincible));
 
-  (* Graphics.moveto ((gui_window.height)/10) (((gui_window.width)/10) - 48); *)
+  Graphics.moveto ((gui_window.height)/10) (((gui_window.width)/10) - 48);
   Graphics.draw_string ("Score: " ^ (string_of_int scoreboard.score));
 

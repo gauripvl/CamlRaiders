@@ -12,6 +12,7 @@ type type_player = {
   mutable level: int;
   mutable power: int;
   mutable invincible: bool;
+  mutable invincibility_duration: float;
 }
 
 type type_attack = None | Missile 
@@ -46,6 +47,7 @@ let player = {
   level = 1;
   power = 10;
   invincible = false;
+  invincibility_duration = 3.0;
 }
 
 let scoreboard = {

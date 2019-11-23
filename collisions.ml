@@ -14,12 +14,6 @@ let set_bg col =
   Graphics.set_color col; 
   Graphics.fill_rect 0 0 640 480
 
-(* let collision (e: sprite) = 
-   if (collision_test player.image e) 
-   then set_bg 0xff792b 
-   else set_bg 0x4797ff *)
-(* if player.lives > 0 then player.lives <- player.lives - 1 else exit 0 *)
-
 let rec enemy_list_collision player_laser enemies =
   match enemies with 
   | [] -> ()
@@ -35,21 +29,30 @@ let rec player_laser_collision player_lasers enemies =
   | h::t -> enemy_list_collision h enemies;
     player_laser_collision t enemies
 
+let invincibility_timer = ref player.invincibility_duration
+let is_invincible = ref false 
+
 let decrease_player_lives () = 
   player.lives <- player.lives - 1
-
-let invincibility_timer = ref 0.0
 
 let rec collision_with = function
   | [] -> ()
   | e::t -> 
     if collision_btn player.image e.image then 
-      timer decrease_player_lives () invincibility_timer 5.0
+      if not !is_invincible then (
+        decrease_player_lives ();
+        is_invincible := true)
+      else ()
     else collision_with t 
 
-let update_player_status () = 
-  if (!invincibility_timer > 0.0) then player.invincible <- true 
-  else player.invincible <- false 
+let check_invincibility () = 
+  player.invincible <- !is_invincible;
+  if !is_invincible then switch_duration 
+      is_invincible invincibility_timer player.invincibility_duration
+
+(* let update_player_status () = 
+   if (!invincibility_timer > 0.0) then player.invincible <- true 
+   else player.invincible <- false  *)
 
 let remove_enemies ()  = 
   enemy_list := List.filter (fun e -> e.health > 0) !enemy_list 
