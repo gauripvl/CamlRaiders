@@ -24,14 +24,7 @@ val draw_list : t list -> unit
 (** [draw_enemies lst] draws each enemy element of [lst] onto the gui *)
 val draw_enemies : type_enemy list -> unit
 
-(** [update_pos t] updates the position of the ship based on key presses. 
-    Pressing 'w'moves the ship up, 'a' moves the ship left, 
-    'd' moves the ship right, and 's' moves the ship down. 
-    Pressing 'q' quits the game and any other key does nothing. *)
-val update_pos : t -> unit
-
-val shoot_laser : t -> unit
-
+(** [print_st str] prints [str] at the center of the game window *)
 val print_st : string -> unit
 
 val draw_scoreboard : unit -> unit 

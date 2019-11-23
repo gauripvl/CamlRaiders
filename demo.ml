@@ -4,6 +4,7 @@ open Gui
 open Sprite
 open Enemy
 open Collisions
+open Commands 
 
 let game_loop () = 
   Unix.sleepf 0.05;
