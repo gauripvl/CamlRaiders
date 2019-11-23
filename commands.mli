@@ -1,5 +1,10 @@
 open Sprite 
 
+
+(** [press_any_key_to f] calls [f] if any character key on the 
+    keyboard is pressed *)
+val press_any_key_to : (unit -> unit) -> unit
+
 (** [quit_game ()] exits the game window when the key 'q' is pressed 
     on the keyboard *)
 val quit_game : unit -> unit 

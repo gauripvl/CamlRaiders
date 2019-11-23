@@ -3,6 +3,11 @@ open Objects
 open Projectile 
 open Utils 
 
+let press_any_key_to f = 
+  if Graphics.key_pressed () then 
+    match Graphics.read_key () with 
+    | _ -> f ()
+
 let quit_game () = 
   if Graphics.key_pressed () then 
     match Graphics.read_key () with 
@@ -22,6 +27,7 @@ let update_pos t =
 
 let laser_duration = ref 0.1
 
+(** [add_laser_to_list t] adds a beam laser to the list of lasers *)
 let add_laser_to_list t = 
   let new_laser = create_projectile "beam" 24 t in 
   set_image_dimensions new_laser;
