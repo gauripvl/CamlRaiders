@@ -42,7 +42,7 @@ let player = {
     x = 320; 
     y = 240; 
   };
-  lives = 1;
+  lives = 3;
   level = 1;
   power = 10;
   invincible = false;

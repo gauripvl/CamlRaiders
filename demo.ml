@@ -2,7 +2,7 @@ open Objects
 open Projectile
 open Gui
 open Sprite
-open Stage
+open Enemy
 open Collisions
 
 let game_loop () = 
@@ -30,7 +30,7 @@ let game_loop () =
   draw_enemies !enemy_list;
   draw_list !lasers_list;
 
-  (* print_st (string_of_float !invincibility_timer); *)
+  print_st (string_of_float !invincibility_timer);
   (* print_st ("number of enemies: " ^ string_of_int (List.length !enemy_list)); *)
   draw_scoreboard ()
 

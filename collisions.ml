@@ -1,6 +1,6 @@
 open Objects
 open Sprite
-open Stage 
+open Enemy 
 open Utils 
 
 let collision_btn origin target = 
@@ -44,7 +44,7 @@ let rec collision_with = function
   | [] -> ()
   | e::t -> 
     if collision_btn player.image e.image then 
-      timer decrease_player_lives () invincibility_timer 3.0
+      timer decrease_player_lives () invincibility_timer 5.0
     else collision_with t 
 
 let update_player_status () = 

@@ -10,6 +10,7 @@
 #load_rec "objects.cmo";;
 #load_rec "projectile.cmo";;
 #load_rec "gui.cmo";;
+#load_rec "enemy.cmo";;
 #load_rec "stage.cmo";;
 #load_rec "utils.cmo";;
 #load_rec "collisions.cmo";;

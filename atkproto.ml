@@ -2,7 +2,7 @@ open Objects
 open Projectile
 open Gui
 open Sprite
-open Stage
+open Enemy
 
 let rec game_loop () = 
   Unix.sleepf 0.05;
