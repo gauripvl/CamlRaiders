@@ -1,17 +1,19 @@
 open Sprite
 open Objects
 
+(** [collision_btn s1 s2] is true if the rectangular image bounds of 
+    [s1] and [s2] overlap. *)
 val collision_btn : sprite -> sprite -> bool
 
-val set_bg : int -> unit
-
-val enemy_list_collision : sprite -> type_enemy list -> unit
-
-val player_laser_collision : sprite list -> type_enemy list -> unit
+(** [player_laser_collision lst1 lst2] checks if one of the 
+    player's projectiles in [lst1] collides with an enemy 
+    in [lst2]. *)
+val player_laser_collision : 
+  Projectile.type_projectile list -> Enemy.type_enemy list -> unit
 
 (** [collision_with lst] decreases player's lives by one if 
     player hits any sprite in [lst] *)
-val collision_with : type_enemy list -> unit
+val collision_with : Enemy.type_enemy list -> unit
 
 val check_invincibility : unit -> unit 
 

@@ -10,14 +10,13 @@ let collision_btn origin target =
     origin.y + origin.height > target.y 
     && origin.y < target.y + target.height)
 
-let set_bg col = 
-  Graphics.set_color col; 
-  Graphics.fill_rect 0 0 640 480
-
-let rec enemy_list_collision player_laser enemies =
+(** [enemy_list_collision proj lst] subtracts health from enemy and increases 
+    the score if [proj] hits one enemy in [lst]. *)
+let rec enemy_list_collision 
+    (player_laser: Projectile.type_projectile) enemies =
   match enemies with 
   | [] -> ()
-  | h::t -> if collision_btn player_laser h.image then (
+  | h::t -> if collision_btn player_laser.image h.image then (
       h.health <- h.health - player.power; 
       scoreboard.score <- scoreboard.score + 1 
     )
@@ -32,6 +31,7 @@ let rec player_laser_collision player_lasers enemies =
 let invincibility_timer = ref player.invincibility_duration
 let is_invincible = ref false 
 
+(** [decrease_player_lives ()] decrements one life from the player. *)
 let decrease_player_lives () = 
   player.lives <- player.lives - 1
 

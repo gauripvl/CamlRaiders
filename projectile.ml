@@ -31,13 +31,6 @@ let dir_vector origin target =
   let y = target.y - origin.y in 
   (float_of_int x, float_of_int y)
 
-(** [dir_vector_mouse] *)
-(* let dir_vector_mouse target = 
-   let mouse_x, mouse_y = Graphics.mouse_pos () in 
-   let x = mouse_x - target.x in 
-   let y = mouse_y - target.y in 
-   (float_of_int x, float_of_int y) *)
-
 let unit_vector v = 
   let x, y = v in 
   let magnitude = sqrt (x ** 2.0 +. y ** 2.0) in 
@@ -47,7 +40,8 @@ let rec create_enemy_atks = function
   | [] -> () 
   | h::t -> begin match h.attack with 
       | Passive -> () 
-      | Missile -> let vect = unit_vector (dir_vector h.image player.image) in 
+      | Missile -> 
+        let vect = unit_vector (dir_vector h.image player.image) in 
         enemy_atks := (create_projectile "orb" 12 h.image vect) :: !enemy_atks
     end; 
     create_enemy_atks t
@@ -60,7 +54,8 @@ let rec move_projectiles = function
     else (
       let dx, dy = unit_vector h.vector in 
       h.image.x <- h.image.x + int_of_float (float_of_int h.image.speed *. dx); 
-      h.image.y <- h.image.y + int_of_float (float_of_int h.image.speed *. dy));
+      h.image.y <- h.image.y + int_of_float (float_of_int h.image.speed *. dy)
+    );
     move_projectiles t
 
 let cleanup_projectiles () = 
