@@ -15,20 +15,12 @@ type type_player = {
   mutable invincibility_duration: float;
 }
 
-type type_attack = None | Missile 
-
-type type_enemy = {
-  image: sprite;
-  mutable health: int;
-  mutable aggro: type_attack;
-}
-
 type type_scoreboard = {
   mutable score: int;
 }
 
 let gui_window = {
-  width = 640;
+  width = 800;
   height = 480;
   title = "CamlRaiders Demo";
 }

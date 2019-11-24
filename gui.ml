@@ -1,6 +1,9 @@
 open Sprite
 open Objects 
 open Commands
+open Projectile
+open Enemy
+
 
 type t = sprite
 
@@ -20,7 +23,13 @@ let rec draw_list = function
   | [] -> () 
   | h::t -> draw h; draw_list t
 
-let rec draw_enemies = function
+let rec draw_projectiles (lst: type_projectile list) = 
+  match lst with 
+  | [] -> () 
+  | h::t -> draw h.image; draw_projectiles t
+
+let rec draw_enemies (lst: type_enemy list) = 
+  match lst with 
   | [] -> () 
   | h::t -> draw h.image; draw_enemies t
 

@@ -2,28 +2,45 @@ open Objects
 open Sprite
 open Utils
 
-let create_enemy name = {
+type type_attack = Passive | Missile 
+
+type type_enemy = {
+  image: sprite;
+  mutable health: int;
+  mutable attack: type_attack;
+  (* mutable attack_freq: float ref; *)
+}
+
+let create_enemy name atk = {
   image = {
     img = Some (create_image name);
     name = name;
     height = -1;
     width = -1;
     speed = 3; 
-    x = get_rand_x gui_window.width; 
+    x = random_int gui_window.width; 
     y = gui_window.height + 100; 
   };
   health = 1;
-  aggro = None;
+  attack = atk;
+  (* attack_freq = freq; *)
 }
 
 let enemy_list = ref []
 
-let spawn_timer = ref 5.0
+let spawn_timer = ref 1.0
+
+(** [random_enemy ()] is an enemy with a randomly set attack type. *)
+let random_enemy () = 
+  let probability = random_int 10 in 
+  if probability < 3 then create_enemy "serpent" Missile 
+  else create_enemy "scorpion" Passive
 
 let add_enemy_to_list () = 
-  let new_enemy = create_enemy "scorpion_mini" in 
+  let new_enemy = random_enemy () in 
   set_image_dimensions new_enemy.image;
   enemy_list := new_enemy :: !enemy_list
+
 (* print_endline "created enemy at x = ";
    let created_enemy = List.hd (List.rev !enemy_list) in 
    print_endline (string_of_int created_enemy.image.x) *)

@@ -1,6 +1,7 @@
 open Sprite
 open Objects
-(* open Projectile *)
+open Projectile
+open Enemy 
 
 type t = sprite
 
@@ -16,6 +17,8 @@ val draw : t -> unit
 
 (** [draw_list lst] draws each sprite element of [lst] onto the gui *)
 val draw_list : t list -> unit
+
+val draw_projectiles : type_projectile list -> unit 
 
 (** [draw_create_list lst] creates an image and 
     draws each sprite element of [lst] onto the gui *)

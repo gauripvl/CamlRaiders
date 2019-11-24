@@ -12,7 +12,7 @@ let switch_duration switch t_ref t =
 (* )  *)
 (* else switch := false *)
 
-let get_rand_x bound = 
+let random_int bound = 
   Random.self_init ();
   Random.int bound
 

@@ -15,14 +15,6 @@ type type_player = {
   mutable invincibility_duration: float;
 }
 
-type type_attack = None | Missile 
-
-type type_enemy = {
-  image: sprite;
-  mutable health: int;
-  mutable aggro: type_attack;
-}
-
 type type_scoreboard = {
   mutable score: int;
 }

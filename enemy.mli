@@ -1,5 +1,14 @@
 (* handles spawn, enemy waves *)
-open Objects
+(* open Objects *)
+open Sprite
+
+type type_attack = Passive | Missile 
+
+type type_enemy = {
+  image: sprite;
+  mutable health: int;
+  mutable attack: type_attack;
+}
 
 val spawn_timer : float ref
 
