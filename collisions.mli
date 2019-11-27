@@ -1,5 +1,5 @@
 open Sprite
-open Objects
+(* open Objects *)
 
 (** [collision_btn s1 s2] is true if the rectangular image bounds of 
     [s1] and [s2] overlap. *)
