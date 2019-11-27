@@ -11,7 +11,9 @@ type type_enemy = {
   (* mutable attack_freq: float ref; *)
 }
 
-let create_enemy name atk = {
+(** [create_enemy n h a] creates an enemy with image name [n], 
+    health of [hp], and an attack type of [atk]. *)
+let create_enemy name hp atk = {
   image = {
     img = Some (create_image name);
     name = name;
@@ -21,7 +23,7 @@ let create_enemy name atk = {
     x = random_int gui_window.width; 
     y = gui_window.height + 100; 
   };
-  health = 1;
+  health = hp;
   attack = atk;
   (* attack_freq = freq; *)
 }
@@ -33,8 +35,8 @@ let spawn_timer = ref 1.0
 (** [random_enemy ()] is an enemy with a randomly set attack type. *)
 let random_enemy () = 
   let probability = random_int 10 in 
-  if probability < 3 then create_enemy "serpent" Missile 
-  else create_enemy "scorpion" Passive
+  if probability < 3 then create_enemy "serpent" 6 Missile 
+  else create_enemy "scorpion" 10 Passive
 
 let add_enemy_to_list () = 
   let new_enemy = random_enemy () in 

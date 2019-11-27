@@ -33,6 +33,13 @@ let rec draw_enemies (lst: type_enemy list) =
   | [] -> () 
   | h::t -> draw h.image; draw_enemies t
 
+let rec draw_enemy_hp = function 
+  | [] -> ()
+  | e::t -> 
+    Graphics.moveto (e.image.x + e.image.width / 4) (e.image.y - 12);
+    Graphics.draw_string ("HP: " ^ (string_of_int e.health));
+    draw_enemy_hp t
+
 let print_st str = 
   Graphics.moveto ((gui_window.height)/2) ((gui_window.width)/2);
   Graphics.draw_string str
