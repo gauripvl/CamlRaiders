@@ -16,6 +16,8 @@ type type_player = {
 }
 
 type type_scoreboard = {
+  width: int;
+  height: int;
   mutable score: int;
 }
 

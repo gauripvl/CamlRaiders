@@ -8,7 +8,8 @@ let main () =
   draw player.image;
   player.image.img <- Some (create_image player.image.name);
   set_image_dimensions player.image;
-  loop_game ();
+  (* loop_game (); *)
+  boss_dialogue ();
   Graphics.clear_graph (); 
   draw_game_over_screen ()
 

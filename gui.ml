@@ -7,7 +7,7 @@ open Enemy
 
 type t = sprite
 
-let open_game_window w = 
+let open_game_window (w: type_gui) = 
   " " ^ (string_of_int w.width) ^ "x" ^ (string_of_int w.height)
   |> Graphics.open_graph; Graphics.set_window_title w.title
 
@@ -44,11 +44,6 @@ let print_st str =
   Graphics.moveto ((gui_window.height)/2) ((gui_window.width)/2);
   Graphics.draw_string str
 
-let rec draw_game_over_screen () = 
-  print_st ("Game over! Your score: " ^ (string_of_int scoreboard.score));
-  quit_game ();
-  draw_game_over_screen ()
-
 let get_hearts () = 
   match player.lives with 
   | 1 -> "one_heart"
@@ -57,23 +52,32 @@ let get_hearts () =
   | _ -> "one_heart"
 
 let draw_scoreboard () =
-  Graphics.draw_rect 
-    (((gui_window.height)/10)-10) 
-    (((gui_window.width)/10)-60) 
-    200 90;
+  Graphics.draw_rect 10 10 scoreboard.width scoreboard.height;
 
-  Graphics.moveto ((gui_window.height)/10) ((gui_window.width)/10);
-  Graphics.draw_string "SCORE BOARD";
-  Graphics.lineto ((gui_window.height)/10) ((gui_window.width)/10);
+  let x_pos = 20 in 
+  let y_pos = scoreboard.height - 10 in (
+    Graphics.moveto x_pos y_pos;
+    Graphics.draw_string "SCORE BOARD";
+    Graphics.lineto x_pos y_pos;
 
-  Graphics.moveto ((gui_window.height)/10) (((gui_window.width)/10) - 16);
-  Graphics.draw_string ("Lives Available:");
-  Graphics.draw_image (create_image (get_hearts ())) 
-    (((gui_window.height)/10) + 100) (((gui_window.width)/10) - 16);
+    Graphics.moveto x_pos (y_pos - 16);
+    Graphics.draw_string ("Lives Available:");
+    Graphics.draw_image (create_image (get_hearts ())) 
+      (x_pos + 100) (y_pos - 16);
 
-  Graphics.moveto ((gui_window.height)/10) (((gui_window.width)/10) - 32);
-  Graphics.draw_string ("Invincibility: " ^ (string_of_bool player.invincible));
+    Graphics.moveto x_pos (y_pos - 32);
+    Graphics.draw_string 
+      ("Invincibility: " ^ (string_of_bool player.invincible));
 
-  Graphics.moveto ((gui_window.height)/10) (((gui_window.width)/10) - 48);
-  Graphics.draw_string ("Score: " ^ (string_of_int scoreboard.score));
+    Graphics.moveto x_pos (y_pos - 48);
+    Graphics.draw_string ("Score: " ^ (string_of_int scoreboard.score))
+  )
 
+let rec draw_game_over_screen () = 
+  print_st ("Game over! Your score: " ^ (string_of_int scoreboard.score));
+  quit_game ();
+  draw_game_over_screen ()
+
+let draw_dialogue_box () = 
+  Graphics.draw_rect (scoreboard.width + 20) 10 
+    (gui_window.width - scoreboard.width-30) scoreboard.height

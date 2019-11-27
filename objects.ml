@@ -16,6 +16,8 @@ type type_player = {
 }
 
 type type_scoreboard = {
+  width: int;
+  height: int;
   mutable score: int;
 }
 
@@ -43,5 +45,7 @@ let player = {
 }
 
 let scoreboard = {
+  width = 200;
+  height = 90;
   score = 0;
 }
