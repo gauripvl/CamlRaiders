@@ -1,0 +1,39 @@
+{
+  "dialogue": [
+    {
+      "title": "test",
+      "scripts": [
+        {
+          "avatar": "player_avatar",
+          "speaker": "Camel",
+          "texts": [
+            "helorldlo w",
+            "I feel a powerful force approaching...!"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "boss",
+      "scripts": [
+        {
+          "avatar": "player_avatar",
+          "speaker": "Camel",
+          "texts": [
+            "...",
+            "I feel a powerful force approaching...!"
+          ]
+        },
+        {
+          "avatar": "sphinx_avatar",
+          "speaker": "Sphinx Guardian",
+          "texts": [
+            "* appears *",
+            "RAWWWR!!",
+            "All those who trepass shall face my wrath!"
+          ]
+        }
+      ]
+    }
+  ]
+}

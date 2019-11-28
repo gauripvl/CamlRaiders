@@ -1,5 +1,5 @@
 (executable
   (name demo)
-  (libraries unix threads graphics camlimages.core camlimages.gif camlimages.png camlimages.graphics)
+  (libraries unix yojson graphics camlimages.core camlimages.gif camlimages.png camlimages.graphics)
   (modules demo utils sprite objects projectile gui enemy stage collisions commands)
 )
