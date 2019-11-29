@@ -14,3 +14,4 @@
 #load_rec "stage.cmo";;
 #load_rec "utils.cmo";;
 #load_rec "collisions.cmo";;
+#load_rec "dialogue.cmo";;

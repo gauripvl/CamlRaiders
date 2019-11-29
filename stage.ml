@@ -11,6 +11,53 @@ let enemy_atk_timer = ref 2.0
 let start_game () = 
   print_st "Press z to start"
 
+(* ============== DIALOGUE CODE (begin) ============== *)
+let texts = ["Because people don't have wings, we look for other ways to fly. 
+             - Ukai";
+             "There are some flowers you only see when you take detours. 
+             - Tanaka";
+             "Haikyuu!! best show ~*";
+             "Add more text here =D";
+            ]
+
+(* TODO - handle special characters *)
+let string_to_list str = 
+  (* let character = String.get str in 
+     match character with 
+     | '\'' -> List.init (String.length str) "'"
+     | _ -> List.init (String.length str) character *)
+  List.init (String.length str) (String.get str)
+
+let rec print_typewriter_dialogue acc = function 
+  | [] -> ()
+  | h::t -> Unix.sleepf 0.04;
+    let current_str = acc ^ Char.escaped h in 
+    print_st current_str; 
+    print_typewriter_dialogue current_str t
+
+let print_current_dialogue txt = 
+  txt |> string_to_list |> print_typewriter_dialogue ""
+
+let is_dialogue_active = ref true 
+
+
+(* TODO - fix the brief delay after pressing 'z' *)
+let rec print_next_dialogue = function 
+  | [] -> is_dialogue_active := false
+  | h::t -> 
+    print_current_dialogue h;
+    if Graphics.key_pressed () then 
+      match Graphics.read_key () with 
+      | 'z' -> Graphics.clear_graph (); print_next_dialogue t
+      | _ -> () 
+    else print_next_dialogue (h::t)
+
+let rec preface () = 
+  if !is_dialogue_active then print_next_dialogue texts;
+  preface ()
+
+(* ============== DIALOGUE CODE (end) ============== *)
+
 let loop_minion_stage () = 
   Unix.sleepf 0.05;
 

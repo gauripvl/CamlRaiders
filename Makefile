@@ -1,4 +1,4 @@
-MODULES=sprite objects projectile gui enemy stage utils collisions authors
+MODULES=sprite objects projectile gui enemy stage utils collisions dialogue authors
 OBJECTS=$(MODULES:=.cmo)
 MLS=$(MODULES:=.ml)
 MLIS=$(MODULES:=.mli)

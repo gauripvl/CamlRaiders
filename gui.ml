@@ -41,7 +41,7 @@ let rec draw_enemy_hp = function
     draw_enemy_hp t
 
 let print_st str = 
-  Graphics.moveto ((gui_window.height)/2) ((gui_window.width)/2);
+  Graphics.moveto ((gui_window.width)/5) ((gui_window.height)/2);
   Graphics.draw_string str
 
 let get_hearts () = 

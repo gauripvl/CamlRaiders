@@ -1,6 +1,9 @@
 (** [start_game ()] displays the title screen *)
 val start_game : unit -> unit 
 
+(** [preface ()] *)
+val preface : unit -> unit
+
 (** [loop_minion_stage ()] *)
 val loop_minion_stage : unit -> unit
 

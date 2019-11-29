@@ -1,14 +1,16 @@
 {
-  "dialogue": [
+  "dialogues": [
     {
       "title": "test",
       "scripts": [
         {
-          "avatar": "player_avatar",
-          "speaker": "Camel",
+          "avatar": "test_avatar",
+          "speaker": "Test Speaker",
           "texts": [
-            "helorldlo w",
-            "I feel a powerful force approaching...!"
+            "Because people don't have wings, we look for other ways to fly. - Ukai",
+            "There are some flowers you only see when you take detours. - Tanaka",
+            "Haikyuu!! best show ~*",
+            "Add more text here =D"
           ]
         }
       ]
