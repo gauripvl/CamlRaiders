@@ -13,7 +13,7 @@ type type_enemy = {
 
 (** [create_enemy n h a] creates an enemy with image name [n], 
     health of [hp], and an attack type of [atk]. *)
-let create_enemy name hp atk = {
+let create_enemy name ~hp:hp ~atk:atk = {
   image = {
     img = Some (create_image name);
     name = name;
@@ -35,11 +35,14 @@ let spawn_timer = ref 1.0
 (** [random_enemy ()] is an enemy with a randomly set attack type. *)
 let random_enemy () = 
   let probability = random_int 100 in 
-  if (probability < 15) then create_enemy "serpent" 10 Missile 
-  else if (is_btn 15 30 probability) then create_enemy "serpent" 14 Cross 
-  else if (is_btn 31 45 probability) then create_enemy "serpent" 14 Diamond 
-  else if (is_btn 46 60 probability) then create_enemy "serpent" 6 Star 
-  else create_enemy "scorpion" 20 Passive 
+  if (probability < 15) then create_enemy "serpent" ~hp:10 ~atk:Missile 
+  else if (is_btn 15 30 probability) then 
+    create_enemy "serpent" ~hp:14 ~atk:Cross 
+  else if (is_btn 31 45 probability) then 
+    create_enemy "serpent" ~hp:14 ~atk:Diamond 
+  else if (is_btn 46 60 probability) then 
+    create_enemy "serpent" ~hp:6 ~atk:Star 
+  else create_enemy "scorpion" ~hp:20 ~atk:Passive 
 
 let add_enemy_to_list () = 
   let new_enemy = random_enemy () in 
