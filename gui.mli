@@ -38,4 +38,4 @@ val draw_scoreboard : unit -> unit
 
 val draw_game_over_screen : unit -> unit
 
-val draw_dialogue_box : unit -> unit 
+val draw_dialogue_container : string -> char list -> unit 

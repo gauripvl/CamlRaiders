@@ -78,6 +78,33 @@ let rec draw_game_over_screen () =
   quit_game ();
   draw_game_over_screen ()
 
-let draw_dialogue_box () = 
-  Graphics.draw_rect (scoreboard.width + 20) 10 
-    (gui_window.width - scoreboard.width-30) scoreboard.height
+let rec draw_typewriter = function 
+  |[] -> ()
+  |h::t -> 
+    Unix.sleepf 0.05;
+    Graphics.draw_char h; 
+    draw_typewriter t
+
+let draw_dialogue_container speaker txt = 
+  Graphics.draw_rect 
+    (scoreboard.width + 20) 10 
+    (gui_window.width - scoreboard.width-30) scoreboard.height;
+
+  (* Graphics.moveto (scoreboard.width + 20) 10; *)
+  Graphics.fill_rect (scoreboard.width + 20) 10 
+    scoreboard.height scoreboard.height;
+
+  Graphics.moveto 
+    (scoreboard.width + scoreboard.height + 40) 
+    (scoreboard.height - 10);
+  Graphics.draw_string speaker;
+  Graphics.lineto 
+    (scoreboard.width + scoreboard.height + 40) 
+    (scoreboard.height - 10);
+
+  Graphics.moveto 
+    (scoreboard.width + scoreboard.height + 40) 
+    (scoreboard.height - 40);
+  draw_typewriter txt
+
+

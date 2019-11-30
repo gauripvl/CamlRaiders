@@ -5,58 +5,12 @@ open Enemy
 open Collisions
 open Commands 
 open Utils
+open Dialogue 
 
 let enemy_atk_timer = ref 2.0
 
 let start_game () = 
   print_st "Press z to start"
-
-(* ============== DIALOGUE CODE (begin) ============== *)
-let texts = ["Because people don't have wings, we look for other ways to fly. 
-             - Ukai";
-             "There are some flowers you only see when you take detours. 
-             - Tanaka";
-             "Haikyuu!! best show ~*";
-             "Add more text here =D";
-            ]
-
-(* TODO - handle special characters *)
-let string_to_list str = 
-  (* let character = String.get str in 
-     match character with 
-     | '\'' -> List.init (String.length str) "'"
-     | _ -> List.init (String.length str) character *)
-  List.init (String.length str) (String.get str)
-
-let rec print_typewriter_dialogue acc = function 
-  | [] -> ()
-  | h::t -> Unix.sleepf 0.04;
-    let current_str = acc ^ Char.escaped h in 
-    print_st current_str; 
-    print_typewriter_dialogue current_str t
-
-let print_current_dialogue txt = 
-  txt |> string_to_list |> print_typewriter_dialogue ""
-
-let is_dialogue_active = ref true 
-
-
-(* TODO - fix the brief delay after pressing 'z' *)
-let rec print_next_dialogue = function 
-  | [] -> is_dialogue_active := false
-  | h::t -> 
-    print_current_dialogue h;
-    if Graphics.key_pressed () then 
-      match Graphics.read_key () with 
-      | 'z' -> Graphics.clear_graph (); print_next_dialogue t
-      | _ -> () 
-    else print_next_dialogue (h::t)
-
-let rec preface () = 
-  if !is_dialogue_active then print_next_dialogue texts;
-  preface ()
-
-(* ============== DIALOGUE CODE (end) ============== *)
 
 let loop_minion_stage () = 
   Unix.sleepf 0.05;
@@ -89,17 +43,80 @@ let loop_minion_stage () =
 
   draw_scoreboard ()
 
+
+(* ============== DIALOGUE CODE V2 (begin) ============== *)
+let dlg_json = Yojson.Basic.from_file "dialogues.json"
+let dlgs = to_json dlg_json
+let scripts_boss = get_scripts dlgs "boss"
+
+let is_dialogue_active = ref true 
+let end_of_speech = ref false 
+
+let string_to_list str = 
+  List.init (String.length str) (String.get str)
+
+let draw_static () = 
+  quit_game();
+  draw_scoreboard ();
+  draw player.image
+
+(* draws speaker and text *)
+let rec show_current_dialogue speaker = function 
+  | [] -> 
+    print_endline "show_current_dialogue []"; end_of_speech := true 
+  | h::t -> 
+    print_endline "show_current_dialogue ht";
+    let char_lst = string_to_list h in 
+    draw_dialogue_container speaker char_lst;
+    if Graphics.key_pressed () then 
+      match Graphics.read_key () with 
+      | 'z' -> 
+        Graphics.clear_graph (); 
+        draw_static (); 
+        show_current_dialogue speaker t
+      | _ -> () 
+
+let rec show_next_dialogue = function 
+  | [] -> 
+    print_endline "show_next_dialogue []"; is_dialogue_active := false
+  | h::t -> 
+    print_endline "show_next_dialogue ht";
+    if not !end_of_speech then (
+      let speaker = get_speaker h in 
+      let texts = get_texts h in 
+      show_current_dialogue speaker texts;
+    ) else (
+      if Graphics.key_pressed () then 
+        match Graphics.read_key () with 
+        | 'z' -> 
+          Graphics.clear_graph (); 
+          draw_static ();
+          end_of_speech := false;
+          print_endline "SUCCESS! :D";
+          show_next_dialogue t
+        | _ -> () 
+    )
+(* if !end_of_speech then (
+   if Graphics.key_pressed () then (
+    match Graphics.read_key () with 
+    | 'z' -> 
+      Graphics.clear_graph (); 
+      draw_static ();
+      end_of_speech := false;
+      show_next_dialogue t
+    | _ -> () ))
+   else show_next_dialogue (h::t) *)
+
+(* buggy code - do not use *)
 let rec boss_dialogue () = 
   Unix.sleepf 0.05;
-
-  update_pos player.image;
-  Graphics.clear_graph ();
-
-  draw_scoreboard ();
-  draw_dialogue_box ();
-  draw player.image;
-
+  draw_static ();
+  print_endline "boss_dialogue before diag";
+  if !is_dialogue_active then show_next_dialogue scripts_boss;
+  print_endline "boss_dialogue outside diag";
   boss_dialogue ()
+
+(* ============== DIALOGUE CODE V2 (end) ============== *)
 
 let rec loop_game () = 
   if (player.lives > 0) then (loop_minion_stage (); loop_game ())
