@@ -36,6 +36,18 @@ let unit_vector v =
   let magnitude = sqrt (x ** 2.0 +. y ** 2.0) in 
   (x /. magnitude , y /. magnitude)
 
+let create_diamond_atk (e: type_enemy) = 
+  enemy_atks := (create_projectile "orb" 12 e.image (1.,0.)) :: !enemy_atks;
+  enemy_atks := (create_projectile "orb" 12 e.image (-1.,0.)) :: !enemy_atks;
+  enemy_atks := (create_projectile "orb" 12 e.image (0.,1.)) :: !enemy_atks;
+  enemy_atks := (create_projectile "orb" 12 e.image (0.,-1.)) :: !enemy_atks
+
+let create_cross_atk (e: type_enemy) = 
+  enemy_atks := (create_projectile "orb" 12 e.image (1.,1.)) :: !enemy_atks;
+  enemy_atks := (create_projectile "orb" 12 e.image (-1.,1.)) :: !enemy_atks;
+  enemy_atks := (create_projectile "orb" 12 e.image (1.,-1.)) :: !enemy_atks;
+  enemy_atks := (create_projectile "orb" 12 e.image (-1.,-1.)) :: !enemy_atks
+
 let rec create_enemy_atks = function 
   | [] -> () 
   | h::t -> begin match h.attack with 
@@ -43,6 +55,9 @@ let rec create_enemy_atks = function
       | Missile -> 
         let vect = unit_vector (dir_vector h.image player.image) in 
         enemy_atks := (create_projectile "orb" 12 h.image vect) :: !enemy_atks
+      | Diamond -> create_diamond_atk h 
+      | Cross -> create_cross_atk h 
+      | Star -> create_diamond_atk h; create_cross_atk h;
     end; 
     create_enemy_atks t
 

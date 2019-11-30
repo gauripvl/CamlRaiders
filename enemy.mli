@@ -2,7 +2,7 @@
 (* open Objects *)
 open Sprite
 
-type type_attack = Passive | Missile 
+type type_attack = Passive | Missile | Diamond | Cross | Star
 
 type type_enemy = {
   image: sprite;

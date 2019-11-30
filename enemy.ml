@@ -2,7 +2,7 @@ open Objects
 open Sprite
 open Utils
 
-type type_attack = Passive | Missile 
+type type_attack = Passive | Missile | Diamond | Cross | Star 
 
 type type_enemy = {
   image: sprite;
@@ -34,9 +34,12 @@ let spawn_timer = ref 1.0
 
 (** [random_enemy ()] is an enemy with a randomly set attack type. *)
 let random_enemy () = 
-  let probability = random_int 10 in 
-  if probability < 3 then create_enemy "serpent" 6 Missile 
-  else create_enemy "scorpion" 10 Passive
+  let probability = random_int 100 in 
+  if (probability < 15) then create_enemy "serpent" 10 Missile 
+  else if (is_btn 15 30 probability) then create_enemy "serpent" 14 Cross 
+  else if (is_btn 31 45 probability) then create_enemy "serpent" 14 Diamond 
+  else if (is_btn 46 60 probability) then create_enemy "serpent" 6 Star 
+  else create_enemy "scorpion" 20 Passive 
 
 let add_enemy_to_list () = 
   let new_enemy = random_enemy () in 
