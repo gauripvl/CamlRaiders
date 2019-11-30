@@ -40,12 +40,6 @@ let create_image str =
   |> Graphic_image.of_image 
   |> img_to_transp
 
-let get_pos spr = (spr.x, spr.y)
-
-let get_x spr = spr.x
-
-let get_y spr = spr.y
-
 (** [get_height img] is the height of [img] *)
 let get_height img = 
   img |> Graphics.dump_image |> Array.length 
