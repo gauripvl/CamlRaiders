@@ -17,6 +17,8 @@ let is_btn min max value =
   value >= min && value <= max 
 
 let is_onscreen s = 
-  s.x > 0 && s.x < gui_window.width &&
-  s.y > 0 && s.y < gui_window.height 
+  is_btn 0 gui_window.width s.x && 
+  is_btn 0 gui_window.height s.y 
+(* s.x > 0 && s.x < gui_window.width &&
+   s.y > 0 && s.y < gui_window.height  *)
 

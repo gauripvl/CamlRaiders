@@ -11,7 +11,8 @@ val switch_duration : bool ref -> float ref-> float ->unit
 val random_int : int -> int
 
 (** [is_btn min max n] is true if [n] is between [min] (inclusive) 
-    and [max] (inclusive). *)
+    and [max] (inclusive). 
+    Requires: [n] >= 0 *)
 val is_btn : 'a -> 'a -> 'a -> bool
 
 (** [is_onscreen s] is [true] if the current x, y coordinates 
