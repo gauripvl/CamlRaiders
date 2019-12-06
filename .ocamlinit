@@ -15,3 +15,4 @@
 #load_rec "utils.cmo";;
 #load_rec "collisions.cmo";;
 #load_rec "dialogue.cmo";;
+#load_rec "boss.cmo";;

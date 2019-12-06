@@ -2,7 +2,6 @@
 doc.public
 doc.private
 camelraiders.zip
-report
 
 # ocaml
 *.cmo

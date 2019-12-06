@@ -1,3 +1,4 @@
+(* open Sprite  *)
 open Objects
 open Projectile
 open Gui
@@ -6,6 +7,8 @@ open Collisions
 open Commands 
 open Utils
 open Dialogue 
+open Boss
+(* open Boss *)
 
 let enemy_atk_timer = ref 2.0
 
@@ -118,5 +121,29 @@ let rec boss_dialogue () =
 
 (* ============== DIALOGUE CODE V2 (end) ============== *)
 
+(* ============== BOSS CODE (begin) ============== *)
+
+(* 'red-black binary' boss  (original idea =D ) *)
+let boss_stage boss = 
+  Unix.sleepf 0.05;
+  Graphics.clear_graph ();
+  draw boss.image;
+  timer create_boss_atk boss_rbbinary boss_attack_timer boss.attack_freq;
+  draw_projectiles !binary_red_atks;
+  draw_projectiles !binary_black_atks;
+  move_projectiles !binary_red_atks;
+  move_projectiles !binary_black_atks;
+  cleanup_projectiles ();
+  print_st "You've entered a BOSS BATTLE"
+
+(* ============== BOSS CODE (end) ============== *)
+
 let rec loop_game () = 
-  if (player.lives > 0) then (loop_minion_stage (); loop_game ())
+  if (player.lives > 0) then 
+    (
+      if (scoreboard.score < 42) then loop_minion_stage () 
+      else 
+        boss_stage boss_rbbinary;
+
+      loop_game ()
+    )
