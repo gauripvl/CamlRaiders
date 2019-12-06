@@ -1,4 +1,5 @@
 open Sprite
+(* open Boss *)
 
 type type_gui = {
   width : int;
@@ -49,3 +50,4 @@ let scoreboard = {
   height = 90;
   score = 0;
 }
+

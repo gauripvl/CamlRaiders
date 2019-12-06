@@ -2,13 +2,17 @@ open Objects
 open Sprite
 open Utils
 
-type type_attack = Passive | Missile | Diamond | Cross | Star 
+type type_attack = 
+  | Passive 
+  | Missile 
+  | Diamond 
+  | Cross 
+  | Star
 
 type type_enemy = {
   image: sprite;
   mutable health: int;
   mutable attack: type_attack;
-  (* mutable attack_freq: float ref; *)
 }
 
 (** [create_enemy n h a] creates an enemy with image name [n], 
@@ -25,7 +29,6 @@ let create_enemy name ~hp:hp ~atk:atk = {
   };
   health = hp;
   attack = atk;
-  (* attack_freq = freq; *)
 }
 
 let enemy_list = ref []

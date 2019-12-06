@@ -1,10 +1,10 @@
 (** [start_game ()] displays the title screen *)
 val start_game : unit -> unit 
 
-(** [loop_minion_stage ()] *)
+(** [loop_minion_stage ()] is the stage where random minion enemies spawn. *)
 val loop_minion_stage : unit -> unit
 
-(** [boss_dialogue ()] *)
+(** [boss_dialogue ()] is the stage before a boss battle. *)
 val boss_dialogue : unit -> unit
 
 (** [loop_game ()] runs the game and chooses stages according to 
