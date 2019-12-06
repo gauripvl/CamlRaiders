@@ -1,5 +1,5 @@
 (executable
   (name demo)
   (libraries unix yojson oUnit graphics camlimages.core camlimages.gif camlimages.png camlimages.graphics)
-  (modules demo utils sprite objects projectile gui enemy stage collisions commands boss dialogue)
+  (modules demo utils sprite objects projectile gui enemy stage collisions commands boss dialogue treasure2)
 )
