@@ -1,5 +1,40 @@
 open OUnit2
 open Dialogue
+open Sprite 
+
+let objects_tests = 
+  [
+    "gui window width"  >:: 
+    (fun _ -> assert_equal 800 (Objects.gui_window.width));
+    "gui window height"  >:: 
+    (fun _ -> assert_equal 480 (Objects.gui_window.height));
+    "initial player lives"  >:: 
+    (fun _ -> assert_equal 3 (Objects.player.lives));
+    "initial player image name"  >:: 
+    (fun _ -> assert_equal "chibi_camel" (Objects.player.image.name));
+    "initial scoreboard score"  >:: 
+    (fun _ -> assert_equal 0 (Objects.scoreboard.score));
+  ]
+
+let sprite_onscreen = {
+  img = None;
+  name = "onscreen";
+  height = 100;
+  width = 100;
+  speed = 2; 
+  x = 10; 
+  y = 20; 
+}
+
+let sprite_offscreen = {
+  img = None;
+  name = "offscreen";
+  height = 100;
+  width = 100;
+  speed = 12; 
+  x = 999; 
+  y = 999; 
+}
 
 let utils_tests = 
   [
@@ -24,10 +59,14 @@ let utils_tests =
     (fun _ -> assert_equal true (Utils.is_btn 2. 42. 12.));
     "is_btn: restricted bounds, float"  >:: 
     (fun _ -> assert_equal true (Utils.is_btn 0. 0. 0.));
+
+    (* TODO: test all quadrants, ie, above, below, over left, over right. *)
+    "is_onscreen: sprite is within GUI bounds"  >:: 
+    (fun _ -> assert_equal true (Utils.is_onscreen sprite_onscreen));
+    "is_onscreen: sprite is not within GUI bounds"  >:: 
+    (fun _ -> assert_equal false (Utils.is_onscreen sprite_offscreen));
   ]
 
-open Sprite 
-(* TODO *)
 let sprite_one = {
   img = None;
   name = "one";
@@ -44,8 +83,8 @@ let sprite_two = {
   height = 20;
   width = 80;
   speed = 4; 
-  x = 320; 
-  y = 240; 
+  x = 7; 
+  y = 3; 
 }
 
 let sprite_three = {
@@ -54,31 +93,24 @@ let sprite_three = {
   height = 42;
   width = 42;
   speed = 13; 
-  x = 320; 
-  y = 240; 
+  x = 0; 
+  y = 99; 
 }
 
-(* Sprite.create_image is tested through the GUI. *)
-let sprite_tests = 
-  [
-    (* "initial player lives"  >:: 
-       (fun _ -> assert_equal true (Collisions.collision_btn)); *)
-  ]
-
-let objects_tests = 
-  [
-    "initial player lives"  >:: 
-    (fun _ -> assert_equal 3 (Objects.player.lives));
-  ]
+(* Sprite functions are tested through the GUI. *)
+let sprite_tests = []
 
 let collisions_tests = 
   [
-    (* "collision_btn: normal overlap"  >:: 
-       (fun _ -> assert_equal true (Collisions.collision_btn));
-        "collision_btn: edge overlap"  >:: 
-       (fun _ -> assert_equal true (Collisions.collision_btn));
-        "collision_btn: no overlap"  >:: 
-       (fun _ -> assert_equal false (Collisions.collision_btn)); *)
+    "collision_btn: normal overlap"  >:: 
+    (fun _ -> assert_equal true (
+         Collisions.collision_btn sprite_one sprite_two));
+    "collision_btn: edge overlap"  >:: 
+    (fun _ -> assert_equal true (
+         Collisions.collision_btn sprite_one sprite_three));
+    "collision_btn: no overlap"  >:: 
+    (fun _ -> assert_equal false (
+         Collisions.collision_btn sprite_two sprite_three));
   ]
 
 let dlg_json = Yojson.Basic.from_file "dialogues.json"
@@ -117,6 +149,8 @@ let dialogue_tests =
 let suite =
   "test suite"  >::: List.flatten [
     utils_tests;
+    objects_tests;
+    collisions_tests;
     dialogue_tests;
   ]
 
