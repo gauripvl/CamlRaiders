@@ -7,6 +7,8 @@ val treasure_list : type_treasure list ref
 
 val move_treasure : type_treasure list -> unit
 
+val random_treasure : Enemy.type_enemy list -> type_treasure option
+
 val add_treasure_to_list : Enemy.type_enemy list -> unit
 
 val cleanup_treasure : unit -> unit
