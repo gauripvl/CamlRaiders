@@ -143,14 +143,11 @@ let boss_stage boss =
   move_projectiles !binary_black_atks;
 
   cleanup_projectiles ();
-<<<<<<< HEAD
 
   cleanup_enemies (); 
   check_invincibility ();
   collision_with !enemy_list;
 
-=======
->>>>>>> parent of 84ed509... treasure changes
   print_st "You've entered a BOSS BATTLE"
 
 (* ============== BOSS CODE (end) ============== *)

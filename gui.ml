@@ -4,10 +4,6 @@ open Commands
 open Projectile
 open Enemy
 
-<<<<<<< HEAD
-=======
-
->>>>>>> parent of 84ed509... treasure changes
 type t = sprite
 
 let open_game_window (w: type_gui) = 
