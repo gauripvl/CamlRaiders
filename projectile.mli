@@ -13,6 +13,10 @@ val enemy_atks : type_projectile list ref
 
 val create_projectile : string -> int -> sprite -> float * float -> type_projectile
 
+val dir_vector : sprite -> sprite -> float * float 
+
+val unit_vector : float * float -> float * float
+
 (** [create_enemy_atks lst] creates a suitable projectile based on the enemy's 
     attack type and adds the newly created projectile to [enemy_atks]. *)
 val create_enemy_atks : Enemy.type_enemy list -> unit

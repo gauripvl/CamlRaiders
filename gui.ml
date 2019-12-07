@@ -4,7 +4,6 @@ open Commands
 open Projectile
 open Enemy
 
-
 type t = sprite
 
 let open_game_window (w: type_gui) = 
