@@ -8,13 +8,12 @@ open Commands
 open Utils
 open Dialogue 
 open Boss
-
 (* open Boss *)
 
 let enemy_atk_timer = ref 2.0
 
 let start_game () = 
-  print_string "Press z to start"
+  print_st "Press z to start"
 
 let loop_minion_stage () = 
   Unix.sleepf 0.05;
@@ -30,7 +29,6 @@ let loop_minion_stage () =
   check_invincibility ();
   collision_with !enemy_list;
 
-  Treasure2.move_treasure !(Treasure2.treasure_list);
   move_enemies !enemy_list;
   move_projectiles !lasers_list;
   move_projectiles !enemy_atks;
@@ -145,11 +143,14 @@ let boss_stage boss =
   move_projectiles !binary_black_atks;
 
   cleanup_projectiles ();
+<<<<<<< HEAD
 
   cleanup_enemies (); 
   check_invincibility ();
   collision_with !enemy_list;
 
+=======
+>>>>>>> parent of 84ed509... treasure changes
   print_st "You've entered a BOSS BATTLE"
 
 (* ============== BOSS CODE (end) ============== *)

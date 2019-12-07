@@ -1,6 +1,7 @@
 open Sprite
 open Objects
-(* open Projectile *)
+open Projectile
+open Enemy 
 
 type t = sprite
 
@@ -11,36 +12,30 @@ val open_game_window : type_gui -> unit
 (** [get_speed t] is the speed of [t] *)
 val get_speed : t -> int
 
-(** [get_pos t] is [(x,y)] where x is the x-coordinate of [t] 
-    and y is the y-coordinate of [t] *)
-val get_pos : t -> int * int
-
-(** [get_x t] is the x-coordinate of [t] *)
-val get_x : t -> int
-
-(** [get_y t] is the y-coordinate of [t] *)
-val get_y : t -> int
-
-(** [create_image str] returns a transparent Graphics.image of 
-    the png file named [str] in the assets/images directory *)
-val create_image : string -> Graphics.image
-
 (** [draw t] draws the image of [s] onto the GUI. *)
 val draw : t -> unit
 
-(** [lasers_list] is a reference to a list of sprites *)
-val lasers_list : t list ref
+(** [draw_list lst] draws each sprite element of [lst] onto the gui *)
+val draw_list : t list -> unit
 
-(** [update_pos t] updates the position of the ship based on key presses. 
-    Pressing 'w'moves the ship up, 'a' moves the ship left, 
-    'd' moves the ship right, and 's' moves the ship down. 
-    Pressing 'q' quits the game and any other key does nothing. *)
-val update_pos : t -> unit
+val draw_projectiles : type_projectile list -> unit 
 
-(** [draw_proj lst] draws each element of [lst] onto the gui *)
-val draw_proj : t list -> unit
+(** [draw_create_list lst] creates an image and 
+    draws each sprite element of [lst] onto the gui *)
+(* val draw_create_list : t list -> unit *)
 
-(** [cleanup ()] removes laser sprites which are outside the 
-    gui window boundaries from [lasers_list] *)
-val cleanup : unit -> unit
+(** [draw_enemies lst] draws each enemy element of [lst] onto the gui. *)
+val draw_enemies : type_enemy list -> unit
 
+(** [draw_enemy_hp lst] draws the current health of each enemy in 
+    [lst] onto the gui. *)
+val draw_enemy_hp : type_enemy list -> unit
+
+(** [print_st str] prints [str] at the center of the game window *)
+val print_st : string -> unit
+
+val draw_scoreboard : unit -> unit 
+
+val draw_game_over_screen : unit -> unit
+
+val draw_dialogue_container : string -> char list -> unit 
