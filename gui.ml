@@ -5,6 +5,7 @@ open Projectile
 open Enemy
 
 
+
 type t = sprite
 
 let open_game_window (w: type_gui) = 
@@ -70,7 +71,11 @@ let draw_scoreboard () =
       ("Invincibility: " ^ (string_of_bool player.invincible));
 
     Graphics.moveto x_pos (y_pos - 48);
-    Graphics.draw_string ("Score: " ^ (string_of_int scoreboard.score))
+    Graphics.draw_string ("Score: " ^ (string_of_int scoreboard.score));
+
+    Graphics.moveto x_pos (y_pos - 64);
+    Graphics.draw_string ("Inventory: " ^ (string_of_int (List.length !Treasure2.treasure_list)))
+
   )
 
 let rec draw_game_over_screen () = 
