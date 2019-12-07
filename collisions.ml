@@ -55,6 +55,10 @@ let check_invincibility () =
    else player.invincible <- false  *)
 
 let remove_enemies ()  = 
+  let dead_enemies = 
+    (List.filter (fun e -> e.health <= 0) !enemy_list) in
+  Treasure.add_treasure_to_list dead_enemies;
+
   enemy_list := List.filter (fun e -> e.health > 0) !enemy_list 
 
 (* try doing accumulator w/ all enemies that have not collided, or try

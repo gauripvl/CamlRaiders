@@ -32,7 +32,6 @@ let loop_minion_stage () =
   move_enemies !enemy_list;
   move_projectiles !lasers_list;
   move_projectiles !enemy_atks;
-  Treasure.move_treasure !Treasure.treasure_list;
 
   Graphics.clear_graph ();
 
@@ -44,7 +43,6 @@ let loop_minion_stage () =
   draw player.image;
   draw_projectiles !lasers_list;
   draw_projectiles !enemy_atks;
-  draw_treasure !Treasure.treasure_list;
 
   draw_scoreboard ()
 
@@ -129,27 +127,13 @@ let rec boss_dialogue () =
 let boss_stage boss = 
   Unix.sleepf 0.05;
   Graphics.clear_graph ();
-
   draw boss.image;
-  update_pos player.image;
-  shoot_laser player.image;
-
   timer create_boss_atk boss_rbbinary boss_attack_timer boss.attack_freq;
-
-  draw player.image;
   draw_projectiles !binary_red_atks;
   draw_projectiles !binary_black_atks;
-  draw_projectiles !lasers_list;
-
   move_projectiles !binary_red_atks;
   move_projectiles !binary_black_atks;
-
   cleanup_projectiles ();
-
-  cleanup_enemies (); 
-  check_invincibility ();
-  collision_with !enemy_list;
-
   print_st "You've entered a BOSS BATTLE"
 
 (* ============== BOSS CODE (end) ============== *)
@@ -157,7 +141,7 @@ let boss_stage boss =
 let rec loop_game () = 
   if (player.lives > 0) then 
     (
-      if (scoreboard.score < 42000) then loop_minion_stage () 
+      if (scoreboard.score < 42) then loop_minion_stage () 
       else 
         boss_stage boss_rbbinary;
 

@@ -32,6 +32,12 @@ let rec draw_enemies (lst: type_enemy list) =
   | [] -> () 
   | h::t -> draw h.image; draw_enemies t
 
+let rec draw_treasure (lst : Treasure.type_treasure list) = 
+  match lst with 
+  | [] -> ()
+  | h::t -> draw h.image; draw_treasure t
+
+
 let rec draw_enemy_hp = function 
   | [] -> ()
   | e::t -> 
@@ -69,7 +75,10 @@ let draw_scoreboard () =
       ("Invincibility: " ^ (string_of_bool player.invincible));
 
     Graphics.moveto x_pos (y_pos - 48);
-    Graphics.draw_string ("Score: " ^ (string_of_int scoreboard.score))
+    Graphics.draw_string ("Score: " ^ (string_of_int scoreboard.score));
+
+    Graphics.moveto x_pos (y_pos - 64);
+    Graphics.draw_string ("Inventory: " ^ (string_of_int (List.length !Treasure.treasure_list)))
   )
 
 let rec draw_game_over_screen () = 

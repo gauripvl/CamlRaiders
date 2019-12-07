@@ -9,7 +9,7 @@ let create_treasure (enemy: Enemy.type_enemy) =
   print_endline "Treasure was created";
   Some {
     image = {
-      img = Some (create_image "goldstar");
+      img = Some (create_image "camel");
       name = "treasure1";
       height = -1;
       width = -1;
@@ -29,12 +29,10 @@ let random_treasure (enemy_list: Enemy.type_enemy list) =
 
     (create_treasure (List.nth enemy_list probability))
 
-
 let remove_option treasure = 
   match treasure with 
   | Some t -> t
-  | None -> failwith""
-
+  | None -> failwith ""
 
 let add_treasure_to_list list_enemy = 
   let new_treasure_option = random_treasure list_enemy in
