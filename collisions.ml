@@ -56,8 +56,7 @@ let check_invincibility () =
 
 let remove_enemies ()  = 
   let probability = random_int 10 in  
-  if probability >= 2 then 
-
+  if probability >= 5 then 
     let dead_enemies = 
       (List.filter (fun e -> e.health <= 0) !enemy_list) in
     Treasure.add_treasure_to_list dead_enemies;

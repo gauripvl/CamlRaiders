@@ -1,15 +1,18 @@
 open Sprite
 open Utils
 
+
 type type_treasure = {
   image : sprite
 }
 
-let create_treasure (enemy: Enemy.type_enemy) = 
+let source_treasures = ref ["pink"; "beige"; "orange"; "purple"]
+
+let create_treasure (name) (enemy: Enemy.type_enemy) = 
 
   Some {
     image = {
-      img = Some (create_image "scorpion_mini");
+      img = Some (create_image name);
       name = "treasure1";
       height = -1;
       width = -1;
@@ -18,15 +21,22 @@ let create_treasure (enemy: Enemy.type_enemy) =
       y = enemy.image.y + 5; 
     }
   }
-
 let treasure_list = ref []
 (* let spawn_timer = ref 1.0 *)
 
-let random_treasure (enemy_list: Enemy.type_enemy list) = 
+let filter_fun lst = 
+  match !lst with 
+  | [] -> failwith ""
+  | h::t -> lst := t
+
+let random_treasure (src_tr_lst) (enemy_list: Enemy.type_enemy list) = 
   if ( List.length enemy_list = 0) then None else
     let probability = random_int (List.length enemy_list) in
     (* let probability = 0 in *)
-    (create_treasure (List.nth enemy_list probability))
+    if (List.length !src_tr_lst > 0) then 
+      filter_fun src_tr_lst;
+    (create_treasure (List.hd !src_tr_lst) (List.nth enemy_list probability))   
+
 
 let remove_option treasure = 
   match treasure with 
@@ -34,7 +44,7 @@ let remove_option treasure =
   | None -> failwith ""
 
 let add_treasure_to_list list_enemy = 
-  let new_treasure_option = random_treasure list_enemy in
+  let new_treasure_option = random_treasure source_treasures list_enemy in
   if new_treasure_option = None then
     treasure_list := !treasure_list else
     let new_treasure = remove_option new_treasure_option in
