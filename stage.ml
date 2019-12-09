@@ -60,9 +60,16 @@ let string_to_list str =
   List.init (String.length str) (String.get str)
 
 let draw_static () = 
+
+  Graphics.clear_graph (); 
   quit_game();
   draw_scoreboard ();
   draw player.image
+
+let rec press_z () = 
+  match Graphics.read_key () with 
+  | 'z' -> true
+  | _ -> press_z ()
 
 (* draws speaker and text *)
 let rec show_current_dialogue speaker = function 
@@ -71,12 +78,10 @@ let rec show_current_dialogue speaker = function
   | h::t -> 
     let char_lst = string_to_list h in 
     draw_dialogue_container speaker char_lst;
-    match Graphics.read_key () with 
-    | 'z' -> 
-      Graphics.clear_graph (); 
+    if press_z () then (
       draw_static (); 
       show_current_dialogue speaker t
-    | _ -> () 
+    )
 
 let rec show_next_dialogue = function 
   | [] -> is_dialogue_active := false
@@ -85,19 +90,15 @@ let rec show_next_dialogue = function
       let speaker = get_speaker h in 
       let texts = get_texts h in 
       show_current_dialogue speaker texts;
-    ) 
-    else (
-      match Graphics.read_key () with 
-      | 'z' -> 
-        Graphics.clear_graph (); 
-        draw_static ();
+    ) else (
+      if press_z () then (
+        draw_static (); 
         show_next_dialogue t
-      | _ -> () 
+      )
     )
 
 let boss_dialogue () = 
   Unix.sleepf 0.05;
-  (* Graphics.clear_graph (); *)
   draw_static ();
   if !is_dialogue_active then (
     end_of_speech := false;
@@ -105,9 +106,6 @@ let boss_dialogue () =
     if not (List.length !scripts_boss = 0) then 
       scripts_boss := List.tl !scripts_boss
   )
-(* else exit 0 *)
-
-(* boss_dialogue () *)
 
 (* ============== DIALOGUE CODE V2 (end) ============== *)
 
