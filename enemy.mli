@@ -12,7 +12,8 @@ type type_attack =
 
 type type_movement = 
   | Straight 
-  | Curved
+  | Organic
+  | CurveUpward
   | Snake
 
 type type_enemy = {
@@ -20,7 +21,7 @@ type type_enemy = {
   mutable health: int;
   mutable attack: type_attack;
   movement: type_movement;
-  v_spd: int;
+  mutable v_spd: float;
 }
 
 val spawn_timer : float ref
