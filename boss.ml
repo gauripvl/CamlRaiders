@@ -24,17 +24,27 @@ let spawn_boss name ~hp:hp ~atk_types:atks ~freq:freq = {
     speed = 2; 
     x = 300;
     y = 200;
-    (* x = random_int Objects.gui_window.width - 100; 
-       y = Objects.gui_window.height + 100;  *)
   };
   health = hp;
   attacks = atks;
   attack_freq = freq;
 }
 
+(* rb special attacks *)
 let binary_red_atks = ref []
 let binary_black_atks = ref []
+
+(* creates an attack every set amount of time *)
 let boss_attack_timer = ref 5.0
+
+(* switches to a random attack when false *)
+let switch_attack = ref true
+
+let attack_duration = ref 1.0
+
+(* stores the current attack of the boss *)
+let boss_current_attack = ref None
+
 (* let combo_atk_timer = ref 0.5 *)
 
 (** [create_vector_projectiles name spd origin atk_ref vectors] *) 
@@ -46,12 +56,27 @@ let rec create_vector_projectiles
     create_vector_projectiles 
       name ~speed:spd ~origin:origin ~atk_ref:atk_ref t
 
+let manage_atk_duration () = 
+  print_endline ((string_of_bool !switch_attack) ^ (string_of_float !attack_duration));
+  if !switch_attack then
+    switch_duration switch_attack attack_duration 1.0 
+
 (** [choose_random_atk lst] is one random element of [lst]. *) 
 let choose_random_atk lst = 
-  Random.self_init ();
-  lst |> List.length |> Random.int |> List.nth lst
+  if (!boss_current_attack = None) || not !switch_attack then (
+    switch_attack := true;
+    let random_attack = (
+      Random.self_init ();
+      lst |> List.length |> Random.int |> List.nth lst 
+    ) in 
+    boss_current_attack := Some random_attack 
+  );
+  match !boss_current_attack with 
+  | Some atk -> atk
+  | None -> failwith "Boss's current attack is None."
 
 let rec create_boss_atk b = 
+  manage_atk_duration ();
   let random_atk = choose_random_atk b.attacks in 
   match random_atk with 
   | BinaryStar -> create_atk_binarystar b
@@ -64,15 +89,23 @@ and create_atk_binarystar (b: type_boss) =
   if prob_rb < 3 then 
     let diamond_vectors = [(1.,0.); (-1.,0.);(0.,1.);(0.,-1.)] in (
       if prob_atk_type = 0 then create_vector_projectiles 
-          "orb" ~speed:6 ~origin:b ~atk_ref:binary_red_atks diamond_vectors 
+          "orb" 
+          ~speed:6  ~origin:b 
+          ~atk_ref:binary_red_atks diamond_vectors 
       else create_vector_projectiles 
-          "orb_blue" ~speed:6 ~origin:b ~atk_ref:binary_red_atks diamond_vectors 
+          "orb_blue" 
+          ~speed:6 ~origin:b 
+          ~atk_ref:binary_red_atks diamond_vectors 
     )
   else let cross_vectors = [(1.,1.); (-1.,1.);(1.,-1.);(-1.,-1.)] in (
       if prob_atk_type = 0 then create_vector_projectiles 
-          "orb" ~speed:6 ~origin:b ~atk_ref:binary_red_atks cross_vectors 
+          "orb" 
+          ~speed:6 ~origin:b 
+          ~atk_ref:binary_red_atks cross_vectors 
       else create_vector_projectiles 
-          "orb_blue" ~speed:6 ~origin:b ~atk_ref:binary_red_atks cross_vectors 
+          "orb_blue"
+          ~speed:6 ~origin:b 
+          ~atk_ref:binary_red_atks cross_vectors 
     )
 
 and create_atk_binarybullet (b:type_boss) = 
@@ -99,6 +132,7 @@ and create_atk_binarybullet (b:type_boss) =
    let rec random_unit_vectors =  *)
 
 let boss_rbbinary = 
-  let attack_types = [BinaryBullet] in spawn_boss "boss_rbbinary" 
-    ~hp:1000 ~atk_types:attack_types ~freq:4.0
+  let attack_types = [BinaryBullet; BinaryStar] in 
+  spawn_boss "boss_rbbinary" 
+    ~hp:1000 ~atk_types:attack_types ~freq:1.0
 
