@@ -40,7 +40,7 @@ let boss_attack_timer = ref 5.0
 (* switches to a random attack when false *)
 let switch_attack = ref true
 
-let attack_duration = ref 1.0
+let attack_duration = ref 0.5
 
 (* stores the current attack of the boss *)
 let boss_current_attack = ref None
@@ -59,7 +59,7 @@ let rec create_vector_projectiles
 let manage_atk_duration () = 
   print_endline ((string_of_bool !switch_attack) ^ (string_of_float !attack_duration));
   if !switch_attack then
-    switch_duration switch_attack attack_duration 1.0 
+    switch_duration switch_attack attack_duration 0.5 
 
 (** [choose_random_atk lst] is one random element of [lst]. *) 
 let choose_random_atk lst = 

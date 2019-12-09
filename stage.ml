@@ -114,27 +114,28 @@ let boss_dialogue () =
 (* 'red-black binary' boss  (original idea =D ) *)
 let boss_stage boss = 
   Unix.sleepf 0.05;
-  Graphics.clear_graph ();
 
-  draw boss.image;
   update_pos player.image;
   shoot_laser player.image;
 
   timer create_boss_atk boss_rbbinary boss_attack_timer boss.attack_freq;
 
-  draw player.image;
-  draw_projectiles !binary_red_atks;
-  draw_projectiles !binary_black_atks;
-  draw_projectiles !lasers_list;
+  Graphics.clear_graph ();
 
+  move_projectiles !lasers_list;
   move_projectiles !binary_red_atks;
   move_projectiles !binary_black_atks;
 
   cleanup_projectiles ();
-
   cleanup_enemies (); 
   check_invincibility ();
   collision_with !enemy_list;
+
+  draw player.image;
+  draw boss.image;
+  draw_projectiles !binary_red_atks;
+  draw_projectiles !binary_black_atks;
+  draw_projectiles !lasers_list;
 
   draw_scoreboard ()
 
@@ -142,7 +143,7 @@ let boss_stage boss =
 
 let rec loop_game () = 
   if (player.lives > 0) then (
-    if (scoreboard.score < 999) then loop_minion_stage () 
+    if (scoreboard.score < 42) then loop_minion_stage () 
     else ( 
       if !is_dialogue_active then (
         Graphics.clear_graph();
