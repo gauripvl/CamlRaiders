@@ -1,4 +1,3 @@
-(* open Sprite  *)
 open Objects
 open Projectile
 open Gui
@@ -8,7 +7,6 @@ open Commands
 open Utils
 open Dialogue 
 open Boss
-(* open Boss *)
 
 let enemy_atk_timer = ref 2.0
 
@@ -18,6 +16,7 @@ let start_game () =
 let loop_minion_stage () = 
   Unix.sleepf 0.05;
 
+  quit_game ();
   spawn_enemy 8;
   timer create_enemy_atks !enemy_list enemy_atk_timer 2.0;
 
@@ -49,23 +48,15 @@ let loop_minion_stage () =
 
   draw_scoreboard ()
 
-(* ============== DIALOGUE CODE V2 (begin) ============== *)
-
-
-(* ============== DIALOGUE CODE V2 (end) ============== *)
-
-(* ============== BOSS CODE (begin) ============== *)
-
 (* 'red-black binary' boss  (original idea =D ) *)
 let boss_stage boss = 
   Unix.sleepf 0.05;
 
+  quit_game ();
   update_pos player.image;
   shoot_laser player.image;
 
   timer create_boss_atk boss_rbbinary boss_attack_timer boss.attack_freq;
-
-  Graphics.clear_graph ();
 
   move_boss boss;
   move_projectiles !lasers_list;
@@ -76,6 +67,8 @@ let boss_stage boss =
   cleanup_enemies (); 
   check_invincibility ();
   collision_with !enemy_list;
+
+  Graphics.clear_graph ();
 
   draw player.image;
   draw boss.image;
