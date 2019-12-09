@@ -67,6 +67,7 @@ let boss_stage boss =
 
   Graphics.clear_graph ();
 
+  move_boss boss;
   move_projectiles !lasers_list;
   move_projectiles !binary_red_atks;
   move_projectiles !binary_black_atks;
@@ -84,13 +85,15 @@ let boss_stage boss =
 
   draw_scoreboard ()
 
+let script_boss = scripts_of "boss"
+
 let rec loop_game () = 
   if (player.lives > 0) then (
-    if (scoreboard.score < 42) then loop_minion_stage () 
+    if (scoreboard.score < 2) then loop_minion_stage () 
     else ( 
       if !is_dialogue_active then (
         Graphics.clear_graph();
-        draw_script (scripts_of "boss");
+        draw_script script_boss;
       ) else boss_stage boss_rbbinary
     );
     loop_game ()
