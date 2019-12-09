@@ -52,9 +52,13 @@ let rec create_enemy_atks = function
   | [] -> () 
   | h::t -> begin match h.attack with 
       | Passive -> () 
+      | Bullet -> 
+        enemy_atks := (
+          create_projectile "orb" 10 h.image (0.,0.)) :: !enemy_atks
       | Missile -> 
         let vect = unit_vector (dir_vector h.image player.image) in 
-        enemy_atks := (create_projectile "orb" 12 h.image vect) :: !enemy_atks
+        enemy_atks := (
+          create_projectile "orb" 12 h.image vect) :: !enemy_atks
       | Diamond -> create_diamond_atk h 
       | Cross -> create_cross_atk h 
       | Star -> create_diamond_atk h; create_cross_atk h;
@@ -63,15 +67,15 @@ let rec create_enemy_atks = function
 
 let rec move_projectiles = function 
   | [] -> () 
-  (* | h::t -> h.y <- h.y + h.speed; move_projectiles t *)
-  | h::t ->
-    if h.vector = (0.0, 0.0) then h.image.y <- h.image.y + h.image.speed
-    else (
-      let dx, dy = unit_vector h.vector in 
-      h.image.x <- h.image.x + int_of_float (float_of_int h.image.speed *. dx); 
-      h.image.y <- h.image.y + int_of_float (float_of_int h.image.speed *. dy)
-    );
-    move_projectiles t
+  | h::t -> move_projectile h; move_projectiles t
+
+and move_projectile h = 
+  if h.vector = (0.0, 0.0) then h.image.x <- h.image.x + h.image.speed
+  else (
+    let dx, dy = unit_vector h.vector in 
+    h.image.x <- h.image.x + int_of_float (float_of_int h.image.speed *. dx); 
+    h.image.y <- h.image.y + int_of_float (float_of_int h.image.speed *. dy)
+  )
 
 let cleanup_projectiles () = 
   lasers_list := List.filter (fun x -> is_onscreen x.image) !lasers_list;

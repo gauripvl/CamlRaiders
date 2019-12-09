@@ -4,15 +4,23 @@ open Sprite
 
 type type_attack = 
   | Passive 
+  | Bullet
   | Missile 
   | Diamond 
   | Cross 
   | Star
 
+type type_movement = 
+  | Straight 
+  | Curved
+  | Snake
+
 type type_enemy = {
   image: sprite;
   mutable health: int;
   mutable attack: type_attack;
+  movement: type_movement;
+  v_spd: int;
 }
 
 val spawn_timer : float ref
