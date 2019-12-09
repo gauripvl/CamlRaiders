@@ -1,1 +1,0 @@
-true: package(unix), package(oUnit), package(yojson), package(graphics), package(camlimages.core), package(camlimages.png), package(camlimages.graphics), package(camlimages.gif)
