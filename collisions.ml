@@ -55,7 +55,15 @@ let check_invincibility () =
    else player.invincible <- false  *)
 
 let remove_enemies ()  = 
-  enemy_list := List.filter (fun e -> e.health > 0) !enemy_list 
-
+  let probability = random_int 10 in  
+  if probability >= 5 then 
+    let dead_enemies = 
+      (List.filter (fun e -> e.health <= 0) !enemy_list) in
+    Treasure.add_treasure_to_list dead_enemies;
+    enemy_list := List.filter (fun e -> e.health > 0) !enemy_list 
+  else enemy_list := List.filter (fun e -> e.health > 0) !enemy_list
+(* let probability = random_int (List.length dead_enemies) in
+       let rand_enemy = List.nth dead_enemies probability in
+       Treasure. *)
 (* try doing accumulator w/ all enemies that have not collided, or try
    doing something with fold_left *)

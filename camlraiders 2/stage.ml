@@ -32,7 +32,6 @@ let loop_minion_stage () =
   move_enemies !enemy_list;
   move_projectiles !lasers_list;
   move_projectiles !enemy_atks;
-  Treasure.move_treasure !Treasure.treasure_list;
 
   Graphics.clear_graph ();
 
@@ -44,14 +43,14 @@ let loop_minion_stage () =
   draw player.image;
   draw_projectiles !lasers_list;
   draw_projectiles !enemy_atks;
-  draw_treasure !Treasure.treasure_list;
 
   draw_scoreboard ()
+
 
 (* ============== DIALOGUE CODE V2 (begin) ============== *)
 let dlg_json = Yojson.Basic.from_file "dialogues.json"
 let dlgs = to_json dlg_json
-let scripts_boss = ref (get_scripts dlgs "boss")
+let scripts_boss = get_scripts dlgs "boss"
 
 let is_dialogue_active = ref true 
 let end_of_speech = ref false 
@@ -67,47 +66,58 @@ let draw_static () =
 (* draws speaker and text *)
 let rec show_current_dialogue speaker = function 
   | [] -> 
-    end_of_speech := true;
+    print_endline "show_current_dialogue []"; end_of_speech := true 
   | h::t -> 
+    print_endline "show_current_dialogue ht";
     let char_lst = string_to_list h in 
     draw_dialogue_container speaker char_lst;
-    match Graphics.read_key () with 
-    | 'z' -> 
-      Graphics.clear_graph (); 
-      draw_static (); 
-      show_current_dialogue speaker t
-    | _ -> () 
+    if Graphics.key_pressed () then 
+      match Graphics.read_key () with 
+      | 'z' -> 
+        Graphics.clear_graph (); 
+        draw_static (); 
+        show_current_dialogue speaker t
+      | _ -> () 
 
 let rec show_next_dialogue = function 
-  | [] -> is_dialogue_active := false
+  | [] -> 
+    print_endline "show_next_dialogue []"; is_dialogue_active := false
   | h::t -> 
+    print_endline "show_next_dialogue ht";
     if not !end_of_speech then (
       let speaker = get_speaker h in 
       let texts = get_texts h in 
       show_current_dialogue speaker texts;
-    ) 
-    else (
-      match Graphics.read_key () with 
-      | 'z' -> 
-        Graphics.clear_graph (); 
-        draw_static ();
-        show_next_dialogue t
-      | _ -> () 
+    ) else (
+      if Graphics.key_pressed () then 
+        match Graphics.read_key () with 
+        | 'z' -> 
+          Graphics.clear_graph (); 
+          draw_static ();
+          end_of_speech := false;
+          print_endline "SUCCESS! :D";
+          show_next_dialogue t
+        | _ -> () 
     )
+(* if !end_of_speech then (
+   if Graphics.key_pressed () then (
+    match Graphics.read_key () with 
+    | 'z' -> 
+      Graphics.clear_graph (); 
+      draw_static ();
+      end_of_speech := false;
+      show_next_dialogue t
+    | _ -> () ))
+   else show_next_dialogue (h::t) *)
 
-let boss_dialogue () = 
+(* buggy code - do not use *)
+let rec boss_dialogue () = 
   Unix.sleepf 0.05;
-  (* Graphics.clear_graph (); *)
   draw_static ();
-  if !is_dialogue_active then (
-    end_of_speech := false;
-    show_next_dialogue !scripts_boss;
-    if not (List.length !scripts_boss = 0) then 
-      scripts_boss := List.tl !scripts_boss
-  )
-(* else exit 0 *)
-
-(* boss_dialogue () *)
+  print_endline "boss_dialogue before diag";
+  if !is_dialogue_active then show_next_dialogue scripts_boss;
+  print_endline "boss_dialogue outside diag";
+  boss_dialogue ()
 
 (* ============== DIALOGUE CODE V2 (end) ============== *)
 
@@ -117,39 +127,23 @@ let boss_dialogue () =
 let boss_stage boss = 
   Unix.sleepf 0.05;
   Graphics.clear_graph ();
-
   draw boss.image;
-  update_pos player.image;
-  shoot_laser player.image;
-
   timer create_boss_atk boss_rbbinary boss_attack_timer boss.attack_freq;
-
-  draw player.image;
   draw_projectiles !binary_red_atks;
   draw_projectiles !binary_black_atks;
-  draw_projectiles !lasers_list;
-
   move_projectiles !binary_red_atks;
   move_projectiles !binary_black_atks;
-
   cleanup_projectiles ();
-
-  cleanup_enemies (); 
-  check_invincibility ();
-  collision_with !enemy_list;
-
-  draw_scoreboard ()
+  print_st "You've entered a BOSS BATTLE"
 
 (* ============== BOSS CODE (end) ============== *)
 
 let rec loop_game () = 
-  if (player.lives > 0) then (
-    if (scoreboard.score < 2) then loop_minion_stage () 
-    else ( 
-      if !is_dialogue_active then (
-        Graphics.clear_graph();
-        boss_dialogue ();
-      ) else boss_stage boss_rbbinary
-    );
-    loop_game ()
-  )
+  if (player.lives > 0) then 
+    (
+      if (scoreboard.score < 42) then loop_minion_stage () 
+      else 
+        boss_stage boss_rbbinary;
+
+      loop_game ()
+    )

@@ -27,6 +27,8 @@ val draw_projectiles : type_projectile list -> unit
 (** [draw_enemies lst] draws each enemy element of [lst] onto the gui. *)
 val draw_enemies : type_enemy list -> unit
 
+val draw_treasure : Treasure.type_treasure list -> unit
+
 (** [draw_enemy_hp lst] draws the current health of each enemy in 
     [lst] onto the gui. *)
 val draw_enemy_hp : type_enemy list -> unit
