@@ -22,26 +22,26 @@ let create_treasure (name) (enemy: Enemy.type_enemy) =
     }
   }
 let treasure_list = ref []
-(* let spawn_timer = ref 1.0 *)
 
 let filter_fun lst = 
   match !lst with 
   | [] -> failwith ""
-  | h::t -> lst := t
+  | _::t -> lst := t
 
-let random_treasure (src_tr_lst) (enemy_list: Enemy.type_enemy list) = 
+let random_treasure (treasures_ref) (enemy_list: Enemy.type_enemy list) = 
   if ( List.length enemy_list = 0) then None else
     let probability = random_int (List.length enemy_list) in
     (* let probability = 0 in *)
-    if (List.length !src_tr_lst > 0) then 
-      filter_fun src_tr_lst;
-    (create_treasure (List.hd !src_tr_lst) (List.nth enemy_list probability))   
-
+    if (List.length !treasures_ref > 0) then (
+      filter_fun treasures_ref;
+      (create_treasure 
+         (List.hd !treasures_ref) (List.nth enemy_list probability))
+    ) else None
 
 let remove_option treasure = 
   match treasure with 
   | Some t -> t
-  | None -> failwith ""
+  | None -> failwith "No treasure match."
 
 let add_treasure_to_list list_enemy = 
   let new_treasure_option = random_treasure source_treasures list_enemy in
