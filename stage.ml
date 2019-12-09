@@ -142,7 +142,7 @@ let boss_stage boss =
 
 let rec loop_game () = 
   if (player.lives > 0) then (
-    if (scoreboard.score < 2) then loop_minion_stage () 
+    if (scoreboard.score < 999) then loop_minion_stage () 
     else ( 
       if !is_dialogue_active then (
         Graphics.clear_graph();
