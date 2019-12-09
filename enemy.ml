@@ -12,7 +12,8 @@ type type_attack =
 
 type type_movement = 
   | Straight 
-  | Curved
+  | Organic
+  | CurveUpward
   | Snake
 
 type type_enemy = {
@@ -20,7 +21,7 @@ type type_enemy = {
   mutable health: int;
   mutable attack: type_attack;
   movement: type_movement;
-  v_spd: int;
+  mutable v_spd: float;
 }
 
 (** [create_enemy n h a] creates an enemy with image name [n], 
@@ -38,7 +39,7 @@ let create_enemy name ~hp:hp ~atk:atk ~spd:spd ~move:dir = {
   health = hp;
   attack = atk;
   movement = dir;
-  v_spd = spd;
+  v_spd = 0.0;
 }
 
 let enemy_list = ref []
@@ -51,12 +52,13 @@ let random_enemy () =
   if (probability < 15) then 
     create_enemy "serpent" ~hp:10 ~atk:Missile ~spd:4 ~move:Straight
   else if (is_btn 15 30 probability) then 
-    create_enemy "serpent" ~hp:14 ~atk:Cross ~spd:3 ~move:Straight
+    create_enemy "serpent" ~hp:14 ~atk:Cross ~spd:3 ~move:Organic
   else if (is_btn 31 45 probability) then 
     create_enemy "serpent" ~hp:14 ~atk:Diamond ~spd:3 ~move:Straight
   else if (is_btn 46 60 probability) then 
-    create_enemy "serpent" ~hp:6 ~atk:Star ~spd:1 ~move:Straight
-  else create_enemy "scorpion" ~hp:20 ~atk:Passive ~spd:2 ~move:Straight
+    create_enemy "serpent" ~hp:6 ~atk:Star ~spd:1 ~move:Organic
+  else 
+    create_enemy "scorpion" ~hp:20 ~atk:Passive ~spd:2 ~move:Straight
 
 let add_enemy_to_list () = 
   let new_enemy = random_enemy () in 
@@ -67,19 +69,28 @@ let spawn_enemy cooldown =
   let rand_spawn_time =  2.0 +. float_of_int (random_int cooldown) in 
   timer add_enemy_to_list () spawn_timer rand_spawn_time
 
-let match_enemy_movement e = 
+let rec match_enemy_movement e = 
   match e.movement with 
-  | _ -> e.image.x <- e.image.x - e.image.speed
-(* | Curved -> ()
-   | Snake -> e.image.y <- e.image.y - e.image.speed *)
+  | Straight -> e.image.x <- e.image.x - e.image.speed
+  | Organic -> perform_organic_movement e
+  | CurveUpward -> perform_curve_upward e
+  | Snake -> e.image.y <- e.image.y - e.image.speed
 
-(* and perform_curved_movement = 
-   failwith "Curved motion not implemented." *)
+and perform_organic_movement e = 
+  let probability = random_int 2 in 
+  if probability = 0 then e.v_spd <- e.v_spd +. 1.0 
+  else e.v_spd <- e.v_spd -. 1.0;
+  e.image.x <- e.image.x - e.image.speed;
+  e.image.y <- e.image.y + (int_of_float e.v_spd)
+
+and perform_curve_upward e = 
+  e.v_spd <- (e.v_spd +. 0.02) ** 2.;
+  e.image.y <- e.image.y + (int_of_float e.v_spd);
+  e.image.x <- e.image.x - e.image.speed
 
 let rec move_enemies = function
   | [] -> () 
   | h::t -> match_enemy_movement h; move_enemies t
-(* | h::t -> h.image.y <- h.image.y - h.image.speed; move_enemies t *)
 
 let cleanup_enemies () = 
   enemy_list := List.filter (fun e -> e.image.x > 0) !enemy_list
