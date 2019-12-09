@@ -35,6 +35,14 @@ let is_invincible = ref false
 let decrease_player_lives () = 
   player.lives <- player.lives - 1
 
+let rec player_hit (enemy_lasers:Projectile.type_projectile list) (player:type_player) =
+  match enemy_lasers with
+  | [] -> ()
+  | h::t -> if collision_btn h.image player.image then (
+      decrease_player_lives ()
+    )
+    else player_hit t player
+
 let rec collision_with = function
   | [] -> ()
   | e::t -> 

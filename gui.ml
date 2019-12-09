@@ -45,6 +45,12 @@ let rec draw_enemy_hp = function
     Graphics.draw_string ("HP: " ^ (string_of_int e.health));
     draw_enemy_hp t
 
+(* let draw_background = 
+   let img = Png.load "___.png" [];;
+   let g = Graphic_image.of_image img;;
+   Graphics.draw_image g 0 0;; *)
+
+
 let print_st str = 
   Graphics.moveto ((gui_window.width)/5) ((gui_window.height)/2);
   Graphics.draw_string str

@@ -25,6 +25,7 @@ let loop_minion_stage () =
   shoot_laser player.image;
 
   player_laser_collision !lasers_list !enemy_list;
+  player_hit !enemy_atks player;
   cleanup_enemies (); 
   check_invincibility ();
   collision_with !enemy_list;
