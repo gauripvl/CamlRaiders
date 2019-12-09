@@ -121,4 +121,8 @@ let draw_dialogue_container speaker txt =
     (scoreboard.height - 40);
   draw_typewriter txt
 
-
+let draw_static () = 
+  Graphics.clear_graph (); 
+  quit_game();
+  draw_scoreboard ();
+  draw player.image

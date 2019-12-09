@@ -24,3 +24,14 @@ val get_speaker : script -> string
 
 (** [get_texts s] is the texts in [s]. *)
 val get_texts : script -> string list 
+
+(** [is_dialogue_active] is true if dialogue should be drawn onto the GUI. *)
+val is_dialogue_active : bool ref
+
+(** [draw_script script_ref] draws the dialogue containing 
+    contents of [script_ref]. *)
+val draw_script : script list ref -> unit 
+
+(** [scripts_of s] is the list of scripts with title [s] 
+    in 'dialogues.json'. *)
+val scripts_of : string -> script list ref

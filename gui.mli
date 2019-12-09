@@ -41,3 +41,7 @@ val draw_scoreboard : unit -> unit
 val draw_game_over_screen : unit -> unit
 
 val draw_dialogue_container : string -> char list -> unit 
+
+
+(** [draw_static ()] draws the scoreboard and player onto the GUI. *)
+val draw_static : unit -> unit

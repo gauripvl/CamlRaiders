@@ -5,7 +5,7 @@ val start_game : unit -> unit
 val loop_minion_stage : unit -> unit
 
 (** [boss_dialogue ()] is the stage before a boss battle. *)
-val boss_dialogue : unit -> unit
+(* val boss_dialogue : unit -> unit *)
 
 (** [boss_stage ()] is the boss stage. *)
 val boss_stage : Boss.type_boss -> unit

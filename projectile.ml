@@ -20,8 +20,6 @@ let create_projectile name spd origin vector = {
     speed = spd;
     x = origin.x + (origin.width / 2);
     y = origin.y + (origin.height / 2);
-    (* x = origin.x + 16; (* TODO change 16 to player.image.width/2 etc... *)
-       y = origin.y + 24; TODO change 24 to player.image.height/2 etc... *)
   };
   vector = vector;
 }
