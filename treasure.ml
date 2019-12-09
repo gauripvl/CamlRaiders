@@ -9,7 +9,6 @@ type type_treasure = {
 let source_treasures = ref ["pink"; "beige"; "orange"; "purple"]
 
 let create_treasure (name) (enemy: Enemy.type_enemy) = 
-
   Some {
     image = {
       img = Some (create_image name);
@@ -23,19 +22,19 @@ let create_treasure (name) (enemy: Enemy.type_enemy) =
   }
 let treasure_list = ref []
 
-let filter_fun lst = 
+let filter_fun lst ene_lst prob = 
   match !lst with 
   | [] -> failwith ""
-  | _::t -> lst := t
+  | h::t -> lst := t; create_treasure h (List.nth ene_lst prob)
 
 let random_treasure (treasures_ref) (enemy_list: Enemy.type_enemy list) = 
   if ( List.length enemy_list = 0) then None else
     let probability = random_int (List.length enemy_list) in
     (* let probability = 0 in *)
     if (List.length !treasures_ref > 0) then (
-      filter_fun treasures_ref;
-      (create_treasure 
-         (List.hd !treasures_ref) (List.nth enemy_list probability))
+      filter_fun treasures_ref enemy_list probability
+      (* create_treasure 
+         (List.hd !treasures_ref) (List.nth enemy_list probability) *)
     ) else None
 
 let remove_option treasure = 
