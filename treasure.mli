@@ -5,6 +5,7 @@ val treasure_list : sprite list ref
 val power_list: sprite list ref
 
 val power_ups : string list ref
+val source_treasures : string list ref
 
 val random_treasure : 
   string list ref -> Enemy.type_enemy list -> sprite option
