@@ -7,6 +7,8 @@ type type_gui = {
   title : string;
 }
 
+type type_powerup = Neutral | TripleLasers
+
 type type_player = {
   image: sprite;
   mutable lives: int;
@@ -14,6 +16,7 @@ type type_player = {
   mutable power: int;
   mutable invincible: bool;
   mutable invincibility_duration: float;
+  mutable powerup: type_powerup;
 }
 
 type type_scoreboard = {
@@ -43,6 +46,7 @@ let player = {
   power = 2;
   invincible = false;
   invincibility_duration = 3.0;
+  powerup = Neutral;
 }
 
 let scoreboard = {

@@ -8,6 +8,9 @@ type type_gui = {
   title : string;
 }
 
+(** [type_powerup] is the type of powerup in our game. *)
+type type_powerup = Neutral | TripleLasers
+
 (** [type_player] is the type of the player. *)
 type type_player = {
   image: sprite;
@@ -16,6 +19,7 @@ type type_player = {
   mutable power: int;
   mutable invincible: bool;
   mutable invincibility_duration: float;
+  mutable powerup: type_powerup;
 }
 
 (** [type_scoreboard] is the type of the scoreboard. Holds information 

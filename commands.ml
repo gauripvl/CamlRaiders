@@ -31,12 +31,23 @@ let update_pos (t:sprite) =
 
 let laser_duration = ref 0.1
 
-(** [add_laser_to_list t] adds a beam laser to the list of lasers *)
-let add_laser_to_list t = 
-  let new_laser = create_projectile "beam" 24 t (0.0, 0.0) in 
-  set_image_dimensions new_laser.image;
-  lasers_list := new_laser :: !lasers_list
+(** [add_lasers origin lst] adds a laser for each vector in [lst] 
+    to [lasers_list]. *)
+let rec add_lasers origin = function 
+  | [] -> ()
+  | h::t ->
+    let new_laser = create_projectile "beam" 24 origin h in 
+    set_image_dimensions new_laser.image;
+    lasers_list := new_laser :: !lasers_list;
+    add_lasers origin t
 
-let shoot_laser t = 
+(** [make_laser origin] adds lasers to [lasers_list] according to 
+    the player's powerup. *)
+let make_laser origin = 
+  match player.powerup with 
+  | Neutral -> add_lasers origin [(1.,0.)]
+  | TripleLasers -> add_lasers origin [(1.,0.); (1.,0.25); (1.,-0.25)]
+
+let shoot_laser origin = 
   if Graphics.button_down () then 
-    timer add_laser_to_list t laser_duration 0.5
+    timer make_laser origin laser_duration 0.5
