@@ -1,3 +1,4 @@
+open Sprite
 open Objects
 open Projectile
 open Gui
@@ -33,8 +34,8 @@ let loop_minion_stage () =
   move_enemies !enemy_list;
   move_projectiles !lasers_list;
   move_projectiles !enemy_atks;
-  Treasure.move_treasure !Treasure.treasure_list;
-  Treasure.move_treasure !Treasure.power_list;
+  move_sprites !Treasure.treasure_list;
+  move_sprites !Treasure.power_list;
 
   Graphics.clear_graph ();
 
@@ -47,8 +48,8 @@ let loop_minion_stage () =
   draw player.image;
   draw_projectiles !lasers_list;
   draw_projectiles !enemy_atks;
-  draw_treasure !Treasure.treasure_list;
-  draw_treasure !Treasure.power_list;
+  draw_list !Treasure.treasure_list;
+  draw_list !Treasure.power_list;
 
   draw_scoreboard ()
 

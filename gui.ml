@@ -13,7 +13,6 @@ let open_game_window (w: type_gui) =
 
 let get_speed t = t.speed
 
-(* let draw t = Graphics.draw_image (Option.get t.img) t.x t.y *)
 let draw t = 
   match t.img with 
   | None -> Graphics.draw_image (create_image t.name) t.x t.y 
@@ -33,11 +32,6 @@ let rec draw_enemies (lst: type_enemy list) =
   | [] -> () 
   | h::t -> draw h.image; draw_enemies t
 
-let rec draw_treasure (lst : Treasure.type_treasure list) = 
-  match lst with 
-  | [] -> ()
-  | h::t -> draw h.image; draw_treasure t
-
 let rec draw_enemy_hp = function 
   | [] -> ()
   | e::t -> 
@@ -56,15 +50,6 @@ let draw_background () =
 
   let bg_lst = [foreground_props; middleground_props; background_props;] in 
   cleanup_bg bg_lst
-
-(* let draw_background () = 
-   sprite_sky.x <- sprite_sky.x - 1;
-   sprite_backdunes.x <- sprite_backdunes.x - 2;
-   sprite_foredunes.x <- sprite_foredunes.x - 3;
-
-   (* foreground_lst := List.filter (fun spr -> spr.x > 0) !foreground_lst; *)
-   let bg_lst = [sprite_sky; sprite_backdunes; sprite_foredunes] in 
-   draw_list bg_lst *)
 
 let print_st str = 
   Graphics.moveto ((gui_window.width)/5) ((gui_window.height)/2);
@@ -119,7 +104,6 @@ let draw_dialogue_container speaker txt =
     (scoreboard.width + 20) 10 
     (gui_window.width - scoreboard.width-30) scoreboard.height;
 
-  (* Graphics.moveto (scoreboard.width + 20) 10; *)
   Graphics.fill_rect (scoreboard.width + 20) 10 
     scoreboard.height scoreboard.height;
 

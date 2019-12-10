@@ -10,7 +10,7 @@ type sprite = {
   mutable y: int;
 }
 
-(** [create_image str] returns a transparent Graphics.image of 
+(** [create_image str] returns a transparent [Graphics.image] of 
     the png file named [str] in the assets/images directory *)
 val create_image : string -> Graphics.image
 
@@ -20,3 +20,6 @@ val create_sprite : string -> x:int -> y:int -> spd:int -> sprite
 
 (** [set_image_dimensions spr] sets the height of width of [spr] *)
 val set_image_dimensions : sprite -> unit
+
+(** [move_sprites lst] moves each sprite in [lst]. *)
+val move_sprites : sprite list -> unit

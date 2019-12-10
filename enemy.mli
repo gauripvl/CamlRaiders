@@ -2,6 +2,7 @@
 (* open Objects *)
 open Sprite
 
+(** [type_attack] is the type of attack of an enemy. *)
 type type_attack = 
   | Passive 
   | Bullet
@@ -10,12 +11,14 @@ type type_attack =
   | Cross 
   | Star
 
+(** [type_movement] is the type of movement of an enemy. *)
 type type_movement = 
   | Straight 
   | Organic
   | CurveUpward
   | Snake
 
+(** [type_enemy] is the type of an enemy. *)
 type type_enemy = {
   image: sprite;
   mutable health: int;
@@ -35,7 +38,8 @@ val enemy_list : type_enemy list ref
     randomly generated from 2 (inclusive) to [n] (inclusive) seconds. *)
 val spawn_enemy : int -> unit
 
-(** [move_enemies lst] moves each enemy in [lst]. *)
+(** [move_enemies lst] moves each enemy in [lst] according to their 
+    movement type. *)
 val move_enemies : type_enemy list -> unit
 
 (** [cleanup_enemies ()] removes enemies which are outside the game window 
