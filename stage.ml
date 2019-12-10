@@ -86,11 +86,7 @@ let script_boss = scripts_of "boss"
 
 let rec loop_game () = 
   if (player.lives > 0) then (
-<<<<<<< HEAD
-    if (scoreboard.score < 25) then loop_minion_stage () 
-=======
     if (scoreboard.score < 999) then loop_minion_stage () 
->>>>>>> e5ae69567aa694f2a0a12f479de68a2312e5d4af
     else ( 
       if !is_dialogue_active then (
         Graphics.clear_graph();
