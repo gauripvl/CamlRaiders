@@ -63,3 +63,7 @@ let set_image_dimensions spr =
   match spr.img with 
   | None -> failwith "No sprite image specified."
   | Some img -> spr.height <- get_height img; spr.width <- get_width img
+
+let rec move_sprites = function
+  | [] -> () 
+  | h::t -> h.y <- h.y + h.speed; move_sprites t

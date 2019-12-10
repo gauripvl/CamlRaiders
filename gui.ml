@@ -32,11 +32,6 @@ let rec draw_enemies (lst: type_enemy list) =
   | [] -> () 
   | h::t -> draw h.image; draw_enemies t
 
-let rec draw_treasure (lst : Treasure.type_treasure list) = 
-  match lst with 
-  | [] -> ()
-  | h::t -> draw h.image; draw_treasure t
-
 let rec draw_enemy_hp = function 
   | [] -> ()
   | e::t -> 
