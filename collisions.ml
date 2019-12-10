@@ -68,7 +68,7 @@ let match_powerup_to_power power_up =
   match power_up with 
   | None -> ()
   | Some h -> match h.name with
-    |"one_heart" -> inc_player_lives ()
+    |"one_heart" -> if player.lives < 3 then inc_player_lives ()
     | _ -> failwith "not yet implemented"
 
 let remove_enemies ()  = 
