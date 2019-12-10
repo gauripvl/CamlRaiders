@@ -22,8 +22,8 @@ let spawn_boss name ~hp:hp ~atk_types:atks ~freq:freq = {
     height = -1;
     width = -1;
     speed = 2; 
-    x = 300;
-    y = 200;
+    x = 1000;
+    y = 500;
   };
   health = hp;
   attacks = atks;
@@ -35,7 +35,7 @@ let binary_red_atks = ref []
 let binary_black_atks = ref []
 
 (* creates an attack every set amount of time *)
-let boss_attack_timer = ref 5.0
+let boss_attack_timer = ref 25.0
 
 (* switches to a random attack when false *)
 let switch_attack = ref true
@@ -57,7 +57,7 @@ let rec create_vector_projectiles
       name ~speed:spd ~origin:origin ~atk_ref:atk_ref t
 
 let manage_atk_duration () = 
-  print_endline ((string_of_bool !switch_attack) ^ (string_of_float !attack_duration));
+  (* print_endline ((string_of_bool !switch_attack) ^ (string_of_float !attack_duration)); *)
   if !switch_attack then
     switch_duration switch_attack attack_duration 0.5 
 
@@ -131,8 +131,39 @@ and create_atk_binarybullet (b:type_boss) =
    let count = 5 in 
    let rec random_unit_vectors =  *)
 
+let is_motion_upwards = ref true
+let direction_duration = ref 15.0
+let is_current_dir_up = ref true
+
+let manage_motion () = 
+  if !is_motion_upwards then 
+    switch_duration is_motion_upwards direction_duration 10.0
+  else (
+    is_motion_upwards := true;
+    is_current_dir_up := not !is_current_dir_up
+  )
+
+let oscillate_vertically (b:type_boss) = 
+  match !is_current_dir_up with 
+  | true -> b.image.y <- b.image.y + b.image.speed
+  | false -> b.image.y <- b.image.y - b.image.speed
+
+let is_entry_going = ref true
+let switch_entry_off = ref 25.0
+
+let move_boss (b:type_boss) = 
+  if !is_entry_going then (
+    switch_duration is_entry_going switch_entry_off 25.0;
+    b.image.x <- b.image.x - b.image.speed;
+    b.image.y <- b.image.y - b.image.speed
+  ) else (
+    manage_motion ();
+    oscillate_vertically b
+  )
+
 let boss_rbbinary = 
   let attack_types = [BinaryBullet; BinaryStar] in 
   spawn_boss "boss_rbbinary" 
     ~hp:1000 ~atk_types:attack_types ~freq:1.0
 
+(* let is_boss_defeated (b:type_boss) = b.health <= 0 *)

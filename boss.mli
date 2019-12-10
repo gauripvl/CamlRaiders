@@ -21,4 +21,7 @@ val boss_attack_timer: float ref
 
 val create_boss_atk: type_boss -> unit
 
+(** [move_boss b] moves [b] on the GUI. *)
+val move_boss: type_boss -> unit
+
 val boss_rbbinary : type_boss
