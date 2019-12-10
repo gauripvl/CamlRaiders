@@ -68,6 +68,7 @@ let boss_stage boss =
   move_projectiles !binary_red_atks;
   move_projectiles !binary_black_atks;
 
+  collision_with_boss boss;
   collision_with_enemy_proj !binary_red_atks;
   collision_with_enemy_proj !binary_black_atks;
 

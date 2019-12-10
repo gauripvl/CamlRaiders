@@ -24,3 +24,6 @@ val check_invincibility : unit -> unit
 (** [remove_enemy lst] is [lst] with enemies whose health 
     is below 0 removed *) 
 val remove_enemies : unit -> unit
+
+
+val collision_with_boss : Boss.type_boss -> unit

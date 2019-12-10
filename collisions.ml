@@ -95,3 +95,7 @@ let remove_enemies ()  =
        Treasure. *)
 (* try doing accumulator w/ all enemies that have not collided, or try
    doing something with fold_left *)
+
+let collision_with_boss (boss:Boss.type_boss) = 
+  if collision_btn player.image boss.image then 
+    decrease_player_lives ();
