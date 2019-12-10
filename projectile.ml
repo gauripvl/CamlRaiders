@@ -24,8 +24,6 @@ let create_projectile name spd origin vector = {
   vector = vector;
 }
 
-(* we want the directional vector that points from the enemy_atk to the 
-   target's location. EP = P - E *)
 let dir_vector origin target = 
   let x = target.x - origin.x in 
   let y = target.y - origin.y in 

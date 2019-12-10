@@ -1,7 +1,16 @@
 open Sprite
 
+(** [foreground_props] is the list of sprites to be drawn in the 
+    front of the game background. *)
 val foreground_props : sprite list ref
+
+(** [middleground_props] is the list of sprites to be drawn in the 
+    middle of the game background, between the foreground and the 
+    background props. *)
 val middleground_props : sprite list ref
+
+(** [background_props] is the list of sprites to be drawn in the 
+    back of the game background. *)
 val background_props : sprite list ref
 
 (** [add_bg str x spd ref] adds a sprite with image [name], 

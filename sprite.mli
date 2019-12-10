@@ -10,7 +10,7 @@ type sprite = {
   mutable y: int;
 }
 
-(** [create_image str] returns a transparent Graphics.image of 
+(** [create_image str] returns a transparent [Graphics.image] of 
     the png file named [str] in the assets/images directory *)
 val create_image : string -> Graphics.image
 
