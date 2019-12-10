@@ -62,6 +62,15 @@ let check_invincibility () =
    if (!invincibility_timer > 0.0) then player.invincible <- true 
    else player.invincible <- false  *)
 
+let inc_player_lives () = player.lives <- player.lives + 1
+
+let match_powerup_to_power power_up = 
+  match power_up with 
+  | None -> ()
+  | Some h -> match h.name with
+    |"one_heart" -> inc_player_lives ()
+    | _ -> failwith "not yet implemented"
+
 let remove_enemies ()  = 
   let probability_t = random_int 10 in  
   let probability_p = random_int 10 in
@@ -70,6 +79,7 @@ let remove_enemies ()  =
       let dead_enemies = 
         (List.filter (fun e -> e.health <= 0) !enemy_list) in
       let new_powerup_option = Treasure.random_powerup Treasure.power_ups dead_enemies in
+      match_powerup_to_power new_powerup_option;
       Treasure.add_treasure_to_list dead_enemies;
       Treasure.add_powerups_to_list new_powerup_option;
       enemy_list := List.filter (fun e -> e.health > 0) !enemy_list 

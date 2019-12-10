@@ -44,22 +44,12 @@ let add_treasure_to_list list_enemy =
     set_image_dimensions new_treasure;
     treasure_list := new_treasure :: !treasure_list
 
-<<<<<<< HEAD
-let add_powerups_to_list power_up = 
-  (* let new_power_option = random_powerup power_ups list_enemy in  *)
-  if power_up = None then
-    treasure_list := !treasure_list else
-    let new_power_up = remove_option power_up in
-    set_image_dimensions new_power_up.image;
-=======
-let add_powerups_to_list list_enemy = 
-  let new_power_option = random_powerup power_ups list_enemy in 
-  if new_power_option = None then 
+let add_powerups_to_list power_up =  
+  if power_up = None then 
     treasure_list := !treasure_list 
   else
-    let new_power_up = remove_option new_power_option in
+    let new_power_up = remove_option power_up in
     set_image_dimensions new_power_up;
->>>>>>> c3ccca373e34214be3a789577509927dce27cc16
     power_list := new_power_up :: !power_list
 
 let cleanup_powerup () = 
