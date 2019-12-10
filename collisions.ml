@@ -31,32 +31,32 @@ let rec player_laser_collision player_lasers enemies =
 let invincibility_timer = ref player.invincibility_duration
 let is_invincible = ref false 
 
-(** [decrease_player_lives ()] decrements one life from the player. *)
-let decrease_player_lives () = 
-  player.lives <- player.lives - 1
-
-let rec player_hit (enemy_lasers:Projectile.type_projectile list) (player:type_player) =
-  match enemy_lasers with
-  | [] -> ()
-  | h::t -> if collision_btn h.image player.image then (
-      decrease_player_lives ()
-    )
-    else player_hit t player
-
-let rec collision_with = function
-  | [] -> ()
-  | e::t -> 
-    if collision_btn player.image e.image then 
-      if not !is_invincible then (
-        decrease_player_lives ();
-        is_invincible := true)
-      else ()
-    else collision_with t 
-
 let check_invincibility () = 
   player.invincible <- !is_invincible;
   if !is_invincible then switch_duration 
       is_invincible invincibility_timer player.invincibility_duration
+
+(** [decrease_player_lives ()] decrements one life from the player 
+    if the player is not invincible. *)
+let decrease_player_lives () = 
+  if not !is_invincible then (
+    player.lives <- player.lives - 1;
+    is_invincible := true)
+  else ()
+
+let rec collision_with_enemy_proj (enemy_lasers:Projectile.type_projectile list)  =
+  match enemy_lasers with
+  | [] -> ()
+  | h::t -> if collision_btn h.image player.image then (
+      decrease_player_lives ()
+    ) else collision_with_enemy_proj t
+
+let rec collision_with_enemies = function
+  | [] -> ()
+  | e::t -> 
+    if collision_btn player.image e.image then 
+      decrease_player_lives ()
+    else collision_with_enemies t 
 
 (* let update_player_status () = 
    if (!invincibility_timer > 0.0) then player.invincible <- true 
