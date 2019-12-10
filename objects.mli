@@ -24,3 +24,7 @@ type type_scoreboard = {
 val gui_window : type_gui
 val player : type_player 
 val scoreboard : type_scoreboard
+
+val sprite_sky : sprite
+val sprite_foredunes : sprite
+val sprite_backdunes : sprite

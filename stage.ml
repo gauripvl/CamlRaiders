@@ -39,6 +39,9 @@ let loop_minion_stage () =
   cleanup_projectiles ();
   remove_enemies ();
 
+  draw sprite_sky;
+  draw sprite_backdunes;
+  draw sprite_foredunes;
   draw_enemies !enemy_list;
   draw_enemy_hp !enemy_list;
   draw player.image;

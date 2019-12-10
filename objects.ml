@@ -51,3 +51,32 @@ let scoreboard = {
   score = 0;
 }
 
+let sprite_sky = {
+  img = None;
+  name = "sky";
+  height = -1;
+  width = -1;
+  speed = 1; 
+  x = 0; 
+  y = 0; 
+}
+
+let sprite_foredunes = {
+  img = None;
+  name = "fore_dunes";
+  height = -1;
+  width = -1;
+  speed = 1; 
+  x = 0; 
+  y = 0; 
+}
+
+let sprite_backdunes = {
+  img = None;
+  name = "back_dunes";
+  height = -1;
+  width = -1;
+  speed = 1; 
+  x = 0; 
+  y = 0; 
+}
