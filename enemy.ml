@@ -52,9 +52,9 @@ let random_enemy () =
   if (probability < 15) then 
     create_enemy "serpent" ~hp:10 ~atk:Missile ~spd:4 ~move:Straight
   else if (is_btn 15 30 probability) then 
-    create_enemy "serpent" ~hp:14 ~atk:Cross ~spd:3 ~move:Organic
+    create_enemy "cactus" ~hp:14 ~atk:Cross ~spd:3 ~move:Organic
   else if (is_btn 31 45 probability) then 
-    create_enemy "serpent" ~hp:14 ~atk:Diamond ~spd:3 ~move:Straight
+    create_enemy "cactus" ~hp:14 ~atk:Diamond ~spd:3 ~move:Straight
   else if (is_btn 46 60 probability) then 
     create_enemy "serpent" ~hp:6 ~atk:Star ~spd:1 ~move:Organic
   else 

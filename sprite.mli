@@ -14,5 +14,9 @@ type sprite = {
     the png file named [str] in the assets/images directory *)
 val create_image : string -> Graphics.image
 
+(** [create_sprite str x y spd] is a sprite with image [str],
+    inital position [x], [y], and a speed [spd]. *)
+val create_sprite : string -> x:int -> y:int -> spd:int -> sprite
+
 (** [set_image_dimensions spr] sets the height of width of [spr] *)
 val set_image_dimensions : sprite -> unit

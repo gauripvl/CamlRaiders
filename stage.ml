@@ -39,9 +39,7 @@ let loop_minion_stage () =
   cleanup_projectiles ();
   remove_enemies ();
 
-  draw sprite_sky;
-  draw sprite_backdunes;
-  draw sprite_foredunes;
+  draw_background ();
   draw_enemies !enemy_list;
   draw_enemy_hp !enemy_list;
   draw player.image;
@@ -85,7 +83,7 @@ let script_boss = scripts_of "boss"
 
 let rec loop_game () = 
   if (player.lives > 0) then (
-    if (scoreboard.score < 2) then loop_minion_stage () 
+    if (scoreboard.score < 999) then loop_minion_stage () 
     else ( 
       if !is_dialogue_active then (
         Graphics.clear_graph();
