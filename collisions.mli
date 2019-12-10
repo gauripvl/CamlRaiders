@@ -19,11 +19,11 @@ val collision_with_enemies : Enemy.type_enemy list -> unit
 
 val check_invincibility : unit -> unit 
 
-(* val update_player_status : unit -> unit  *)
-
 (** [remove_enemy lst] is [lst] with enemies whose health 
     is below 0 removed *) 
 val remove_enemies : unit -> unit
 
-
 val collision_with_boss : Boss.type_boss -> unit
+
+val collision_with_player_laser : 
+  Boss.type_boss -> Projectile.type_projectile list -> unit

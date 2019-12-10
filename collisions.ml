@@ -98,4 +98,17 @@ let remove_enemies ()  =
 
 let collision_with_boss (boss:Boss.type_boss) = 
   if collision_btn player.image boss.image then 
-    decrease_player_lives ();
+    decrease_player_lives ()
+
+let rec collision_with_player_laser (boss:Boss.type_boss) 
+    (player_lasers:Projectile.type_projectile list) = 
+  match player_lasers with 
+  | [] -> ()
+  | h::t -> check_laser_hit_boss h boss; 
+    collision_with_player_laser boss t
+
+and check_laser_hit_boss h boss = 
+  if collision_btn boss.image h.image then (
+    boss.health <- boss.health - player.power; 
+    scoreboard.score <- scoreboard.score + 2
+  )
