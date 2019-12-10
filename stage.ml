@@ -26,6 +26,7 @@ let loop_minion_stage () =
   player_laser_collision !lasers_list !enemy_list;
   player_hit !enemy_atks player;
   cleanup_enemies (); 
+  Treasure.cleanup_powerup ();
   check_invincibility ();
   collision_with !enemy_list;
 
@@ -33,6 +34,7 @@ let loop_minion_stage () =
   move_projectiles !lasers_list;
   move_projectiles !enemy_atks;
   Treasure.move_treasure !Treasure.treasure_list;
+  Treasure.move_treasure !Treasure.power_list;
 
   Graphics.clear_graph ();
 
@@ -48,6 +50,7 @@ let loop_minion_stage () =
   draw_projectiles !lasers_list;
   draw_projectiles !enemy_atks;
   draw_treasure !Treasure.treasure_list;
+  draw_treasure !Treasure.power_list;
 
   draw_scoreboard ()
 
@@ -61,7 +64,7 @@ let boss_stage boss =
 
   timer create_boss_atk boss_rbbinary boss_attack_timer boss.attack_freq;
 
-  move_boss boss;
+  (* move_boss boss; *)
   move_projectiles !lasers_list;
   move_projectiles !binary_red_atks;
   move_projectiles !binary_black_atks;
@@ -85,7 +88,7 @@ let script_boss = scripts_of "boss"
 
 let rec loop_game () = 
   if (player.lives > 0) then (
-    if (scoreboard.score < 2) then loop_minion_stage () 
+    if (scoreboard.score < 25) then loop_minion_stage () 
     else ( 
       if !is_dialogue_active then (
         Graphics.clear_graph();

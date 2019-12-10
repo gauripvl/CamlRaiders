@@ -7,6 +7,8 @@ type type_treasure = {
 
 let source_treasures = ref ["pink"; "beige"; "orange"; "purple"]
 
+let power_ups = ref ["one_heart"]
+
 let create_treasure (name) (enemy: Enemy.type_enemy) = 
   Some {
     image = {
@@ -20,6 +22,7 @@ let create_treasure (name) (enemy: Enemy.type_enemy) =
     }
   }
 let treasure_list = ref []
+let power_list = ref []
 
 let filter_fun lst ene_lst prob = 
   match !lst with 
@@ -32,6 +35,12 @@ let random_treasure (treasures_ref) (enemy_list: Enemy.type_enemy list) =
     if (List.length !treasures_ref > 0) then (
       filter_fun treasures_ref enemy_list probability
     ) else None
+
+let random_powerup (power_lst) (enemy_list: Enemy.type_enemy list) = 
+  if (List.length enemy_list = 0) then None else
+    let probability_e = random_int (List.length enemy_list) in
+    (* let probability_p = random_int (0) in *)
+    create_treasure (List.nth !power_lst 0) (List.nth enemy_list probability_e)
 
 let remove_option treasure = 
   match treasure with 
@@ -46,9 +55,17 @@ let add_treasure_to_list list_enemy =
     set_image_dimensions new_treasure.image;
     treasure_list := new_treasure :: !treasure_list
 
+let add_powerups_to_list list_enemy = 
+  let new_power_option = random_powerup power_ups list_enemy in 
+  if new_power_option = None then
+    treasure_list := !treasure_list else
+    let new_power_up = remove_option new_power_option in
+    set_image_dimensions new_power_up.image;
+    power_list := new_power_up :: !power_list
+
 let rec move_treasure = function
   | [] -> () 
   | h::t -> h.image.y <- h.image.y - h.image.speed; move_treasure t
 
-let cleanup_treasure () = 
-  treasure_list := List.filter (fun e -> e.image.y > 0) !treasure_list
+let cleanup_powerup () = 
+  power_list := List.filter (fun e -> e.image.y > 0) !power_list
