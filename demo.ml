@@ -2,6 +2,7 @@ open Objects
 open Gui
 open Sprite
 open Stage 
+open Background
 
 let rec initialize_sprites = function 
   | [] -> ()
@@ -10,15 +11,17 @@ let rec initialize_sprites = function
     set_image_dimensions h;
     initialize_sprites t
 
-let init_lst = [
-  player.image; 
-  Boss.boss_rbbinary.image; 
-  sprite_sky; sprite_foredunes; sprite_backdunes
-]
+let initialize_bg () = 
+  add_bg "sky" ~x:0 ~spd:1 ~ref:background_props;
+  add_bg "back_dunes" ~x:0 ~spd:2 ~ref:middleground_props;
+  add_bg "fore_dunes" ~x:0 ~spd:3 ~ref:foreground_props
+
+let init_lst = [player.image; Boss.boss_rbbinary.image;]
 
 let main () = 
   open_game_window gui_window;
   initialize_sprites init_lst;
+  initialize_bg ();
   loop_game ();
   Graphics.clear_graph (); 
   draw_game_over_screen ()

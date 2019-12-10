@@ -16,3 +16,4 @@
 #load_rec "collisions.cmo";;
 #load_rec "dialogue.cmo";;
 #load_rec "boss.cmo";;
+#load_rec "background.cmo";;

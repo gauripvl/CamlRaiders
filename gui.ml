@@ -3,6 +3,7 @@ open Objects
 open Commands
 open Projectile
 open Enemy
+open Background
 
 type t = sprite
 
@@ -37,7 +38,6 @@ let rec draw_treasure (lst : Treasure.type_treasure list) =
   | [] -> ()
   | h::t -> draw h.image; draw_treasure t
 
-
 let rec draw_enemy_hp = function 
   | [] -> ()
   | e::t -> 
@@ -45,11 +45,26 @@ let rec draw_enemy_hp = function
     Graphics.draw_string ("HP: " ^ (string_of_int e.health));
     draw_enemy_hp t
 
-(* let draw_background = 
-   let img = Png.load "___.png" [];;
-   let g = Graphic_image.of_image img;;
-   Graphics.draw_image g 0 0;; *)
+let draw_background () = 
+  manage_parallax "sky" ~spd:1 ~ref:background_props !background_props;
+  manage_parallax "back_dunes" ~spd:2 ~ref:middleground_props !middleground_props;
+  manage_parallax "fore_dunes" ~spd:3 ~ref:foreground_props !foreground_props;
 
+  draw_list !background_props;
+  draw_list !middleground_props;
+  draw_list !foreground_props;
+
+  let bg_lst = [foreground_props; middleground_props; background_props;] in 
+  cleanup_bg bg_lst
+
+(* let draw_background () = 
+   sprite_sky.x <- sprite_sky.x - 1;
+   sprite_backdunes.x <- sprite_backdunes.x - 2;
+   sprite_foredunes.x <- sprite_foredunes.x - 3;
+
+   (* foreground_lst := List.filter (fun spr -> spr.x > 0) !foreground_lst; *)
+   let bg_lst = [sprite_sky; sprite_backdunes; sprite_foredunes] in 
+   draw_list bg_lst *)
 
 let print_st str = 
   Graphics.moveto ((gui_window.width)/5) ((gui_window.height)/2);

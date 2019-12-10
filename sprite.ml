@@ -40,6 +40,16 @@ let create_image str =
   |> Graphic_image.of_image 
   |> img_to_transp
 
+let create_sprite name ~x:initial_x ~y:initial_y ~spd:spd = {
+  img = Some (create_image name);
+  name = name;
+  height = -1;
+  width = -1;
+  speed = spd; 
+  x = initial_x; 
+  y = initial_y; 
+}
+
 (** [get_height img] is the height of [img] *)
 let get_height img = 
   img |> Graphics.dump_image |> Array.length 

@@ -33,6 +33,10 @@ val draw_treasure : Treasure.type_treasure list -> unit
     [lst] onto the gui. *)
 val draw_enemy_hp : type_enemy list -> unit
 
+(** [draw_background ()] draws and moves the game background on 
+    the GUI. *)
+val draw_background : unit -> unit
+
 (** [print_st str] prints [str] at the center of the game window *)
 val print_st : string -> unit
 
@@ -41,7 +45,6 @@ val draw_scoreboard : unit -> unit
 val draw_game_over_screen : unit -> unit
 
 val draw_dialogue_container : string -> char list -> unit 
-
 
 (** [draw_static ()] draws the scoreboard and player onto the GUI. *)
 val draw_static : unit -> unit
