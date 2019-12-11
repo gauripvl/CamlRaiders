@@ -14,7 +14,7 @@ let add_bg name ~x:initial_x ~spd:spd ~ref:lst_ref =
 let rec manage_parallax name ~spd:spd ~ref:lst_ref = function 
   | [] -> ()
   | h::t -> 
-    if h.x + h.width - 14 < gui_window.width && List.length !lst_ref < 3  then 
+    if h.x + h.width - 18 < gui_window.width && List.length !lst_ref < 3  then 
       add_bg name ~x:gui_window.width ~spd:spd ~ref:lst_ref;
     h.x <- h.x - h.speed;
     manage_parallax name ~spd:spd ~ref:lst_ref t

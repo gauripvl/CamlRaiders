@@ -39,6 +39,10 @@ let rec draw_enemy_hp = function
     Graphics.draw_string ("HP: " ^ (string_of_int e.health));
     draw_enemy_hp t
 
+let draw_boss_hp (boss:Boss.type_boss) = 
+  Graphics.moveto (boss.image.x + boss.image.width / 4) (boss.image.y - 12);
+  Graphics.draw_string ("BOSS HP: " ^ (string_of_int boss.health))
+
 let draw_background () = 
   manage_parallax "sky" ~spd:1 ~ref:background_props !background_props;
   manage_parallax "back_dunes" ~spd:2 ~ref:middleground_props !middleground_props;
@@ -123,5 +127,6 @@ let draw_dialogue_container speaker txt =
 let draw_static () = 
   Graphics.clear_graph (); 
   quit_game();
+  draw_background ();
   draw_scoreboard ();
   draw player.image
