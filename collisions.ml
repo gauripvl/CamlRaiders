@@ -45,7 +45,6 @@ let decrease_player_lives () =
     is_invincible := true)
   else ()
 
-
 let rec collision_with_enemy_proj (enemy_lasers:Projectile.type_projectile list)  =
   match enemy_lasers with
   | [] -> ()
