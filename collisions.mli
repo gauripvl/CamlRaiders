@@ -18,6 +18,10 @@ val collision_with_enemy_proj : Projectile.type_projectile list -> unit
     sprite and the player sprite *)
 val treasure_collision : sprite list -> unit
 
+(** [powerup_collision] checks if there is a collision between any powerup
+    sprite and the player sprite *)
+val powerup_collision : sprite list -> unit
+
 (** [collision_with_enemies lst] decreases player's lives by one if 
     player hits any sprite in [lst] *)
 val collision_with_enemies : Enemy.type_enemy list -> unit

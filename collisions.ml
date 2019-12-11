@@ -78,7 +78,7 @@ let rec treasure_collision (treasures:sprite list) =
   match treasures with
   | [] -> ()
   | h::t -> if collision_btn h player.image then (
-      scoreboard.score <- treasure_points h;
+      scoreboard.score <- scoreboard.score + treasure_points h;
       collected_treasures := h :: !collected_treasures;
       treasure_list := remove_treasure !treasure_list h [] 
     )
@@ -112,6 +112,15 @@ let match_powerup_to_power power_up =
   | Some h -> match h.name with
     |"one_heart" -> if player.lives < 3 then inc_player_lives ()
     | _ -> failwith "not yet implemented"
+
+let rec powerup_collision (powerups:sprite list) =
+  match powerups with
+  | [] -> ()
+  | h::t -> if collision_btn h player.image then (
+      match_powerup_to_power (Some h);
+      power_list := remove_treasure !power_list h [] 
+    )
+    else powerup_collision t
 
 let remove_enemies ()  = 
   let probability_t = random_int 10 in  

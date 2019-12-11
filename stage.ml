@@ -26,6 +26,7 @@ let collision_minion_stage () =
   collision_with_enemy_proj !enemy_atks;
   collision_with_enemies !enemy_list;
   treasure_collision !Treasure.treasure_list;
+  powerup_collision !Treasure.power_list;
   check_invincibility ()
 
 let cleanup_minion_stage () = 
