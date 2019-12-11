@@ -12,7 +12,7 @@ val player_laser_collision :
 
 val collision_with_enemy_proj : Projectile.type_projectile list -> unit
 
-(** [collision_with lst] decreases player's lives by one if 
+(** [collision_with_enemies lst] decreases player's lives by one if 
     player hits any sprite in [lst] *)
 val collision_with_enemies : Enemy.type_enemy list -> unit
 
