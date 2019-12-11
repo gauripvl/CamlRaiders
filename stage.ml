@@ -80,8 +80,10 @@ let boss_stage boss =
 
   Graphics.clear_graph ();
 
+  draw_background ();
   draw player.image;
   draw boss.image;
+  draw_boss_hp boss;
   draw_projectiles !binary_red_atks;
   draw_projectiles !binary_black_atks;
   draw_projectiles !lasers_list;

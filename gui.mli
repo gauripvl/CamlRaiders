@@ -28,6 +28,9 @@ val draw_enemies : type_enemy list -> unit
     [lst] onto the gui. *)
 val draw_enemy_hp : type_enemy list -> unit
 
+(** [draw_boss_hp b] draws the current health of [b] onto the gui. *)
+val draw_boss_hp : Boss.type_boss -> unit
+
 (** [draw_background ()] draws and moves the game background on 
     the GUI. *)
 val draw_background : unit -> unit
