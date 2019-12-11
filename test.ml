@@ -2,6 +2,11 @@ open OUnit2
 open Dialogue
 open Sprite 
 
+(* Objects module stores the main objects of our game: 
+   the GUI window, the player, and the scoreboard. Each object can be 
+   mutated. These mutations are tested by play-testing our game 
+   on the GUI. The non-mutablable fields and initial values of our 
+   objects are tested in the [objects_tests] test set. *)
 let objects_tests = 
   [
     "gui window width"  >:: 
@@ -16,6 +21,7 @@ let objects_tests =
     (fun _ -> assert_equal 0 (Objects.scoreboard.score));
   ]
 
+(* The sprites below are used to test functions in [utils_tests] test set. *)
 let sprite_onscreen = {
   img = None;
   name = "onscreen";
@@ -36,6 +42,12 @@ let sprite_offscreen = {
   y = 999; 
 }
 
+(* Utils module contain general functions that are repeatedly used 
+   in other modules. The functions [timer] and [switch_duration] are 
+   time-dependent and are tested by play-testing. The [random_int] 
+   function is dependent on probability and cannot be tested 
+   effectively by assertions. The functions [is_btn] and [on_screen] 
+   gives a concrete value and are tested in the [utils_tests] test set. *)
 let utils_tests = 
   [
     "is_btn: edge case min, int"  >:: 
@@ -67,6 +79,8 @@ let utils_tests =
     (fun _ -> assert_equal false (Utils.is_onscreen sprite_offscreen));
   ]
 
+(* The sprites below are used to test functions in [collisions_tests] 
+   test set. *)
 let sprite_one = {
   img = None;
   name = "one";
