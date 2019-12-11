@@ -35,10 +35,10 @@ let unit_vector v =
   (x /. magnitude , y /. magnitude)
 
 let create_diamond_atk (e: type_enemy) = 
-  enemy_atks := (create_projectile "orb" 12 e.image (1.,0.)) :: !enemy_atks;
-  enemy_atks := (create_projectile "orb" 12 e.image (-1.,0.)) :: !enemy_atks;
-  enemy_atks := (create_projectile "orb" 12 e.image (0.,1.)) :: !enemy_atks;
-  enemy_atks := (create_projectile "orb" 12 e.image (0.,-1.)) :: !enemy_atks
+  enemy_atks := (create_projectile "spike_right" 12 e.image (1.,0.)) :: !enemy_atks;
+  enemy_atks := (create_projectile "spike_left" 12 e.image (-1.,0.)) :: !enemy_atks;
+  enemy_atks := (create_projectile "spike_up" 12 e.image (0.,1.)) :: !enemy_atks;
+  enemy_atks := (create_projectile "spike_down" 12 e.image (0.,-1.)) :: !enemy_atks
 
 let create_cross_atk (e: type_enemy) = 
   enemy_atks := (create_projectile "orb" 12 e.image (1.,1.)) :: !enemy_atks;

@@ -50,13 +50,13 @@ let spawn_timer = ref 1.0
 let random_enemy () = 
   let probability = random_int 100 in 
   if (probability < 15) then 
-    create_enemy "serpent" ~hp:10 ~atk:Missile ~spd:4 ~move:Straight
+    create_enemy "snek" ~hp:10 ~atk:Missile ~spd:4 ~move:Organic
   else if (is_btn 15 30 probability) then 
     create_enemy "cactus" ~hp:14 ~atk:Cross ~spd:3 ~move:Organic
   else if (is_btn 31 45 probability) then 
-    create_enemy "cactus" ~hp:14 ~atk:Diamond ~spd:3 ~move:Straight
+    create_enemy "ghost" ~hp:14 ~atk:Diamond ~spd:3 ~move:Straight
   else if (is_btn 46 60 probability) then 
-    create_enemy "serpent" ~hp:6 ~atk:Star ~spd:1 ~move:Organic
+    create_enemy "birb" ~hp:6 ~atk:Star ~spd:1 ~move:Organic
   else 
     create_enemy "scorpion" ~hp:20 ~atk:Passive ~spd:2 ~move:Straight
 
