@@ -21,7 +21,7 @@ let power_list = ref []
 let filter_fun lst ene_lst prob = 
   match !lst with 
   | [] -> failwith "Empty treasure list."
-  | h::t -> lst := t; create_treasure h (List.nth ene_lst prob)
+  | h::_ -> create_treasure h (List.nth ene_lst prob)
 
 (* [random_treasure [treasures_ref] [enemy_list]] creates a random treasure using 
    the ref list of treasures [treasure_ref] and [enemy_list]  *)
