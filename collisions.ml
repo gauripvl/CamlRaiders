@@ -22,8 +22,8 @@ let rec enemy_list_collision
     )
     else enemy_list_collision player_laser t
 
-let rec player_laser_collision lasers_ref enemies = 
-  match lasers_ref with
+let rec player_laser_collision player_lasers enemies =
+  match player_lasers with
   | [] -> ()
   | h::t -> enemy_list_collision h enemies;
     player_laser_collision t enemies
@@ -62,19 +62,6 @@ let rec collision_with_enemies = function
    if (!invincibility_timer > 0.0) then player.invincible <- true 
    else player.invincible <- false  *)
 
-let should_keep (proj:Projectile.type_projectile) target = 
-  not (collision_btn proj.image target)
-
-let remove_projs (lst_ref:Projectile.type_projectile list ref) target = 
-  lst_ref := List.filter (fun p -> should_keep p target) !lst_ref
-
-let rec remove_lasers (lasers_ref:Projectile.type_projectile list ref) 
-    (enemies:type_enemy list) = 
-  match enemies with 
-  | [] -> ()
-  | h::t -> remove_projs lasers_ref h.image;
-    remove_lasers lasers_ref t
-
 let inc_player_lives () = player.lives <- player.lives + 1
 
 let match_powerup_to_power power_up = 
@@ -100,6 +87,7 @@ let remove_enemies ()  =
       let dead_enemies = 
         (List.filter (fun e -> e.health <= 0) !enemy_list) in
       let new_powerup_option = Treasure.random_powerup Treasure.power_ups dead_enemies in
+      match_powerup_to_power new_powerup_option;
       Treasure.add_powerups_to_list new_powerup_option;
       enemy_list := List.filter (fun e -> e.health > 0) !enemy_list 
   else enemy_list := List.filter (fun e -> e.health > 0) !enemy_list
@@ -125,5 +113,3 @@ and check_laser_hit_boss h boss =
     boss.health <- boss.health - player.power; 
     scoreboard.score <- scoreboard.score + 2
   )
-
-
