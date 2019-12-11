@@ -22,8 +22,8 @@ let rec enemy_list_collision
     )
     else enemy_list_collision player_laser t
 
-let rec player_laser_collision player_lasers enemies =
-  match player_lasers with
+let rec player_laser_collision lasers_ref enemies = 
+  match lasers_ref with
   | [] -> ()
   | h::t -> enemy_list_collision h enemies;
     player_laser_collision t enemies
@@ -58,9 +58,18 @@ let rec collision_with_enemies = function
       decrease_player_lives ()
     else collision_with_enemies t 
 
-(* let update_player_status () = 
-   if (!invincibility_timer > 0.0) then player.invincible <- true 
-   else player.invincible <- false  *)
+let should_keep (proj:Projectile.type_projectile) target = 
+  not (collision_btn proj.image target)
+
+let remove_projs (lst_ref:Projectile.type_projectile list ref) target = 
+  lst_ref := List.filter (fun p -> should_keep p target) !lst_ref
+
+let rec remove_lasers (lasers_ref:Projectile.type_projectile list ref) 
+    (enemies:type_enemy list) = 
+  match enemies with 
+  | [] -> ()
+  | h::t -> remove_projs lasers_ref h.image;
+    remove_lasers lasers_ref t
 
 let inc_player_lives () = player.lives <- player.lives + 1
 
