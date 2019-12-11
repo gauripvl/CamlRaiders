@@ -77,7 +77,6 @@ let rec create_boss_atk b =
   match random_atk with 
   | BinaryStar -> create_atk_binarystar b
   | BinaryBullet ->  create_atk_binarybullet b;
-  | _ -> ()
 
 and create_atk_binarystar (b: type_boss) = 
   let prob_rb, prob_atk_type = (random_int 4, random_int 2) in 

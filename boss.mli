@@ -1,7 +1,6 @@
 type type_boss_attack = 
   | BinaryStar 
   | BinaryBullet
-  | BinaryChaos
 
 type type_boss = {
   image: Sprite.sprite;
