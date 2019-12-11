@@ -65,10 +65,10 @@ let rec remove_treasure (treasures:sprite list) (treasure:sprite)
       remove_treasure t treasure (h :: acc)
     )
 
-let rec remove_head (treasures:string list) =
+let remove_head (treasures:string list) =
   match treasures with
   | [] -> []
-  | h::t -> t
+  | _::t -> t
 
 (** [treasure_points treasure] returns how many points [treasure] is worth *)
 let treasure_points (treasure:sprite) =
