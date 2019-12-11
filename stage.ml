@@ -14,6 +14,11 @@ let enemy_atk_timer = ref 2.0
 let start_game () = 
   print_st "Press z to start"
 
+(** [upgrade_powerup ()] lets player shoot 3 lasers when score 
+    is above 999 *)
+let upgrade_powerup () = 
+  if scoreboard.score > 999 then player.powerup <- TripleLasers
+
 let move_minion_stage () = 
   move_enemies !enemy_list;
   move_projectiles !lasers_list;
@@ -58,6 +63,7 @@ let loop_minion_stage () =
 
   update_pos player.image;
   shoot_laser player.image;
+  upgrade_powerup ();
 
   collision_minion_stage ();
   cleanup_minion_stage ();
@@ -103,6 +109,7 @@ let boss_stage boss =
   quit_game ();
   update_pos player.image;
   shoot_laser player.image;
+  upgrade_powerup ();
 
   timer create_boss_atk boss_rbbinary boss_attack_timer boss.attack_freq;
 
