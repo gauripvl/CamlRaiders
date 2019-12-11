@@ -90,6 +90,12 @@ let boss_stage boss =
 
   draw_scoreboard ()
 
+let won_game () = 
+  Graphics.clear_graph ();
+  print_st ("Congratulations! You have won! 
+  Your score: " ^ (string_of_int scoreboard.score));
+  quit_game ()
+
 let script_boss = scripts_of "boss"
 
 let rec loop_game () = 
@@ -99,7 +105,9 @@ let rec loop_game () =
       if !is_dialogue_active then (
         Graphics.clear_graph();
         draw_script script_boss;
-      ) else boss_stage boss_rbbinary
-    );
+      ) else (
+        if boss_rbbinary.health > 0 then boss_stage boss_rbbinary
+        else won_game ()
+      ));
     loop_game ()
   )
