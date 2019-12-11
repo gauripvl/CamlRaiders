@@ -59,7 +59,7 @@ let rec remove_treasure (treasures:sprite list) (treasure:sprite)
     (acc:sprite list)=
   match treasures with
   | [] -> acc
-  | h::t -> if (h = treasure) then
+  | h::t -> if (h.name = treasure.name) then
       remove_treasure t treasure acc
     else (
       remove_treasure t treasure (h :: acc)
