@@ -120,7 +120,7 @@ let script_boss = scripts_of "boss"
 
 let rec loop_game () = 
   if (player.lives > 0) then (
-    if (List.length !Treasure.collected_treasures = 4) then 
+    if (List.length !Treasure.collected_treasures < 4) then 
       loop_minion_stage () 
     else ( 
       if !is_dialogue_active then (
