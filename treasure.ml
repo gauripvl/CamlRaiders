@@ -9,6 +9,7 @@ let create_treasure name (origin: Enemy.type_enemy) =
   create_sprite name ~x:origin.image.x ~y:(origin.image.y + 5) ~spd:~-3
 
 let treasure_list = ref []
+let collected_treasures = ref []
 let power_list = ref []
 
 let filter_fun lst ene_lst prob = 

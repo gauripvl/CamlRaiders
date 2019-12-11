@@ -2,6 +2,8 @@ open Sprite
 
 val treasure_list : sprite list ref
 
+val collected_treasures : sprite list ref
+
 val power_list: sprite list ref
 
 val power_ups : string list ref

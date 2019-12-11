@@ -11,7 +11,13 @@ val collision_btn : sprite -> sprite -> bool
 val player_laser_collision : 
   Projectile.type_projectile list -> Enemy.type_enemy list -> unit
 
-val player_hit : Projectile.type_projectile list -> Objects.type_player -> unit
+(** [player_hit lst] checks if there is a collision between any enemy laser
+    and the player sprite *)
+val player_hit : Projectile.type_projectile list -> unit
+
+(** [treasure_collision] checks if there is a collision between any treasure
+    sprite and the player sprite *)
+val treasure_collision : sprite list -> unit
 
 (** [collision_with lst] decreases player's lives by one if 
     player hits any sprite in [lst] *)

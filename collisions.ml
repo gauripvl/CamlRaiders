@@ -2,6 +2,7 @@ open Objects
 open Sprite
 open Enemy 
 open Utils 
+open Treasure
 
 let collision_btn origin target = 
   (origin.x + origin.width > target.x 
@@ -13,7 +14,7 @@ let collision_btn origin target =
 (** [enemy_list_collision proj lst] subtracts health from enemy and increases 
     the score if [proj] hits one enemy in [lst]. *)
 let rec enemy_list_collision 
-    (player_laser: Projectile.type_projectile) enemies =
+    (player_laser: Projectile.type_projectile) (enemies:type_enemy list) =
   match enemies with 
   | [] -> ()
   | h::t -> if collision_btn player_laser.image h.image then (
@@ -35,13 +36,44 @@ let is_invincible = ref false
 let decrease_player_lives () = 
   player.lives <- player.lives - 1
 
-let rec player_hit (enemy_lasers:Projectile.type_projectile list) (player:type_player) =
+let rec player_hit (enemy_lasers:Projectile.type_projectile list) =
   match enemy_lasers with
   | [] -> ()
   | h::t -> if collision_btn h.image player.image then (
       decrease_player_lives ()
     )
-    else player_hit t player
+    else player_hit t
+
+(** [remove_treasure lst treasure acc] returns a new list [acc] of treasures
+    with the elements of [lst] exluding [treasure] *)
+let rec remove_treasure (treasures:sprite list) (treasure:sprite) 
+    (acc:sprite list)=
+  match treasures with
+  | [] -> acc
+  | h::t -> if (h = treasure) then
+      remove_treasure t treasure acc
+    else (
+      remove_treasure t treasure (h :: acc)
+    )
+
+(** [treasure_points treasure] returns how many points [treasure] is worth *)
+let treasure_points (treasure:sprite) =
+  match treasure.name with
+  | "pink" -> 50
+  | "beige" -> 75
+  | "orange" -> 100
+  | "purple" -> 125
+  | _ -> 0
+
+let rec treasure_collision (treasures:sprite list) =
+  match treasures with
+  | [] -> ()
+  | h::t -> if collision_btn h player.image then (
+      scoreboard.score <- treasure_points h;
+      collected_treasures := h :: !collected_treasures;
+      treasure_list := remove_treasure !treasure_list h [] 
+    )
+    else treasure_collision t
 
 let rec collision_with = function
   | [] -> ()

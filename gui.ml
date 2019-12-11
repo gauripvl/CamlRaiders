@@ -84,7 +84,7 @@ let draw_scoreboard () =
     Graphics.draw_string ("Score: " ^ (string_of_int scoreboard.score));
 
     Graphics.moveto x_pos (y_pos - 64);
-    Graphics.draw_string ("Inventory: " ^ (string_of_int (List.length !Treasure.treasure_list)))
+    Graphics.draw_string ("Inventory: " ^ (string_of_int (List.length !Treasure.collected_treasures)))
   )
 
 let rec draw_game_over_screen () = 
