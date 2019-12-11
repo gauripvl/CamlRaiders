@@ -34,7 +34,7 @@ let create_enemy name ~hp:hp ~atk:atk ~spd:spd ~move:dir = {
     width = -1;
     speed = spd; 
     x = gui_window.width - 100; 
-    y = random_int gui_window.height + 100; 
+    y = random_int gui_window.height - 100; 
   };
   health = hp;
   attack = atk;

@@ -43,7 +43,7 @@ let player = {
   };
   lives = 3;
   level = 1;
-  power = 2;
+  power = 20;
   invincible = false;
   invincibility_duration = 3.0;
   powerup = Neutral;
