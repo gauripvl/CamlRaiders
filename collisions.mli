@@ -1,5 +1,4 @@
 open Sprite
-(* open Objects *)
 
 (** [collision_btn s1 s2] is true if the rectangular image bounds of 
     [s1] and [s2] overlap. *)
@@ -16,6 +15,15 @@ val collision_with_enemy_proj : Projectile.type_projectile list -> unit
 (** [collision_with lst] decreases player's lives by one if 
     player hits any sprite in [lst] *)
 val collision_with_enemies : Enemy.type_enemy list -> unit
+
+(** [remove_projs lst_ref spr] removes projectiles in [lst_ref] 
+    that have collided with [spr]. *)
+val remove_projs : Projectile.type_projectile list ref -> sprite -> unit
+
+(** [remove_lasers lst_ref enemies] removes projectiles in [lst_ref] 
+    that have collided with any enemy in [enemies]. *)
+val remove_lasers : 
+  Projectile.type_projectile list ref -> Enemy.type_enemy list -> unit
 
 val check_invincibility : unit -> unit 
 
