@@ -6,7 +6,6 @@ open Objects
 type type_boss_attack = 
   | BinaryStar 
   | BinaryBullet
-  | BinaryChaos
 
 type type_boss = {
   image: sprite;
@@ -45,8 +44,6 @@ let attack_duration = ref 0.5
 (* stores the current attack of the boss *)
 let boss_current_attack = ref None
 
-(* let combo_atk_timer = ref 0.5 *)
-
 (** [create_vector_projectiles name spd origin atk_ref vectors] *) 
 let rec create_vector_projectiles 
     name ~speed:spd ~origin:(origin:type_boss) ~atk_ref:atk_ref = function 
@@ -57,7 +54,6 @@ let rec create_vector_projectiles
       name ~speed:spd ~origin:origin ~atk_ref:atk_ref t
 
 let manage_atk_duration () = 
-  (* print_endline ((string_of_bool !switch_attack) ^ (string_of_float !attack_duration)); *)
   if !switch_attack then
     switch_duration switch_attack attack_duration 0.5 
 
@@ -81,7 +77,6 @@ let rec create_boss_atk b =
   match random_atk with 
   | BinaryStar -> create_atk_binarystar b
   | BinaryBullet ->  create_atk_binarybullet b;
-    (* | BinaryChaos -> create_atk_binarychaos b; *)
   | _ -> ()
 
 and create_atk_binarystar (b: type_boss) = 
@@ -127,10 +122,6 @@ and create_atk_binarybullet (b:type_boss) =
       !binary_black_atks
   )
 
-(* and create_atk_binarychaos (b: type_boss) = 
-   let count = 5 in 
-   let rec random_unit_vectors =  *)
-
 let is_motion_upwards = ref true
 let direction_duration = ref 15.0
 let is_current_dir_up = ref true
@@ -164,6 +155,6 @@ let move_boss (b:type_boss) =
 let boss_rbbinary = 
   let attack_types = [BinaryBullet; BinaryStar] in 
   spawn_boss "boss_rbbinary" 
-    ~hp:1000 ~atk_types:attack_types ~freq:1.0
+    ~hp:3110 ~atk_types:attack_types ~freq:1.0
 
 (* let is_boss_defeated (b:type_boss) = b.health <= 0 *)
