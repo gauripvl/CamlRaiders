@@ -12,7 +12,6 @@ type type_powerup = Neutral | TripleLasers
 type type_player = {
   image: sprite;
   mutable lives: int;
-  mutable level: int;
   mutable power: int;
   mutable invincible: bool;
   mutable invincibility_duration: float;
@@ -42,7 +41,6 @@ let player = {
     y = 240; 
   };
   lives = 3;
-  level = 1;
   power = 20;
   invincible = false;
   invincibility_duration = 3.0;
