@@ -126,12 +126,24 @@ let match_powerup_to_power power_up =
     |"one_heart" -> if player.lives < 3 then inc_player_lives ()
     | _ -> failwith "not yet implemented"
 
+(** [remove_first_powerup lst powerup acc] returns a new list [acc] of powerups
+    with the elements of [lst] exluding the first instance of [powerup] *)
+let rec remove_first_powerup (powerups:sprite list) (powerup:sprite) 
+    (acc:sprite list)=
+  match powerups with
+  | [] -> acc
+  | h::t -> if (h.name = powerup.name) then
+      List.append t acc
+    else (
+      remove_first_powerup t powerup (h :: acc)
+    )
+
 let rec powerup_collision (powerups:sprite list) =
   match powerups with
   | [] -> ()
   | h::t -> if collision_btn h player.image then (
       match_powerup_to_power (Some h);
-      power_list := remove_treasure !power_list h [] 
+      power_list := remove_first_powerup !power_list h [] 
     )
     else powerup_collision t
 

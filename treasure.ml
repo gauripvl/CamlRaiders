@@ -60,7 +60,7 @@ let add_treasure_to_list list_enemy =
 (* [add_powerups_to_list [power_up]] is the updated [power_list] with a new power_up*)
 let add_powerups_to_list power_up =  
   if power_up = None then 
-    treasure_list := !treasure_list 
+    power_list := !power_list 
   else
     let new_power_up = remove_option power_up in
     set_image_dimensions new_power_up;
