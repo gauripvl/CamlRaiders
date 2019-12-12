@@ -59,6 +59,8 @@ let print_st str =
   Graphics.moveto ((gui_window.width)/5) ((gui_window.height)/2);
   Graphics.draw_string str
 
+(** [get_hearts] returns how many hearts should be displayed based on the
+    number of player lives *)
 let get_hearts () = 
   match player.lives with 
   | 1 -> "one_heart"
@@ -96,6 +98,7 @@ let rec draw_game_over_screen () =
   quit_game ();
   draw_game_over_screen ()
 
+(** [draw_typewriter] draws the dialogue one letter at a time *)
 let rec draw_typewriter = function 
   |[] -> ()
   |h::t -> 

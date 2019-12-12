@@ -65,6 +65,7 @@ let rec remove_treasure (treasures:sprite list) (treasure:sprite)
       remove_treasure t treasure (h :: acc)
     )
 
+(** [remove_head lst] removes the first string from a list of strings [lst] *)
 let rec remove_head (treasures:string list) =
   match treasures with
   | [] -> []
@@ -97,8 +98,11 @@ let rec collision_with_enemies = function
       decrease_player_lives ()
     else collision_with_enemies t 
 
+(** [should_keep proj target] returns whether [proj] and [target] have
+    collided or not *)
 let should_keep (proj:Projectile.type_projectile) target = 
   not (collision_btn proj.image target)
+
 
 let remove_projs (lst_ref:Projectile.type_projectile list ref) target = 
   lst_ref := List.filter (fun p -> should_keep p target) !lst_ref
@@ -110,8 +114,11 @@ let rec remove_lasers (lasers_ref:Projectile.type_projectile list ref)
   | h::t -> remove_projs lasers_ref h.image;
     remove_lasers lasers_ref t
 
+(** [inc_player_lives ()] increases the number of player's lives by 1 *)
 let inc_player_lives () = player.lives <- player.lives + 1
 
+(** [match_powerup_to_power p] determines what power the powerup grants the
+    player *)
 let match_powerup_to_power power_up = 
   match power_up with 
   | None -> ()
@@ -165,6 +172,8 @@ let rec collision_with_player_laser (boss:Boss.type_boss)
   | h::t -> check_laser_hit_boss h boss; 
     collision_with_player_laser boss t
 
+(** [check_laser_hit_boss h b] updates the health of boss [b] and the scoreboard
+    whenever a laser shot by the player hits the boss *)
 and check_laser_hit_boss h boss = 
   if collision_btn boss.image h.image then (
     boss.health <- boss.health - player.power; 

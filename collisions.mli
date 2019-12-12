@@ -35,13 +35,18 @@ val remove_projs : Projectile.type_projectile list ref -> sprite -> unit
 val remove_lasers : 
   Projectile.type_projectile list ref -> Enemy.type_enemy list -> unit
 
+(** [check_invincibility] checks if the player is invincible or not *)
 val check_invincibility : unit -> unit 
 
 (** [remove_enemy lst] is [lst] with enemies whose health 
     is below 0 removed *) 
 val remove_enemies : unit -> unit
 
+(** [collision_with_boss boss] checks if there is a collision between [boss]
+    and the player sprite. *)
 val collision_with_boss : Boss.type_boss -> unit
 
+(** [collision_with_player_laser boss lst] checks if there is a collision 
+    between any of the player lasers and [boss]. *)
 val collision_with_player_laser : 
   Boss.type_boss -> Projectile.type_projectile list -> unit

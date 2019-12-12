@@ -11,9 +11,11 @@ open Boss
 
 let enemy_atk_timer = ref 2.0
 
+(** [start_game] prints instructions for starting the game *)
 let start_game () = 
   print_st "Press z to start"
 
+(** [move_minion_stage] moves the enemies, projectiles, and sprites *)
 let move_minion_stage () = 
   move_enemies !enemy_list;
   move_projectiles !lasers_list;
@@ -21,6 +23,7 @@ let move_minion_stage () =
   move_sprites !Treasure.treasure_list;
   move_sprites !Treasure.power_list
 
+(** [collision_minion_stages] checks for any sort of collision in the game *)
 let collision_minion_stage () = 
   player_laser_collision !lasers_list !enemy_list;
   collision_with_enemy_proj !enemy_atks;
@@ -29,6 +32,8 @@ let collision_minion_stage () =
   powerup_collision !Treasure.power_list;
   check_invincibility ()
 
+(** [cleanup_minion_stage] removes any object that has disappeared from the
+    screen from the game *)
 let cleanup_minion_stage () = 
   Treasure.cleanup_powerup ();
   remove_projs enemy_atks player.image;
@@ -37,6 +42,7 @@ let cleanup_minion_stage () =
   cleanup_projectiles ();
   cleanup_enemies ()
 
+(** [draw_minion_stage] draws all of the components of the game *)
 let draw_minion_stage () =
   Graphics.clear_graph ();
   draw_background ();
@@ -64,12 +70,16 @@ let loop_minion_stage () =
   move_minion_stage ();
   draw_minion_stage ()
 
+(** [move_boss_stage] moves all of the objects on the screen in the boss
+    stage *)
 let move_boss_stage boss = 
   move_boss boss;
   move_projectiles !lasers_list;
   move_projectiles !binary_red_atks;
   move_projectiles !binary_black_atks
 
+(** [collision_boss_stage] checks for collisions between any objects in the
+    boss stage *)
 let collision_boss_stage boss = 
   collision_with_boss boss;
   collision_with_player_laser boss !lasers_list;
@@ -78,6 +88,8 @@ let collision_boss_stage boss =
   collision_with_enemies !enemy_list;
   check_invincibility ()
 
+(** [cleanup_boss_stage] removes any object that has disappeared from the
+    screen from the game in the boss stage *)
 let cleanup_boss_stage boss = 
   remove_projs lasers_list boss.image;
   remove_projs binary_red_atks player.image;
@@ -85,6 +97,8 @@ let cleanup_boss_stage boss =
   cleanup_projectiles ();
   cleanup_enemies ()
 
+(** [draw_boss_stages] draws all of the components of the game in the boss
+    stage *)
 let draw_boss_stage boss = 
   Graphics.clear_graph ();
   draw_background ();
@@ -111,6 +125,7 @@ let boss_stage boss =
   cleanup_boss_stage boss;
   draw_boss_stage boss
 
+(** [won_game] prints win message when game is defeated *)
 let won_game () = 
   Graphics.clear_graph ();
   print_st ("Congratulations, You have won! Your score: " ^ 

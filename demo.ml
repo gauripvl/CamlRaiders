@@ -4,6 +4,7 @@ open Sprite
 open Stage 
 open Background
 
+(** [initialize_sprites] creates sprites given a list of sprites *)
 let rec initialize_sprites = function 
   | [] -> ()
   | h::t ->
@@ -11,6 +12,7 @@ let rec initialize_sprites = function
     set_image_dimensions h;
     initialize_sprites t
 
+(** [initialize_bg] creates the background  *)
 let initialize_bg () = 
   add_bg "sky" ~x:0 ~spd:1 ~ref:background_props;
   add_bg "back_dunes" ~x:0 ~spd:2 ~ref:middleground_props;

@@ -142,7 +142,6 @@ let manage_motion () =
     is_motion_upwards := true;
     is_current_dir_up := not !is_current_dir_up
   )
-
 let oscillate_vertically (b:type_boss) = 
   match !is_current_dir_up with 
   | true -> b.image.y <- b.image.y + b.image.speed
