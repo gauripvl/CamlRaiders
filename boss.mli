@@ -12,12 +12,17 @@ type type_boss = {
 (** [spawn_boss name hp:hp atk_types:atks freq:freq] spawns a boss with 
     name [name], hp of [hp], attack types of [atks] 
     and attack frequency of [freq]. *) 
-val spawn_boss: string -> hp:int -> atk_types:type_boss_attack list -> freq:float -> type_boss
+val spawn_boss: string -> hp:int -> atk_types:type_boss_attack list -> 
+  freq:float -> type_boss
 
-(** [binary_red_atks] is a list of all of the boss's red attacks *)
+(** [binary_red_atks] is a reference to a list of all of the 
+    boss's red attacks. *)
 val binary_red_atks: Projectile.type_projectile list ref
-(** [binary_black_atks] is a list of all of the boss's black attacks *)
+
+(** [binary_black_atks] is a reference to a list of all of the 
+    boss's black attacks. *)
 val binary_black_atks: Projectile.type_projectile list ref
+
 (** [boss_attack_timer] is the amount of time between each of the boss's 
     attacks *)
 val boss_attack_timer: float ref

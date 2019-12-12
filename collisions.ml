@@ -66,14 +66,13 @@ let rec remove_treasure (treasures:sprite list) (treasure:sprite)
     )
 
 (** [remove_head lst] removes the first string from a list of strings [lst] *)
-let rec remove_head (treasures:string list) =
+let remove_head (treasures:string list) =
   match treasures with
   | [] -> []
   | _::t -> t
 
-(** [treasure_points treasure] returns how many points [treasure] is worth *)
-let treasure_points (treasure:sprite) =
-  match treasure.name with
+let treasure_points str =
+  match str with
   | "coin" -> 42
   | "lily" -> 60
   | "crown" -> 100
@@ -85,7 +84,7 @@ let rec treasure_collision (treasures:sprite list) =
   | [] -> ()
   | h::t -> if collision_btn h player.image then (
       source_treasures := remove_head !source_treasures;
-      scoreboard.score <- scoreboard.score + treasure_points h;
+      scoreboard.score <- scoreboard.score + treasure_points h.name;
       collected_treasures := h :: !collected_treasures;
       treasure_list := remove_treasure !treasure_list h [] 
     )

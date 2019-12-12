@@ -14,6 +14,9 @@ val player_laser_collision :
     between any enemy laser and the player sprite *)
 val collision_with_enemy_proj : Projectile.type_projectile list -> unit
 
+(** [treasure_points str] returns how many points [str] is worth *)
+val treasure_points : string -> int 
+
 (** [treasure_collision] checks if there is a collision between any treasure
     sprite and the player sprite *)
 val treasure_collision : sprite list -> unit
