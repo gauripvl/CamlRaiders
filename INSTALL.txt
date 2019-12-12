@@ -6,40 +6,86 @@ Our game uses external libraries which must be installed to run the game.
 1) opam install graphics
 2) opam install camlimages 
 
-To run the game: 
+To build the code: 
 1) make build
-2) make play 
+2) dune build demo.exe
 
-Here are the features we implemented for Milestone 3:
-1) The player is now controlled via mouse/touchpad. The sprite will follow the
-mouse pointer.
-2) When destroyed, enemies have the potential to drop either treasures or
-bonus lives at random. There are 4 different treasures that must be collected
-when dropped to advance to the boss battle. Collecting a treasure will give the
-player bonus points. Each treasure is worth a different number of points.
-Collecting a bonus life will add another life to the player's live only if the
-number of lives is currently less than 3.
-3) There is now a boss battle stage. Prior to the beginning of the battle,
-there is a dialogue box. The player should press 'z' to advance to the next
-dialogue message after reading. The player must defeat the boss in order to
-defeat the game.
-4) An inventory system exists in the scoreboard box that tells the player how
-many treasures have been collected. 
+To run the game: make play 
 
-Here are the features we implemented for Milestone 2: 
-1) Player has one life. The player looses their life if they touch an enemy.
-2) Hold down mouse button to shoot lasers. Lasers do not get consumed if they 
-destroy an enemy. 
-3) Enemies spawn at random locations from the top of the game window 
-every few seconds. Enemies disappear if they come into contact with 
-a laser or when they reach the bottom of the screen.
-4) Scoreboard displays current score and number of lives. Player earns +1 score 
-for every enemy destroyed.
-5) Once player loses their life, the game window clears and their score 
-is displayed.
+### GAME RULES:
 
-Previous features from Milestone 1: 
-1) Player movement: Use WASD keys to move up, left, down, or right.
-2) Bounded GUI: The player stays inside the GUI window. In other words, 
-it is not possible to move the player's image outside the GUI. 
-3) Quit game: Press 'q' to close the GUI window.
+# Notes
+- The game does not support resizing the GUI window.
+
+# Winning the Game 
+- Collect all 4 items and defeat the boss to win the game. A "Congratulations" 
+screen is displayed along with the score.
+
+# Losing the Game
+- Losing all 3 lives displays a "Game over" screen with the current score.
+- Lives are lost when the player touches the enemy or one of the enemy attacks.
+- Lives can be gained by collecting a heart which some enemies drop when 
+killed.
+
+# Quitting the Game 
+- During the non-dialogue parts, press 'q' to close the GUI window.
+
+# Controls 
+- The player is controlled via mouse/touchpad. The camel will follow the
+mouse pointer. Move the mouse to move the camel. The camel cannot be moved 
+offscreen. 
+- Hold down mouse button to shoot lasers. Lasers do get consumed if they 
+destroy an enemy. Lasers are blue. Touching a laser shot by you will not 
+decrease your lives.
+
+# Enemies 
+- Enemies spawn at random locations from the right of the game window 
+every few seconds. Enemies lose health points if they come into contact with 
+a player laser.
+- Enemies disappear when they cross the left side of the screen.
+- Enemies' health points are drawn below their images on the GUI.
+- Enemies have different attack patterns and movement. Some enemies attack, 
+some enemies do not attack. Some enemies move faster than others.
+- Avoid all enemies and enemy attacks. 
+- Beware, enemies can appear from the top or bottom of the screen.
+
+# Dropped loot 
+- When killed, enemies have the potential to drop either treasures or
+bonus hearts at random. 
+- There are 4 treasures that must be collected to advance to the boss battle. 
+The collectible treasures have a blue outline. Collecting a treasure will 
+give the player bonus points. Each treasure is worth a different number 
+of points. Collecting a heart will add another life to the player's live 
+only if the number of lives is currently less than 3.
+
+# Player attacks 
+- The power of each player attack depends on their current score. 
+The higher their score, the more damage each attack will deal to enemies.
+- Once the current score reaches 200, the player can shoot 3 lasers.
+
+# Dialogue
+- Prior to the beginning of the battle, there is a dialogue box. 
+The player should press 'z' to advance to the next dialogue message after 
+the message is displayed. The player must defeat the boss in order to
+win the game.
+
+# Boss 
+- Only one boss lives in this game.
+- We didn't have time to draw an epic boss, so it's a square demonic face.
+- Every few seconds, the boss switches to a different attack pattern. 
+- No loot drops from the boss, so you can't gain any lives. 
+- Win the game by defeating the boss.
+
+# Scoreboard 
+- Scoreboard displays current information of the game. 
+- Score: Player earns points for every enemy or boss hit or item collected.
+- An inventory system exists in the scoreboard box that tells the player how
+many treasures have been collected. Once the player collects all 4 items, 
+the boss battle will begin. 
+- Invincibility: when player takes damage, the player becomes invincible for 
+a few seconds and cannot lose lives when invincibility is true.
+
+# Background
+- Infinite parallax scrolling background. 
+- Because we're not artists and don't know how to create loop-able 
+bg images, some background art may be cut off.
