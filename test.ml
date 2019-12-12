@@ -175,18 +175,43 @@ let sprite_three = {
   y = 99; 
 }
 
-(* Sprite functions are tested through the GUI. *)
+let sprite_four = {
+  img = None;
+  name = "two";
+  height = 42;
+  width = 42;
+  speed = 13; 
+  x = 41; 
+  y = 99; 
+}
+
+let sprite_five = {
+  img = None;
+  name = "two";
+  height = 42;
+  width = 42;
+  speed = 13; 
+  x = 41; 
+  y = 58; 
+}
+
 
 let collisions_tests = [
   "collision_btn: normal overlap"  >:: 
   (fun _ -> assert_equal true (
        Collisions.collision_btn sprite_one sprite_two));
-  "collision_btn: edge overlap"  >:: 
-  (fun _ -> assert_equal true (
-       Collisions.collision_btn sprite_one sprite_three));
   "collision_btn: no overlap"  >:: 
   (fun _ -> assert_equal false (
        Collisions.collision_btn sprite_two sprite_three));
+  "collision_btn: top edge overlap"  >:: 
+  (fun _ -> assert_equal true (
+       Collisions.collision_btn sprite_one sprite_three));
+  "collision_btn: bottom edge overlap"  >:: 
+  (fun _ -> assert_equal true (
+       Collisions.collision_btn sprite_five sprite_four));
+  "collision_btn: right edge overlap"  >:: 
+  (fun _ -> assert_equal true (
+       Collisions.collision_btn sprite_four sprite_three));
 
   "treasure_points: coin"  >:: 
   (fun _ -> assert_equal 42 (Collisions.treasure_points "coin"));
@@ -270,6 +295,9 @@ let projectile_tests = [
   "dir_vector btn two sprites with positive values"  >:: 
   (fun _ -> assert_equal (3.0,17.0) 
       (Projectile.dir_vector sprite_two sprite_onscreen));
+  "dir_vector of two sprites with position (0,0)"  >:: 
+  (fun _ -> assert_equal (0.0,0.0) 
+      (Projectile.dir_vector sprite_one sprite_one));
 
   "unit_vector of (3.,4.)"  >:: 
   (fun _ -> assert_equal (0.6,0.8) (Projectile.unit_vector (3.,4.)));
@@ -279,6 +307,8 @@ let projectile_tests = [
   (fun _ -> assert_equal (-0.6,-0.8) (Projectile.unit_vector (-3.,-4.)));  
   "unit_vector of (8.,0.)"  >:: 
   (fun _ -> assert_equal (1.,0.) (Projectile.unit_vector (8.,0.)));  
+  "unit_vector of (0.,-6.)"  >:: 
+  (fun _ -> assert_equal (0.,-1.) (Projectile.unit_vector (0.,-6.)));  
 ]
 
 let suite =
