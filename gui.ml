@@ -109,8 +109,6 @@ let draw_dialogue_container speaker avatar txt =
     (gui_window.width - scoreboard.width-30) scoreboard.height;
 
   Graphics.draw_image (create_image avatar) (scoreboard.width + 20) 10;
-  (* Graphics.fill_rect (scoreboard.width + 20) 10 
-     scoreboard.height scoreboard.height; *)
 
   Graphics.moveto 
     (scoreboard.width + scoreboard.height + 40) 

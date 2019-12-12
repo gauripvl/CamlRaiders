@@ -19,7 +19,7 @@ let rec enemy_list_collision
   | [] -> ()
   | h::t -> if collision_btn player_laser.image h.image then (
       h.health <- h.health - player.power; 
-      scoreboard.score <- scoreboard.score + 1 
+      scoreboard.score <- scoreboard.score + 2 
     )
     else enemy_list_collision player_laser t
 
@@ -168,5 +168,5 @@ let rec collision_with_player_laser (boss:Boss.type_boss)
 and check_laser_hit_boss h boss = 
   if collision_btn boss.image h.image then (
     boss.health <- boss.health - player.power; 
-    scoreboard.score <- scoreboard.score + 2
+    scoreboard.score <- scoreboard.score + 10
   )
