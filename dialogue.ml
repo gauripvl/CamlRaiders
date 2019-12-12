@@ -46,11 +46,6 @@ let all_titles t =
   let lst = titles_helper t.dialogues in 
   List.sort_uniq Stdlib.compare lst
 
-(** [all_scripts lst] is a list of all the scripts of each dialogue in [lst]*)
-(* let rec all_scripts = function
-   | [] -> []
-   | h::t -> h.scripts :: all_scripts t *)
-
 let get_scripts t title = 
   if List.mem title (all_titles t) then 
     let dlg = List.find (fun x -> x.title = title) t.dialogues in 

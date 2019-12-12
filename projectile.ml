@@ -72,12 +72,9 @@ let rec move_projectiles = function
   | h::t -> move_projectile h; move_projectiles t
 
 and move_projectile h = 
-  (* if h.vector = (0.0, 0.0) then h.image.x <- h.image.x + h.image.speed
-     else ( *)
   let dx, dy = unit_vector h.vector in 
   h.image.x <- h.image.x + int_of_float (float_of_int h.image.speed *. dx); 
   h.image.y <- h.image.y + int_of_float (float_of_int h.image.speed *. dy)
-(* ) *)
 
 let cleanup_projectiles () = 
   lasers_list := List.filter (fun x -> is_onscreen x.image) !lasers_list;

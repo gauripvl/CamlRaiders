@@ -23,15 +23,17 @@
           "speaker": "Camel",
           "texts": [
             "...",
-            "I feel a powerful force approaching...!"
+            "What's this?!",
+            "I feel a powerful force approaching...!",
+            "We must be careful!"
           ]
         },
         {
           "avatar": "avatar_boss",
-          "speaker": "Sphinx Guardian",
+          "speaker": "Final Boss Guardian",
           "texts": [
             "* appears *",
-            "RAWWWR!!",
+            "R A W W W R !!",
             "All those who trepass shall face my wrath!"
           ]
         }
