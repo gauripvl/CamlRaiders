@@ -102,7 +102,6 @@ let rec collision_with_enemies = function
 let should_keep (proj:Projectile.type_projectile) target = 
   not (collision_btn proj.image target)
 
-
 let remove_projs (lst_ref:Projectile.type_projectile list ref) target = 
   lst_ref := List.filter (fun p -> should_keep p target) !lst_ref
 
@@ -154,7 +153,7 @@ let remove_enemies ()  =
       let dead_enemies = 
         (List.filter (fun e -> e.health <= 0) !enemy_list) in
       let new_powerup_option = Treasure.random_powerup Treasure.power_ups dead_enemies in
-      match_powerup_to_power new_powerup_option;
+      (* match_powerup_to_power new_powerup_option; *)
       Treasure.add_treasure_to_list dead_enemies;
       Treasure.add_powerups_to_list new_powerup_option;
       enemy_list := List.filter (fun e -> e.health > 0) !enemy_list 
@@ -162,7 +161,7 @@ let remove_enemies ()  =
       let dead_enemies = 
         (List.filter (fun e -> e.health <= 0) !enemy_list) in
       let new_powerup_option = Treasure.random_powerup Treasure.power_ups dead_enemies in
-      match_powerup_to_power new_powerup_option;
+      (* match_powerup_to_power new_powerup_option; *)
       Treasure.add_powerups_to_list new_powerup_option;
       enemy_list := List.filter (fun e -> e.health > 0) !enemy_list 
   else enemy_list := List.filter (fun e -> e.health > 0) !enemy_list
