@@ -54,11 +54,11 @@ let random_enemy () =
   else if (is_btn 15 30 probability) then 
     create_enemy "cactus" ~hp:14 ~atk:Cross ~spd:3 ~move:Organic
   else if (is_btn 31 45 probability) then 
-    create_enemy "ghost" ~hp:14 ~atk:Diamond ~spd:3 ~move:Straight
+    create_enemy "cactus" ~hp:14 ~atk:Diamond ~spd:3 ~move:Straight
   else if (is_btn 46 60 probability) then 
     create_enemy "birb" ~hp:6 ~atk:Star ~spd:1 ~move:Organic
   else 
-    create_enemy "scorpion" ~hp:20 ~atk:Passive ~spd:2 ~move:Straight
+    create_enemy "ghost" ~hp:20 ~atk:Passive ~spd:2 ~move:Straight
 
 let add_enemy_to_list () = 
   let new_enemy = random_enemy () in 
