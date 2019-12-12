@@ -6,6 +6,7 @@ open Objects
 type type_boss_attack = 
   | BinaryStar 
   | BinaryBullet
+  | BinaryChaos
 
 type type_boss = {
   image: sprite;
@@ -76,7 +77,8 @@ let rec create_boss_atk b =
   let random_atk = choose_random_atk b.attacks in 
   match random_atk with 
   | BinaryStar -> create_atk_binarystar b
-  | BinaryBullet ->  create_atk_binarybullet b;
+  | BinaryBullet ->  create_atk_binarybullet b
+  | BinaryChaos -> create_atk_binarychaos b
 
 and create_atk_binarystar (b: type_boss) = 
   let prob_rb, prob_atk_type = (random_int 4, random_int 2) in 
@@ -107,19 +109,24 @@ and create_atk_binarybullet (b:type_boss) =
     let prob_rb = random_int 4 in 
     if prob_rb < 3 then (
       binary_red_atks := (
-        create_projectile "orb" 12 b.image (dx, dy)) :: 
+        create_projectile "orb" 20 b.image (dx, dy)) :: 
         !binary_red_atks;
       binary_red_atks := (
-        create_projectile "orb" 12 b.image (~-.dx, ~-.dy)) :: 
+        create_projectile "orb" 20 b.image (~-.dx, ~-.dy)) :: 
         !binary_red_atks)
     else 
       binary_black_atks := (
-        create_projectile "orb_blue" 12 b.image (dx, dy)) :: 
+        create_projectile "orb_blue" 20 b.image (dx, dy)) :: 
         !binary_black_atks;
     binary_black_atks := (
-      create_projectile "orb" 12 b.image (~-.dx, ~-.dy)) :: 
+      create_projectile "orb" 20 b.image (~-.dx, ~-.dy)) :: 
       !binary_black_atks
   )
+
+and create_atk_binarychaos (b:type_boss) = 
+  let vectors = [(-1.,0.5); (-1.,0.25);(-1.,-0.25);(-1.,-0.5)] in
+  create_vector_projectiles "orb" ~speed:6 ~origin:b 
+    ~atk_ref:binary_red_atks vectors 
 
 let is_motion_upwards = ref true
 let direction_duration = ref 15.0
@@ -151,7 +158,7 @@ let move_boss (b:type_boss) =
   )
 
 let boss_rbbinary = 
-  let attack_types = [BinaryBullet; BinaryStar] in 
+  let attack_types = [BinaryBullet; BinaryStar; BinaryChaos] in 
   spawn_boss "boss_rbbinary" 
     ~hp:3110 ~atk_types:attack_types ~freq:1.0
 

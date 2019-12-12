@@ -45,7 +45,8 @@ let decrease_player_lives () =
     is_invincible := true)
   else ()
 
-let rec collision_with_enemy_proj (enemy_lasers:Projectile.type_projectile list)  =
+let rec collision_with_enemy_proj 
+    (enemy_lasers:Projectile.type_projectile list) =
   match enemy_lasers with
   | [] -> ()
   | h::t -> if collision_btn h.image player.image then (
@@ -141,7 +142,8 @@ let remove_enemies ()  =
     if probability_t >= 5 then 
       let dead_enemies = 
         (List.filter (fun e -> e.health <= 0) !enemy_list) in
-      let new_powerup_option = Treasure.random_powerup Treasure.power_ups dead_enemies in
+      let new_powerup_option = 
+        Treasure.random_powerup Treasure.power_ups dead_enemies in
       match_powerup_to_power new_powerup_option;
       Treasure.add_treasure_to_list dead_enemies;
       Treasure.add_powerups_to_list new_powerup_option;
@@ -149,16 +151,12 @@ let remove_enemies ()  =
     else 
       let dead_enemies = 
         (List.filter (fun e -> e.health <= 0) !enemy_list) in
-      let new_powerup_option = Treasure.random_powerup Treasure.power_ups dead_enemies in
+      let new_powerup_option = 
+        Treasure.random_powerup Treasure.power_ups dead_enemies in
       match_powerup_to_power new_powerup_option;
       Treasure.add_powerups_to_list new_powerup_option;
       enemy_list := List.filter (fun e -> e.health > 0) !enemy_list 
   else enemy_list := List.filter (fun e -> e.health > 0) !enemy_list
-(* let probability = random_int (List.length dead_enemies) in
-       let rand_enemy = List.nth dead_enemies probability in
-       Treasure. *)
-(* try doing accumulator w/ all enemies that have not collided, or try
-   doing something with fold_left *)
 
 let collision_with_boss (boss:Boss.type_boss) = 
   if collision_btn player.image boss.image then 
@@ -171,8 +169,8 @@ let rec collision_with_player_laser (boss:Boss.type_boss)
   | h::t -> check_laser_hit_boss h boss; 
     collision_with_player_laser boss t
 
-(** [check_laser_hit_boss h b] updates the health of boss [b] and the scoreboard
-    whenever a laser shot by the player hits the boss *)
+(** [check_laser_hit_boss h b] updates the health of boss [b] 
+    and the scoreboard whenever a laser shot by the player hits the boss *)
 and check_laser_hit_boss h boss = 
   if collision_btn boss.image h.image then (
     boss.health <- boss.health - player.power; 

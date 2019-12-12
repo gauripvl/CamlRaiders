@@ -14,7 +14,6 @@ type type_movement =
   | Straight 
   | Organic
   | CurveUpward
-  | Snake
 
 type type_enemy = {
   image: sprite;
@@ -34,7 +33,7 @@ let create_enemy name ~hp:hp ~atk:atk ~spd:spd ~move:dir = {
     width = -1;
     speed = spd; 
     x = gui_window.width - 100; 
-    y = random_int gui_window.height - 100; 
+    y = 100 + (random_int gui_window.height - 300); 
   };
   health = hp;
   attack = atk;
@@ -50,15 +49,17 @@ let spawn_timer = ref 1.0
 let random_enemy () = 
   let probability = random_int 100 in 
   if (probability < 15) then 
-    create_enemy "snek" ~hp:10 ~atk:Missile ~spd:4 ~move:Organic
+    create_enemy "snek" ~hp:16 ~atk:Missile ~spd:4 ~move:Straight
   else if (is_btn 15 30 probability) then 
-    create_enemy "cactus" ~hp:14 ~atk:Cross ~spd:3 ~move:Organic
-  else if (is_btn 31 45 probability) then 
-    create_enemy "cactus" ~hp:14 ~atk:Diamond ~spd:3 ~move:Straight
-  else if (is_btn 46 60 probability) then 
-    create_enemy "birb" ~hp:6 ~atk:Star ~spd:1 ~move:Organic
+    create_enemy "cactus" ~hp:26 ~atk:Cross ~spd:3 ~move:CurveUpward
+  else if (is_btn 30 45 probability) then 
+    create_enemy "cactus" ~hp:26 ~atk:Diamond ~spd:3 ~move:Straight
+  else if (is_btn 45 60 probability) then 
+    create_enemy "snek" ~hp:20 ~atk:Bullet ~spd:1 ~move:Organic
+  else if (is_btn 60 75 probability) then 
+    create_enemy "birb" ~hp:30 ~atk:Star ~spd:2 ~move:Organic
   else 
-    create_enemy "ghost" ~hp:20 ~atk:Passive ~spd:2 ~move:Straight
+    create_enemy "ghost" ~hp:42 ~atk:Passive ~spd:1 ~move:Straight
 
 let add_enemy_to_list () = 
   let new_enemy = random_enemy () in 
@@ -74,7 +75,6 @@ let rec match_enemy_movement e =
   | Straight -> e.image.x <- e.image.x - e.image.speed
   | Organic -> perform_organic_movement e
   | CurveUpward -> perform_curve_upward e
-  | Snake -> e.image.y <- e.image.y - e.image.speed
 
 and perform_organic_movement e = 
   let probability = random_int 2 in 

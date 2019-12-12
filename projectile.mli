@@ -30,6 +30,6 @@ val create_enemy_atks : Enemy.type_enemy list -> unit
 (** [move_projectiles lst] moves each projectile of [lst]. *)
 val move_projectiles : type_projectile list -> unit
 
-(** [cleanup_lasers lst] removes sprites which are outside the 
+(** [cleanup_projectiles lst] removes sprites which are outside the 
     gui window boundaries from [lst] *)
 val cleanup_projectiles : unit -> unit

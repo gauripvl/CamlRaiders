@@ -37,10 +37,14 @@ let unit_vector v =
 (** [create_diamond_atk e] creates an attack that is shot from all directions,
     beginning at the position of [e] *)
 let create_diamond_atk (e: type_enemy) = 
-  enemy_atks := (create_projectile "spike_right" 12 e.image (1.,0.)) :: !enemy_atks;
-  enemy_atks := (create_projectile "spike_left" 12 e.image (-1.,0.)) :: !enemy_atks;
-  enemy_atks := (create_projectile "spike_up" 12 e.image (0.,1.)) :: !enemy_atks;
-  enemy_atks := (create_projectile "spike_down" 12 e.image (0.,-1.)) :: !enemy_atks
+  enemy_atks := (
+    create_projectile "spike_right" 12 e.image (1.,0.)) :: !enemy_atks;
+  enemy_atks := (
+    create_projectile "spike_left" 12 e.image (-1.,0.)) :: !enemy_atks;
+  enemy_atks := (
+    create_projectile "spike_up" 12 e.image (0.,1.)) :: !enemy_atks;
+  enemy_atks := (
+    create_projectile "spike_down" 12 e.image (0.,-1.)) :: !enemy_atks
 
 (** [create_diamond_atk e] creates an attack that is shot from all diagonal
     directions, beginning at the position of [e] *)
@@ -49,6 +53,13 @@ let create_cross_atk (e: type_enemy) =
   enemy_atks := (create_projectile "orb" 12 e.image (-1.,1.)) :: !enemy_atks;
   enemy_atks := (create_projectile "orb" 12 e.image (1.,-1.)) :: !enemy_atks;
   enemy_atks := (create_projectile "orb" 12 e.image (-1.,-1.)) :: !enemy_atks
+
+let create_star_atk (e: type_enemy) = 
+  create_cross_atk e;
+  enemy_atks := (create_projectile "orb" 12 e.image (1.,0.)) :: !enemy_atks;
+  enemy_atks := (create_projectile "orb" 12 e.image (-1.,0.)) :: !enemy_atks;
+  enemy_atks := (create_projectile "orb" 12 e.image (0.,1.)) :: !enemy_atks;
+  enemy_atks := (create_projectile "orb" 12 e.image (0.,-1.)) :: !enemy_atks
 
 let rec create_enemy_atks = function 
   | [] -> () 
@@ -63,7 +74,7 @@ let rec create_enemy_atks = function
           create_projectile "orb" 12 h.image vect) :: !enemy_atks
       | Diamond -> create_diamond_atk h 
       | Cross -> create_cross_atk h 
-      | Star -> create_diamond_atk h; create_cross_atk h;
+      | Star -> create_star_atk h
     end; 
     create_enemy_atks t
 

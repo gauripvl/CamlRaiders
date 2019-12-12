@@ -16,7 +16,6 @@ type type_movement =
   | Straight 
   | Organic
   | CurveUpward
-  | Snake
 
 (** [type_enemy] is the type of an enemy. *)
 type type_enemy = {

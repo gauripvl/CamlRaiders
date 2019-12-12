@@ -11,21 +11,17 @@ open Boss
 
 let enemy_atk_timer = ref 2.0
 
-(** [start_game] prints instructions for starting the game *)
-let start_game () = 
-  print_st "Press z to start"
-
 (** [upgrade_powerup ()] lets player shoot 3 lasers when score 
     is above 999 *)
 let upgrade_powerup () = 
-  if scoreboard.score > 999 then player.powerup <- TripleLasers
+  if scoreboard.score > 200 then player.powerup <- TripleLasers
 
 (** [increase_player_atk ()] synchronizes the player's attack power 
     with their current score. The player's attack power should 
     be a tenth of their current score. *)
 let increase_player_atk () = 
   let current_power = scoreboard.score / 10 in 
-  if current_power > 0 then player.power <- current_power
+  if is_btn 2 20 current_power then player.power <- current_power
 
 (** [move_minion_stage] moves the enemies, projectiles, and sprites *)
 let move_minion_stage () = 

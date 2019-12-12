@@ -21,15 +21,15 @@ val source_treasures : string list ref
 val random_treasure : 
   string list ref -> Enemy.type_enemy list -> sprite option
 
-(* [add_treasure_to [list_enemy]] is the updated [treasure_list] with a new
+(* [add_treasure_to [list_enemy]] updates [treasure_list] with a new
    treasure *)
 val add_treasure_to_list : Enemy.type_enemy list -> unit
 
-(* [random_powerup [power_lst] [enemy_list]] creates a random powerup using 
+(* [random_powerup [power_lst] [enemy_list]] is a random powerup using 
    the ref list of powerups [power_lst] and [enemy_list] *)
 val random_powerup : string list ref -> Enemy.type_enemy list -> sprite option
 
-(* [add_powerups_to_list [power_up]] is the updated [power_list] with a new
+(* [add_powerups_to_list [power_up]] updates [power_list] with a new
    power_up *)
 val add_powerups_to_list : sprite option -> unit
 

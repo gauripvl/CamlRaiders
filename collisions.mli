@@ -41,7 +41,7 @@ val remove_lasers :
 (** [check_invincibility] checks if the player is invincible or not *)
 val check_invincibility : unit -> unit 
 
-(** [remove_enemy lst] is [lst] with enemies whose health 
+(** [remove_enemies lst] is [lst] with enemies whose health 
     is below 0 removed *) 
 val remove_enemies : unit -> unit
 

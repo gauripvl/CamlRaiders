@@ -1,11 +1,13 @@
-MODULES=sprite objects projectile gui enemy stage utils collisions dialogue authors
+MODULES=sprite objects projectile gui enemy stage utils collisions \
+dialogue authors
 OBJECTS=$(MODULES:=.cmo)
 MLS=$(MODULES:=.ml)
 MLIS=$(MODULES:=.mli)
 TEST=test.byte
 MAIN=demo.byte
 OCAMLBUILD=ocamlbuild -use-ocamlfind
-PKGS=unix,oUnit,str,yojson,graphics,camlimages.core,camlimages.png,camlimages.graphics,camlimages.gif
+PKGS=unix,oUnit,str,yojson,graphics,camlimages.core,camlimages.png,\
+camlimages.graphics,camlimages.gif
 
 default: build
 	utop
@@ -22,12 +24,9 @@ play:
 check:
 	bash checkenv.sh
 	
-# finalcheck: check
-# 	bash checkzip.sh
-# 	bash finalcheck.sh
-
 zip: 
-	zip camlraiders.zip *.ml* _tags Makefile ./assets/images/* INSTALL.txt
+	zip camlraiders.zip *.ml* _tags Makefile \
+	./assets/images/* INSTALL.txt *.json dune
 	
 docs: docs-public docs-private
 	

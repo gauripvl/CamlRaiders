@@ -1,7 +1,12 @@
+
+(** [type_boss_attack] is the type of attacks the boss can have 
+    in the game. *)
 type type_boss_attack = 
   | BinaryStar 
   | BinaryBullet
+  | BinaryChaos
 
+(** [type_boss] is the type of boss in the game. *)
 type type_boss = {
   image: Sprite.sprite;
   mutable health: int;
