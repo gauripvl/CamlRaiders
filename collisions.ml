@@ -103,7 +103,6 @@ let rec collision_with_enemies = function
 let should_keep (proj:Projectile.type_projectile) target = 
   not (collision_btn proj.image target)
 
-
 let remove_projs (lst_ref:Projectile.type_projectile list ref) target = 
   lst_ref := List.filter (fun p -> should_keep p target) !lst_ref
 
@@ -126,12 +125,24 @@ let match_powerup_to_power power_up =
     |"one_heart" -> if player.lives < 3 then inc_player_lives ()
     | _ -> failwith "not yet implemented"
 
+(** [remove_first_powerup lst powerup acc] returns a new list [acc] of powerups
+    with the elements of [lst] exluding the first instance of [powerup] *)
+let rec remove_first_powerup (powerups:sprite list) (powerup:sprite) 
+    (acc:sprite list)=
+  match powerups with
+  | [] -> acc
+  | h::t -> if (h.name = powerup.name) then
+      List.append t acc
+    else (
+      remove_first_powerup t powerup (h :: acc)
+    )
+
 let rec powerup_collision (powerups:sprite list) =
   match powerups with
   | [] -> ()
   | h::t -> if collision_btn h player.image then (
       match_powerup_to_power (Some h);
-      power_list := remove_treasure !power_list h [] 
+      power_list := remove_first_powerup !power_list h [] 
     )
     else powerup_collision t
 
@@ -143,8 +154,8 @@ let remove_enemies ()  =
       let dead_enemies = 
         (List.filter (fun e -> e.health <= 0) !enemy_list) in
       let new_powerup_option = 
-        Treasure.random_powerup Treasure.power_ups dead_enemies in
-      match_powerup_to_power new_powerup_option;
+      Treasure.random_powerup Treasure.power_ups dead_enemies in
+      (* match_powerup_to_power new_powerup_option; *)
       Treasure.add_treasure_to_list dead_enemies;
       Treasure.add_powerups_to_list new_powerup_option;
       enemy_list := List.filter (fun e -> e.health > 0) !enemy_list 
@@ -152,8 +163,8 @@ let remove_enemies ()  =
       let dead_enemies = 
         (List.filter (fun e -> e.health <= 0) !enemy_list) in
       let new_powerup_option = 
-        Treasure.random_powerup Treasure.power_ups dead_enemies in
-      match_powerup_to_power new_powerup_option;
+      Treasure.random_powerup Treasure.power_ups dead_enemies in
+      (* match_powerup_to_power new_powerup_option; *)
       Treasure.add_powerups_to_list new_powerup_option;
       enemy_list := List.filter (fun e -> e.health > 0) !enemy_list 
   else enemy_list := List.filter (fun e -> e.health > 0) !enemy_list
