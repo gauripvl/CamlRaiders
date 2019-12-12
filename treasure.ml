@@ -1,7 +1,7 @@
 open Sprite
 open Utils
 (* [source_treasures] is the list of names of all possible treasures .*)
-let source_treasures = ref ["pink"; "beige"; "orange"; "purple"]
+let source_treasures = ref ["coin"; "lily"; "crown"; "diamond"]
 
 (* [power_ups] is the list of names of all possible  *)
 let power_ups = ref ["one_heart"]

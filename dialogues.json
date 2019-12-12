@@ -19,7 +19,7 @@
       "title": "boss",
       "scripts": [
         {
-          "avatar": "player_avatar",
+          "avatar": "avatar_camel",
           "speaker": "Camel",
           "texts": [
             "...",
@@ -27,7 +27,7 @@
           ]
         },
         {
-          "avatar": "sphinx_avatar",
+          "avatar": "avatar_camel",
           "speaker": "Sphinx Guardian",
           "texts": [
             "* appears *",

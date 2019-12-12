@@ -45,9 +45,9 @@ val draw_scoreboard : unit -> unit
 (** [draw_game_over_screen ()] draws the game over screen. *)
 val draw_game_over_screen : unit -> unit
 
-(** [draw_dialogue_container name lst] draws the dialogue with 
-    speaker [name] and text of [lst]. *)
-val draw_dialogue_container : string -> char list -> unit 
+(** [draw_dialogue_container name avatar lst] draws the dialogue with 
+    speaker [name], avatar [avatar], and text of [lst]. *)
+val draw_dialogue_container : string -> string -> char list -> unit 
 
 (** [draw_static ()] draws the scoreboard and player onto the GUI. *)
 val draw_static : unit -> unit

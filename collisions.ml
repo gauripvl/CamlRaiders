@@ -73,10 +73,10 @@ let remove_head (treasures:string list) =
 (** [treasure_points treasure] returns how many points [treasure] is worth *)
 let treasure_points (treasure:sprite) =
   match treasure.name with
-  | "pink" -> 50
-  | "beige" -> 75
-  | "orange" -> 100
-  | "purple" -> 125
+  | "coin" -> 42
+  | "lily" -> 60
+  | "crown" -> 100
+  | "diamond" -> 200
   | _ -> 0
 
 let rec treasure_collision (treasures:sprite list) =
