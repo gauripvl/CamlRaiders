@@ -10,6 +10,22 @@ To run the game:
 1) make build
 2) make play 
 
+Here are the features we implemented for Milestone 3:
+1) The player is now controlled via mouse/touchpad. The sprite will follow the
+mouse pointer.
+2) When destroyed, enemies have the potential to drop either treasures or
+bonus lives at random. There are 4 different treasures that must be collected
+when dropped to advance to the boss battle. Collecting a treasure will give the
+player bonus points. Each treasure is worth a different number of points.
+Collecting a bonus life will add another life to the player's live only if the
+number of lives is currently less than 3.
+3) There is now a boss battle stage. Prior to the beginning of the battle,
+there is a dialogue box. The player should press 'z' to advance to the next
+dialogue message after reading. The player must defeat the boss in order to
+defeat the game.
+4) An inventory system exists in the scoreboard box that tells the player how
+many treasures have been collected. 
+
 Here are the features we implemented for Milestone 2: 
 1) Player has one life. The player looses their life if they touch an enemy.
 2) Hold down mouse button to shoot lasers. Lasers do not get consumed if they 
@@ -19,7 +35,7 @@ every few seconds. Enemies disappear if they come into contact with
 a laser or when they reach the bottom of the screen.
 4) Scoreboard displays current score and number of lives. Player earns +1 score 
 for every enemy destroyed.
-5) Once player looses their life, the game window clears and their score 
+5) Once player loses their life, the game window clears and their score 
 is displayed.
 
 Previous features from Milestone 1: 
