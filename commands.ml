@@ -19,16 +19,6 @@ let update_pos (t:sprite) =
   if is_btn 0 gui_window.width mouse_x then t.x <- mouse_x - (t.width / 2);
   if is_btn 0 gui_window.height mouse_y then t.y <- mouse_y - (t.height / 2)
 
-(* let update_pos t = 
-   if Graphics.key_pressed () then 
-    match Graphics.read_key () with 
-    | 'w' -> t.y <- if t.y + t.speed >= (gui_window.height - 50) then (gui_window.height - 50) else t.y + t.speed
-    | 'a' -> t.x <- if t.x - t.speed <= 0 then 0 else t.x - t.speed
-    | 's' -> t.y <- if t.y - t.speed <= 0 then 0 else t.y - t.speed
-    | 'd' -> t.x <- if t.x + t.speed >= (gui_window.width - 50) then (gui_window.width - 50) else t.x + t.speed
-    | 'q' -> exit 0
-    | _ -> () *)
-
 let laser_duration = ref 0.1
 
 (** [add_lasers origin lst] adds a laser for each vector in [lst] 

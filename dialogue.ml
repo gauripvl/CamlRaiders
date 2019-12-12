@@ -75,15 +75,15 @@ let rec press_z () =
   | _ -> press_z ()
 
 (* draws speaker and text *)
-let rec show_current_dialogue speaker = function 
+let rec show_current_dialogue speaker avatar = function 
   | [] -> 
     end_of_speech := true;
   | h::t -> 
     let char_lst = string_to_list h in 
-    draw_dialogue_container speaker char_lst;
+    draw_dialogue_container speaker avatar char_lst;
     if press_z () then (
       draw_static (); 
-      show_current_dialogue speaker t
+      show_current_dialogue speaker avatar t
     )
 
 let rec show_next_dialogue = function 
@@ -91,8 +91,9 @@ let rec show_next_dialogue = function
   | h::t -> 
     if not !end_of_speech then (
       let speaker = get_speaker h in 
+      let avatar = get_avatar h in 
       let texts = get_texts h in 
-      show_current_dialogue speaker texts;
+      show_current_dialogue speaker avatar texts;
     ) else (
       if press_z () then (
         draw_static (); 

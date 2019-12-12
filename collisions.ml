@@ -19,7 +19,7 @@ let rec enemy_list_collision
   | [] -> ()
   | h::t -> if collision_btn player_laser.image h.image then (
       h.health <- h.health - player.power; 
-      scoreboard.score <- scoreboard.score + 1 
+      scoreboard.score <- scoreboard.score + 2 
     )
     else enemy_list_collision player_laser t
 
@@ -69,15 +69,15 @@ let rec remove_treasure (treasures:sprite list) (treasure:sprite)
 let rec remove_head (treasures:string list) =
   match treasures with
   | [] -> []
-  | h::t -> t
+  | _::t -> t
 
 (** [treasure_points treasure] returns how many points [treasure] is worth *)
 let treasure_points (treasure:sprite) =
   match treasure.name with
-  | "pink" -> 50
-  | "beige" -> 75
-  | "orange" -> 100
-  | "purple" -> 125
+  | "coin" -> 42
+  | "lily" -> 60
+  | "crown" -> 100
+  | "diamond" -> 200
   | _ -> 0
 
 let rec treasure_collision (treasures:sprite list) =
@@ -177,5 +177,5 @@ let rec collision_with_player_laser (boss:Boss.type_boss)
 and check_laser_hit_boss h boss = 
   if collision_btn boss.image h.image then (
     boss.health <- boss.health - player.power; 
-    scoreboard.score <- scoreboard.score + 2
+    scoreboard.score <- scoreboard.score + 10
   )
